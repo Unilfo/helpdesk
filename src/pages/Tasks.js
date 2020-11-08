@@ -1,50 +1,143 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Title from '../components/Title';
+import Title from '../components/Title'
+import { Input } from '@material-ui/core';
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+const columns = [
+  { id: 'id', label: '№', minWidth: 50,},
+  { id: 'theme', label: 'Тема', minWidth: 170, maxWidth: 250, align: 'left'},
+  { id: 'responsible', label: 'Ответственный', minWidth: 170, maxWidth: 250, align: 'left'},
+  { id: 'data', label: 'Дата', minWidth: 170, maxWidth: 250, align: 'left'},
+  { id: 'status', label: 'Статус', minWidth: 170, maxWidth: 250, align: 'left'},
+  { id: 'author', label: 'Автор', minWidth: 170, maxWidth: 250, align: 'left'},
+  { id: 'text', label: 'Текст', minWidth: 170, maxWidth: 250, align: 'left'},
+];
+
+function createData(id, theme, responsible, data, status, author, text) {
+  return { id, theme, responsible, data, status, author, text};
 }
 
 const rows = [
-  createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-  createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
 ];
 
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
+  },
+  container: {
+    maxHeight: 535,
+  },
+  pagination:{
+    height: 50,
+    overflow: 'hidden'
+  },
+});
 
 export default function Tasks() {
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+      <Grid container spacing={3}>
+        <Grid item>
+          <Title>Задачи</Title>
+        </Grid>
+        <Grid item xs={3}>
+          <Button variant="contained" color="primary" size="small">Создать</Button>
+        </Grid>
+        <Grid item xs={3}>
+          <Input placeholder={'Поиск'}></Input>
+        </Grid>
+      </Grid>
+      <Paper className={classes.root}>
+      <TableContainer className={classes.container}>
+      <Table stickyHeader aria-label="sticky table">
+      <TableHead>
+      <TableRow>
+      {columns.map((column) => (
+        <TableCell
+          key={column.id}
+          align={column.align}
+          style={{ minWidth: column.minWidth }}
+        >
+          {column.label}
+        </TableCell>
+      ))}
+      </TableRow>
+      </TableHead>
+      <TableBody>
+      {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+        return (
+          <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+            {columns.map((column) => {
+              const value = row[column.id];
+              return (
+                <TableCell key={column.id} align={column.align}>
+                  {column.format && typeof value === 'number' ? column.format(value) : value}
+                </TableCell>
+              );
+            })}
           </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        );
+      })}
+      </TableBody>
       </Table>
+      </TableContainer>
+      <TablePagination
+      rowsPerPageOptions={[10, 25, 100]}
+      component="div"
+      count={rows.length}
+      rowsPerPage={rowsPerPage}
+      labelRowsPerPage={'Строк на странице'}
+      page={page}
+      onChangePage={handleChangePage}
+      onChangeRowsPerPage={handleChangeRowsPerPage}
+      className={classes.pagination}
+      />
+      </Paper>
     </React.Fragment>
   );
 }
