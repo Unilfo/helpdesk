@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/razrabotka.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Employees.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Instructions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Instructions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Reports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Reports.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Tasks.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +77,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604847425120</updated>
-      <workItem from="1604847426482" duration="13171000" />
+      <workItem from="1604847426482" duration="14372000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -90,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604854352422</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1">
+      <created>1604861588388</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604861588388</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
