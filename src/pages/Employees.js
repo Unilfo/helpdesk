@@ -11,6 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import ModalForm from './Modal'
 
 
 const columns = [
@@ -68,7 +69,7 @@ export default function Employees() {
           <Title>Пользователи</Title>
         </Grid>
         <Grid item xs={3} spacing={3}>
-          <Button variant="contained" color='primary' size='small'>Создать</Button>
+          <ModalForm/>
         </Grid>
       </Grid>
       <Paper className={classes.root}>

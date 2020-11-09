@@ -88,7 +88,7 @@ export default function Tasks() {
           <Title>Задачи</Title>
         </Grid>
         <Grid item xs={3}>
-          <ModalForm/>
+          <Button variant="contained" color='primary' size='small'>Создать</Button>
         </Grid>
         <Grid item xs={3}>
           <Input placeholder={'Поиск'}></Input>
