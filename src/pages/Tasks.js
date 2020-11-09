@@ -12,6 +12,7 @@ import Title from '../components/Title'
 import { Input } from '@material-ui/core';
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import ModalForm from './Modal'
 
 const columns = [
   { id: 'id', label: '№', minWidth: 50,},
@@ -59,6 +60,7 @@ const useStyles = makeStyles({
   },
   container: {
     maxHeight: 535,
+    width: '100%',
   },
   pagination:{
     height: 50,
@@ -86,7 +88,7 @@ export default function Tasks() {
           <Title>Задачи</Title>
         </Grid>
         <Grid item xs={3}>
-          <Button variant="contained" color="primary" size="small">Создать</Button>
+          <ModalForm/>
         </Grid>
         <Grid item xs={3}>
           <Input placeholder={'Поиск'}></Input>

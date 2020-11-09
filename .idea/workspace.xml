@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/Kak_ustroen_JavaScript_2019_Krokford.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/profile.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Modal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Instructions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Instructions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Tasks.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,8 +28,14 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -37,24 +43,12 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Prog\help\src\components" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
@@ -82,6 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1604847425120</updated>
       <workItem from="1604847426482" duration="17250000" />
+      <workItem from="1604900629075" duration="9208000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -108,7 +103,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -120,11 +115,30 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="1" />
     <MESSAGE value="2" />
     <option name="LAST_COMMIT_MESSAGE" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1604900896655">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1604900896655" />
+    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1604900896655">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1604900896655" />
+    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1604900896655">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1604900896655" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1604900896655">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1604900896655" />
   </component>
 </project>
