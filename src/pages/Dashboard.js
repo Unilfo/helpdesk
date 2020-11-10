@@ -136,9 +136,9 @@ export default function Dashboard() {
             Help Desk
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+            {/*<Badge badgeContent={4} color="secondary">*/}
+              {/*<NotificationsIcon />*/}
+            {/*</Badge>*/}
           </IconButton>
         </Toolbar>
       </AppBar>

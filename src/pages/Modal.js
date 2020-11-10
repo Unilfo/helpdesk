@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Title from '../components/Title'
@@ -8,6 +8,8 @@ import Avatar from '@material-ui/core/Avatar'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Input from '@material-ui/core/Input'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 
 
 function rand() {
@@ -38,8 +40,9 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(30),
   },
   input: {
-    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
     marginLeft: theme.spacing(3),
+    width:180
   },
   button: {
     marginTop: theme.spacing(3),
@@ -53,17 +56,51 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ModalForm(){
+export default function ModalForm({opened, closeModal, item}){
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+  const [age, setAge] = useState()
+  const [status, setStatus] = useState()
+  const [id, setId] = useState('')
+  const [fio1, setFio1] = useState('')
+  const [fio2, setFio2] = useState('')
+  const [fio3, setFio3] = useState('')
+  const [role, setRole] = useState('')
+  const [tabNumber, setTabNumber] = useState('')
 
-  const handleOpen = () => {
-    setOpen(true);
+
+  useEffect(()=>{
+    setId(item.id)
+    setFio1(item.fio1)
+    setFio2(item.fio2)
+    setFio3(item.fio3)
+    setRole(item.role)
+    setTabNumber(item.tabNumber)
+    setOpen(opened)
+  },[opened])
+
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
   };
+
 
   const handleClose = () => {
     setOpen(false);
+    setStatus('');
+    setAge('');
+    setId('')
+    setFio1('')
+    setFio2('')
+    setFio3('')
+    setRole('')
+    setTabNumber('')
+    closeModal()
+  };
+
+  const handleChangeStatus = (event) => {
+    setStatus(event.target.value);
   };
 
   const body = (
@@ -76,27 +113,51 @@ export default function ModalForm(){
         <Grid item xs={8}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Фамилия</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" />
+            <Input id="my-input" aria-describedby="my-helper-text" value={fio1}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" />
+            <Input id="my-input" aria-describedby="my-helper-text" value={fio2}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Отчество</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" />
+            <Input id="my-input" aria-describedby="my-helper-text" value={fio3}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Роль</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={age}
+              onChange={handleChange}
+            >
+              <MenuItem value={10}>Пользователь</MenuItem>
+              <MenuItem value={20}>Администратор</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className={classes.input}>
+            <InputLabel htmlFor="my-input">Табельный номер</InputLabel>
+            <Input id="my-input" aria-describedby="my-helper-text" value={tabNumber}/>
+          </FormControl>
+          <FormControl className={classes.input}>
+            <InputLabel htmlFor="my-input">Статус</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={status}
+              onChange={handleChangeStatus}
+            >
+              <MenuItem value={10}>Действует</MenuItem>
+              <MenuItem value={20}>Неактивна</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className={classes.input}>
+            <InputLabel htmlFor="my-input">Логин</InputLabel>
             <Input id="my-input" aria-describedby="my-helper-text" />
           </FormControl>
           <FormControl className={classes.input}>
-            <InputLabel htmlFor="my-input">Email</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" />
-          </FormControl>
-          <FormControl className={classes.input}>
-            <InputLabel htmlFor="my-input">address</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" />
+            <InputLabel htmlFor="my-input">Пароль</InputLabel>
+            <Input id="my-input" aria-describedby="my-helper-text"  type="password"/>
           </FormControl>
         </Grid>
         <Grid item className={classes.groupButton}>
@@ -113,12 +174,7 @@ export default function ModalForm(){
 
   return(
       <Fragment>
-        <Button variant="contained" color="primary" size="small" onClick={handleOpen}>
-          Создать
-        </Button>
-        <Modal
-          open={open}
-        >
+        <Modal open={open}>
           {body}
         </Modal>
       </Fragment>
