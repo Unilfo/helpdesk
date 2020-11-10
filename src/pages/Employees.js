@@ -15,6 +15,9 @@ import {Input} from '@material-ui/core'
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Button from '@material-ui/core/Button'
 
+//Нужно добавить логин пароль аватрку
+
+
 const columns = [
   { id: 'id', label: '№', minWidth: 50,},
   { id: 'fio1', label: 'Фамилия', minWidth: 170, maxWidth: 250, align: 'left'},
@@ -29,24 +32,25 @@ function createData(id, fio1, fio2, fio3, status, role, tabNumber) {
   return { id, fio1, fio2, fio3, status, role, tabNumber};
 }
 
+
 const rows = [
-  createData(1, 'Иванов', 'Иван', 'Иванович', 'действует', 'admin', '12'),
-  createData(2, 'Иванов', 'Иван', 'Иванович', 'действует', 'admin', '34'),
-  createData(3, 'Иванов', 'Иван', 'Иванович', 'действует', 'admin', '123'),
-  createData(4, 'Иванов', 'Иван', 'Иванович', 'действует', 'admin', '96'),
-  createData(5, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(6, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(7, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(8, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(9, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(10, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(11, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(12, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(13, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(14, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(15, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(16, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
-  createData(17, 'петров', 'Иван', 'Иванович', 'действует', 'admin', '0'),
+  createData(1, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'},'12'),
+  createData(2, 'Иванов', 'Иван', 'Иванович', {id:2, label:'Неактивен'}, {id:1, label:'Администратор'}, '34'),
+  createData(3, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '123'),
+  createData(4, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '96'),
+  createData(5, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:1, label:'Администратор'}, '0'),
+  createData(6, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(7, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(8, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(9, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(10, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(11, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(12, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(13, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(14, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(15, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(16, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(17, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
 ];
 
 const useStyles = makeStyles({
@@ -160,7 +164,7 @@ export default function Employees() {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={()=>openModal(row)}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      const value = row[column.id].label? row[column.id].label : row[column.id]
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {value}

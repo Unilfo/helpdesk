@@ -60,41 +60,45 @@ export default function ModalForm({opened, closeModal, item}){
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [age, setAge] = useState()
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState('')
   const [id, setId] = useState('')
   const [fio1, setFio1] = useState('')
   const [fio2, setFio2] = useState('')
   const [fio3, setFio3] = useState('')
-  const [role, setRole] = useState('')
+  const [roleId, setRoleId] = useState('')
   const [tabNumber, setTabNumber] = useState('')
 
 
   useEffect(()=>{
-    setId(item.id)
-    setFio1(item.fio1)
-    setFio2(item.fio2)
-    setFio3(item.fio3)
-    setRole(item.role)
-    setTabNumber(item.tabNumber)
-    setOpen(opened)
+    if(item.role){
+      setRoleId(item.role.id)
+    }
+    if(item.status){
+      setStatus(item.status.id )
+    }
+      setId(item.id)
+      setFio1(item.fio1)
+      setFio2(item.fio2)
+      setFio3(item.fio3)
+      setTabNumber(item.tabNumber)
+      setOpen(opened)
   },[opened])
 
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleChangeRole = (event) => {
+    setRoleId(event.target.value);
+    setRoleId(event.target.value);
   };
 
 
   const handleClose = () => {
     setOpen(false);
     setStatus('');
-    setAge('');
     setId('')
     setFio1('')
     setFio2('')
     setFio3('')
-    setRole('')
+    setRoleId('')
     setTabNumber('')
     closeModal()
   };
@@ -102,6 +106,7 @@ export default function ModalForm({opened, closeModal, item}){
   const handleChangeStatus = (event) => {
     setStatus(event.target.value);
   };
+
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -113,31 +118,31 @@ export default function ModalForm({opened, closeModal, item}){
         <Grid item xs={8}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Фамилия</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" value={fio1}/>
+            <Input  aria-describedby="my-helper-text" value={fio1}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" value={fio2}/>
+            <Input  aria-describedby="my-helper-text" value={fio2}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Отчество</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" value={fio3}/>
+            <Input  aria-describedby="my-helper-text" value={fio3}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Роль</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={age}
-              onChange={handleChange}
+              value={roleId}
+              onChange={handleChangeRole}
             >
-              <MenuItem value={10}>Пользователь</MenuItem>
-              <MenuItem value={20}>Администратор</MenuItem>
+              <MenuItem value={2}>Пользователь</MenuItem>
+              <MenuItem value={1}>Администратор</MenuItem>
             </Select>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Табельный номер</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" value={tabNumber}/>
+            <Input aria-describedby="my-helper-text" value={tabNumber}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Статус</InputLabel>
@@ -147,17 +152,17 @@ export default function ModalForm({opened, closeModal, item}){
               value={status}
               onChange={handleChangeStatus}
             >
-              <MenuItem value={10}>Действует</MenuItem>
-              <MenuItem value={20}>Неактивна</MenuItem>
+              <MenuItem value={1}>Действует</MenuItem>
+              <MenuItem value={2}>Неактивен</MenuItem>
             </Select>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Логин</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" />
+            <Input  aria-describedby="my-helper-text" />
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Пароль</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text"  type="password"/>
+            <Input aria-describedby="my-helper-text"  type="password"/>
           </FormControl>
         </Grid>
         <Grid item className={classes.groupButton}>
