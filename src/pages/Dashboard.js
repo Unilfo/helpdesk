@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     paddingTop: theme.spacing(1),
+    maxWidth: '90%'
   },
   paper: {
     padding: theme.spacing(2),

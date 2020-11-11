@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Employees.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Modal.js" afterDir="false" />
     </list>
@@ -49,18 +50,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Prog\help\src\components" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
@@ -139,13 +128,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -158,25 +146,29 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1604929524453" />
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1604994533847">
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1605097424485">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1604994533847" />
-    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1604994533846">
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605097424485" />
+    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1605097424485">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1604994533846" />
-    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1604994533846">
+    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605097424485" />
+    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1605097424485">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1604994533846" />
-    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1604994533847">
+    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605097424485" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1605097424485">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1604994533847" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605097424485" />
     <state x="517" y="209" key="Vcs.Push.Dialog.v2" timestamp="1604929527414">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1604929527414" />
+    <state x="732" y="298" key="git4idea.merge.GitPullDialog" timestamp="1605076754382">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="732" y="298" key="git4idea.merge.GitPullDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1605076754382" />
   </component>
 </project>

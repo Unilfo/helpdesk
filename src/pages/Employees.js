@@ -20,37 +20,39 @@ import Button from '@material-ui/core/Button'
 
 const columns = [
   { id: 'id', label: '№', minWidth: 50,},
-  { id: 'fio1', label: 'Фамилия', minWidth: 170, maxWidth: 250, align: 'left'},
-  { id: 'fio2', label: 'Имя', minWidth: 170, maxWidth: 250, align: 'left'},
-  { id: 'fio3', label: 'Отчество', minWidth: 170, maxWidth: 250, align: 'left'},
-  { id: 'status', label: 'Статус', minWidth: 170, maxWidth: 250, align: 'left'},
-  { id: 'role', label: 'Роль', minWidth: 170, maxWidth: 250, align: 'left'},
-  { id: 'tabNumber', label: 'Табельный номер', minWidth: 170, maxWidth: 250, align: 'left'},
+  { id: 'fio1', label: 'Фамилия', minWidth: 170, maxWidth: 250, align: 'left',},
+  { id: 'fio2', label: 'Имя', minWidth: 170, maxWidth: 250, align: 'left', },
+  { id: 'fio3', label: 'Отчество', minWidth: 170, maxWidth: 250, align: 'left', },
+  { id: 'status', label: 'Статус', minWidth: 170, maxWidth: 250, align: 'left', },
+  { id: 'role', label: 'Роль', minWidth: 170, maxWidth: 250, align: 'left', },
+  { id: 'tabNumber', label: 'Табельный номер', minWidth: 170, maxWidth: 250, align: 'left',},
+  { id: 'login', label: 'login', minWidth: 170, maxWidth: 250, align: 'left', },
+  { id: 'password', label: 'password', minWidth: 170, maxWidth: 250, align: 'left', },
 ];
 
-function createData(id, fio1, fio2, fio3, status, role, tabNumber) {
-  return { id, fio1, fio2, fio3, status, role, tabNumber};
+function createData(id, fio1, fio2, fio3, status, role, tabNumber, login, password) {
+  return { id, fio1, fio2, fio3, status, role, tabNumber, login, password};
 }
 
 
 const rows = [
-  createData(1, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'},'12'),
-  createData(2, 'Иванов', 'Иван', 'Иванович', {id:2, label:'Неактивен'}, {id:1, label:'Администратор'}, '34'),
-  createData(3, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '123'),
-  createData(4, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '96'),
-  createData(5, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:1, label:'Администратор'}, '0'),
-  createData(6, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(7, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(8, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(9, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(10, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(11, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(12, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(13, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(14, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(15, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(16, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
-  createData(17, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0'),
+  createData(1, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'},'12', 'pog', 'qwe'),
+  createData(2, 'Иванов', 'Иван', 'Иванович', {id:2, label:'Неактивен'}, {id:1, label:'Администратор'}, '34', 'login', 'qwe'),
+  createData(3, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '123', 'login', 'qwe'),
+  createData(4, 'Иванов', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '96', 'login', 'qwe'),
+  createData(5, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:1, label:'Администратор'}, '0', 'login', 'qwe'),
+  createData(6, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(7, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(8, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(9, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(10, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(11, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(12, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(13, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(14, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(15, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(16, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
+  createData(17, 'петров', 'Иван', 'Иванович', {id:1, label:'Действует'}, {id:2, label:'Пользователь'}, '0', 'login', 'qwe'),
 ];
 
 const useStyles = makeStyles({
@@ -91,7 +93,22 @@ export default function Employees() {
   }
 
   const openModal = (item) => {
-    setItem(item)
+    if(item){
+      setItem(item)
+    }else{
+      const itemNull = {
+        id:'',
+        fio1:'',
+        fio2:'',
+        fio3:'',
+        role:{id:'',label:''},
+        status:{id:'', label: ''},
+        tabNumber:{},
+        login:'',
+        password:''
+      }
+      setItem(itemNull)
+    }
     setOpen(true)
   }
 
@@ -109,7 +126,10 @@ export default function Employees() {
       const filteredRowsTabelNumber = rows.filter((data) => {
         return data.tabNumber.toLowerCase().includes(searchText.toLowerCase().trim())
       })
-      const filteredRows = [...new Set([...filteredRowsFIO, ...filteredRowsTabelNumber])]
+      const filteredRowsByLogin = rows.filter((data) => {
+        return data.login.toLowerCase().includes(searchText.toLowerCase().trim())
+      })
+      const filteredRows = [...new Set([...filteredRowsFIO, ...filteredRowsTabelNumber, ...filteredRowsByLogin])]
       setData(filteredRows)
     }
   },[searchText])
@@ -165,11 +185,11 @@ export default function Employees() {
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={()=>openModal(row)}>
                     {columns.map((column) => {
                       const value = row[column.id].label? row[column.id].label : row[column.id]
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {value}
-                        </TableCell>
-                      );
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {value}
+                          </TableCell>
+                        );
                     })}
                   </TableRow>
                 );

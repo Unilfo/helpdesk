@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     width: '100%',
     marginRight: theme.spacing(8)
+  },
+  inputHidden:{
+    display:'none'
   }
 }));
 
@@ -67,26 +70,39 @@ export default function ModalForm({opened, closeModal, item}){
   const [fio3, setFio3] = useState('')
   const [roleId, setRoleId] = useState('')
   const [tabNumber, setTabNumber] = useState('')
+  const [img, setImg] = useState('profile.jpg')
+  const [login, setLogin] = useState('')
+  const [password, setPasword] = useState('')
+
 
 
   useEffect(()=>{
-    if(item.role){
-      setRoleId(item.role.id)
-    }
-    if(item.status){
-      setStatus(item.status.id )
-    }
       setId(item.id)
       setFio1(item.fio1)
       setFio2(item.fio2)
       setFio3(item.fio3)
       setTabNumber(item.tabNumber)
+      setStatus(()=>{
+        if(item.status){
+          return item.status.id
+        }else{
+          return ''
+        }
+      })
+      setRoleId(()=>{
+        if(item.role){
+          return item.role.id
+        }else{
+          return ''
+        }
+      })
+    setLogin(item.login)
+    setPasword(item.password)
       setOpen(opened)
   },[opened])
 
 
   const handleChangeRole = (event) => {
-    setRoleId(event.target.value);
     setRoleId(event.target.value);
   };
 
@@ -98,8 +114,11 @@ export default function ModalForm({opened, closeModal, item}){
     setFio1('')
     setFio2('')
     setFio3('')
-    setRoleId('')
+    setRoleId(null)
     setTabNumber('')
+    setLogin('')
+    setPasword('')
+    setImg('profile.jpg')
     closeModal()
   };
 
@@ -107,13 +126,36 @@ export default function ModalForm({opened, closeModal, item}){
     setStatus(event.target.value);
   };
 
+  const FileUploader = props => {
+    const hiddenFileInput = React.useRef(null);
+    const handleClick = event => {
+      hiddenFileInput.current.click();
+    };
+    const handleChange = event => {
+      const fileUploaded = event.target.files[0];
+      setImg(URL.createObjectURL(fileUploaded))
+    };
+    return (
+      <Fragment>
+        <Avatar src={img} className={classes.large} onClick={handleClick}></Avatar>
+        <input
+          type="file"
+          ref={hiddenFileInput}
+          onChange={handleChange}
+          style={{display: 'none'}}
+        />
+      </Fragment>
+    );
+  }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
+      <input type="file" className={classes.inputHidden}/>
       <Title>Карточка пользователя</Title>
       <Grid container spacing={5}>
         <Grid item>
-          <Avatar src='profile.jpg' className={classes.large} onClick={()=>alert('Выбор аватарки')}></Avatar>
+          <FileUploader/>
+            {/*<Avatar src='profile.jpg' className={classes.large} onClick={handleClick}></Avatar>*/}
         </Grid>
         <Grid item xs={8}>
           <FormControl className={classes.input}>
@@ -158,11 +200,11 @@ export default function ModalForm({opened, closeModal, item}){
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Логин</InputLabel>
-            <Input  aria-describedby="my-helper-text" />
+            <Input  aria-describedby="my-helper-text" value={login}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Пароль</InputLabel>
-            <Input aria-describedby="my-helper-text"  type="password"/>
+            <Input aria-describedby="my-helper-text"  type="password" value={password}/>
           </FormControl>
         </Grid>
         <Grid item className={classes.groupButton}>
