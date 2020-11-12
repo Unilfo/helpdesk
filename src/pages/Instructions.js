@@ -13,6 +13,8 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import Button from '@material-ui/core/Button'
+import ModalInstraction from './ModalInstraction'
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +35,10 @@ const useStyles = makeStyles({
       borderRadius: '5px',
       backgroundColor: 'rgb(7, 177, 77, 0.42)'
     },
+  },
+  labelRoot: {
+    display: 'flex',
+    alignItems: 'center',
   },
 });
 
@@ -58,6 +64,13 @@ export default function Instructions() {
   const [searchText, setSearhText] = useState('')
   const [data, setData] = useState(dataFetch)
   const [docFile, setDocFile] = useState('')
+  const [open, setOpen] = React.useState(false);
+  const [instraction, setInstraction] = useState({})
+
+
+  const closeModal =() => {
+    setOpen(false)
+  }
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -116,14 +129,23 @@ export default function Instructions() {
     setNumPages(1)
   }
 
+  const openModal = () => {
+    setOpen(true)
+  }
+
   return (
     <Fragment>
       <Grid container spacing={3}>
+        <ModalInstraction opened={open} closeModal={closeModal} instraction={instraction}/>
         <Grid item>
           <Title>Инструкции</Title>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Input placeholder={'Поиск'} value={searchText} onChange={handleChange}></Input>
+        </Grid>
+        <Grid item xs={2}>
+          <Button variant="contained" color='primary' size='small' onClick={openModal}>Создать</Button>
+          <Button variant="contained" color='primary' size='small' onClick={openModal}>red</Button>
         </Grid>
         <Grid item xs={3}>
           <div className={classes.pageControls}>
@@ -136,7 +158,7 @@ export default function Instructions() {
         </Grid>
       </Grid>
       <Grid container spacing={3}>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
             <TreeView
               className={classes.root}
               defaultCollapseIcon={<ExpandMoreIcon />}
@@ -146,12 +168,14 @@ export default function Instructions() {
               {searchText !== ''?
                 data.map((columnChild)=>{
                   return(
-                    <TreeItem
-                      nodeId={columnChild.nodeId}
-                      label={columnChild.label}
-                      key={columnChild.nodeId}
-                      onClick={()=>handleChangeDokFile(columnChild.path)}/>
-                  )}):
+                      <TreeItem
+                        nodeId={columnChild.nodeId}
+                        label={columnChild.label}
+                        key={columnChild.nodeId}
+                        onClick={()=>handleChangeDokFile(columnChild.path)}>
+                      </TreeItem>
+                  )})
+                :
                 data.map((column)=>{
                 if(column.group){
                   return(
@@ -159,11 +183,14 @@ export default function Instructions() {
                       {data.map((columnChild)=>{
                         if(!columnChild.group && columnChild.prinadlejit === column.id){
                         return(
-                          <TreeItem
-                            nodeId={columnChild.nodeId}
-                            label={columnChild.label}
-                            key={columnChild.nodeId}
-                            onClick={()=>handleChangeDokFile(columnChild.path)}/>
+                          <Fragment className={classes.labelRoot}>
+                            <TreeItem
+                              nodeId={columnChild.nodeId}
+                              label={columnChild.label}
+                              key={columnChild.nodeId}
+                              onClick={()=>handleChangeDokFile(columnChild.path)}>
+                            </TreeItem>
+                          </Fragment>
                         )}
                       })}
                     </TreeItem>

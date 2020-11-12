@@ -12,13 +12,9 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -52,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     width: '100%',
-    marginRight: theme.spacing(8)
+    // marginRight: theme.spacing(12)
   },
   inputHidden:{
     display:'none'
@@ -207,7 +203,7 @@ export default function ModalForm({opened, closeModal, item}){
             <Input aria-describedby="my-helper-text"  type="password" value={password}/>
           </FormControl>
         </Grid>
-        <Grid item className={classes.groupButton}>
+        <Grid item className={classes.groupButton} xs={10}>
           <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleClose}>
             Закрыть
           </Button>
