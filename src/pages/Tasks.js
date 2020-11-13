@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -12,7 +12,7 @@ import Title from '../components/Title'
 import { Input } from '@material-ui/core';
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import ModalForm from './Modal'
+import ModalTasks from './ModalTasks'
 
 const columns = [
   { id: 'id', label: '№', minWidth: 50,},
@@ -70,12 +70,18 @@ const useStyles = makeStyles({
 
 export default function Tasks() {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [opened, setOpened] = useState(false)
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  const closeModal =() => {
+    setOpened(false)
+  }
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -84,11 +90,12 @@ export default function Tasks() {
   return (
     <React.Fragment>
       <Grid container spacing={3}>
+        <ModalTasks opened={opened} closeModal={closeModal}/>
         <Grid item>
           <Title>Задачи</Title>
         </Grid>
         <Grid item xs={3}>
-          <Button variant="contained" color='primary' size='small'>Создать</Button>
+          <Button variant="contained" color='primary' size='small' onClick={()=>setOpened(true)}>Создать</Button>
         </Grid>
         <Grid item xs={3}>
           <Input placeholder={'Поиск'}></Input>

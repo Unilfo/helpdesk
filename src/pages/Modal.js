@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     width: '100%',
-    // marginRight: theme.spacing(12)
   },
   inputHidden:{
     display:'none'

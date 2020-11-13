@@ -61,9 +61,9 @@ export default function ModalForm({opened, closeModal, instraction}){
 
 
   useEffect(()=>{
-    setTitle(instraction.title)
+    setTitle(instraction.label)
     setPath(instraction.path)
-    setGroup(instraction.group)
+    setGroup(instraction.prinadlejit)
     setOpen(opened)
   },[opened])
 

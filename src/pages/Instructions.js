@@ -15,6 +15,9 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import Button from '@material-ui/core/Button'
 import ModalInstraction from './ModalInstraction'
+import Typography from '@material-ui/core/Typography'
+import EditIcon from '@material-ui/icons/Edit';
+
 
 const useStyles = makeStyles({
   root: {
@@ -38,8 +41,14 @@ const useStyles = makeStyles({
   },
   labelRoot: {
     display: 'flex',
-    alignItems: 'center',
+    justifyContent:'space-between'
   },
+  editIcon:{
+    color: '#3f51b5',
+    '&:hover': {
+      color: 'green',
+    },
+  }
 });
 
 const dataFetch = [
@@ -100,6 +109,10 @@ export default function Instructions() {
   },[data])
 
 
+  useEffect(()=>()=>{
+    setInstraction({})
+  },[])
+
   const handleChange = (event) => {
     setSearhText(event.target.value)
   }
@@ -123,13 +136,19 @@ export default function Instructions() {
     setPageNumber(pageNumber + 1)
   }
 
-  const handleChangeDokFile = (path) => {
-    setDocFile(path)
+  const handleChangeDokFile = (item) => {
+    setDocFile(item.path)
     setPageNumber(1)
     setNumPages(1)
   }
 
   const openModal = () => {
+    setInstraction({})
+    setOpen(true)
+  }
+
+  const handleEditeInstraction = (item) => {
+    setInstraction(item)
     setOpen(true)
   }
 
@@ -145,7 +164,6 @@ export default function Instructions() {
         </Grid>
         <Grid item xs={2}>
           <Button variant="contained" color='primary' size='small' onClick={openModal}>Создать</Button>
-          <Button variant="contained" color='primary' size='small' onClick={openModal}>red</Button>
         </Grid>
         <Grid item xs={3}>
           <div className={classes.pageControls}>
@@ -170,9 +188,16 @@ export default function Instructions() {
                   return(
                       <TreeItem
                         nodeId={columnChild.nodeId}
-                        label={columnChild.label}
+                        label={
+                          <div className={classes.labelRoot}>
+                            <Typography variant="body2" >
+                              {columnChild.label}
+                            </Typography>
+                            <EditIcon className={classes.editIcon} onClick={()=>handleEditeInstraction(columnChild)}/>
+                          </div>
+                        }
                         key={columnChild.nodeId}
-                        onClick={()=>handleChangeDokFile(columnChild.path)}>
+                        onClick={()=>handleChangeDokFile(columnChild)}>
                       </TreeItem>
                   )})
                 :
@@ -183,12 +208,19 @@ export default function Instructions() {
                       {data.map((columnChild)=>{
                         if(!columnChild.group && columnChild.prinadlejit === column.id){
                         return(
-                          <Fragment className={classes.labelRoot}>
+                          <Fragment>
                             <TreeItem
+                              label={
+                                <div className={classes.labelRoot}>
+                                  <Typography variant="body2" >
+                                    {columnChild.label}
+                                  </Typography>
+                                  <EditIcon className={classes.editIcon} onClick={()=>handleEditeInstraction(columnChild)}/>
+                                </div>
+                              }
                               nodeId={columnChild.nodeId}
-                              label={columnChild.label}
                               key={columnChild.nodeId}
-                              onClick={()=>handleChangeDokFile(columnChild.path)}>
+                              onClick={()=>handleChangeDokFile(columnChild)}>
                             </TreeItem>
                           </Fragment>
                         )}

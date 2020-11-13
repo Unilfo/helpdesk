@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/Memo_Crimea.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/ModalTasks.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Instructions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Instructions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ModalInstraction.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ModalInstraction.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Tasks.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +41,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -48,6 +52,9 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Application\helpdesk\src\pages" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Prog\help\src\components" />
     </key>
@@ -82,6 +89,7 @@
       <workItem from="1604925007071" duration="4000" />
       <workItem from="1604925029597" duration="2149000" />
       <workItem from="1604986766741" duration="19762000" />
+      <workItem from="1605245731597" duration="9012000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -118,11 +126,18 @@
       <option name="project" value="LOCAL" />
       <updated>1604929525611</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2">
+      <created>1605196347788</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605196347788</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -143,37 +158,37 @@
     <option name="LAST_COMMIT_MESSAGE" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="569" y="46" key="CommitChangelistDialog2" timestamp="1604929524453">
+    <state x="569" y="46" key="CommitChangelistDialog2" timestamp="1605196346823">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1604929524453" />
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1605174916531">
+    <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1605196346823" />
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1605196368663">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605174916531" />
-    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1605174916531">
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605196368663" />
+    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1605196368663">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605174916531" />
-    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1605174916530">
+    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605196368663" />
+    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1605196368663">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605174916530" />
-    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1605174916531">
+    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605196368663" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1605196368663">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605174916531" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605196368663" />
     <state x="849" y="188" key="RollbackChangesDialog" timestamp="1605166535706">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="849" y="188" key="RollbackChangesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1605166535706" />
-    <state x="517" y="209" key="Vcs.Push.Dialog.v2" timestamp="1604929527414">
+    <state x="517" y="209" key="Vcs.Push.Dialog.v2" timestamp="1605196349455">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1604929527414" />
-    <state x="732" y="298" key="git4idea.merge.GitPullDialog" timestamp="1605166513917">
+    <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1605196349455" />
+    <state x="732" y="298" key="git4idea.merge.GitPullDialog" timestamp="1605248706769">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="732" y="298" key="git4idea.merge.GitPullDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1605166513917" />
+    <state x="732" y="298" key="git4idea.merge.GitPullDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1605248706769" />
   </component>
 </project>
