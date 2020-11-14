@@ -7,100 +7,91 @@ import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Input from '@material-ui/core/Input'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogActions from '@material-ui/core/DialogActions'
 
-
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: '50%',
+  dialog:{
+    // width: '70%'
+  },
+  DialogContent: {
+    // width: '80%',
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2, 4, 3),
     outline: 'none',
-  },
-  large: {
-    width: theme.spacing(30),
-    height: theme.spacing(30),
-  },
-  input: {
-    marginBottom: theme.spacing(5),
-    marginLeft: theme.spacing(3),
-    width:180
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(3),
-  },
-  groupButton:{
-    display: 'flex',
-    justifyContent: 'flex-end',
-    width: '100%',
-  },
-  inputHidden:{
-    display:'none'
   }
 }));
 
 export default function ModalTasks({opened, closeModal, item}){
   const classes = useStyles();
-  const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [scroll, setScroll] = React.useState('paper');
 
+  const handleClickOpen = (scrollType) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
 
-  const handleCloseModal = () => {
-    setOpen(false)
-    closeModal()
-  }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  useEffect(()=>{
-    setOpen(opened)
-  },[opened])
+  const descriptionElementRef = React.useRef(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <input type="file" className={classes.inputHidden}/>
-      <Title>Задачи</Title>
-      <Grid container spacing={5}>
-        <Grid item>
-
-        </Grid>
-        <Grid item xs={8}>
-          <FormControl className={classes.input}>
-            <InputLabel htmlFor="my-input">Фамилия</InputLabel>
-            <Input  aria-describedby="my-helper-text" />
-          </FormControl>
-          <FormControl className={classes.input}>
-            <InputLabel htmlFor="my-input">Имя</InputLabel>
-            <Input  aria-describedby="my-helper-text"/>
-          </FormControl>
-        </Grid>
-        <Grid item className={classes.groupButton} xs={10}>
-          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleCloseModal}>
-            Закрыть
+  return (
+    <div>
+      <Button variant="contained" color='primary' size='small' onClick={handleClickOpen('paper')}>Создать</Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        className={classes.dialog}
+        maxWidth={'lg'}
+      >
+        <DialogTitle id="scroll-dialog-title">
+          <Title>Заявка</Title>
+        </DialogTitle>
+        <DialogContent>
+          group buttons
+        </DialogContent>
+        <DialogContent dividers={scroll === 'paper'} className={classes.DialogContent}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            {[...new Array(50)]
+              .map(
+                () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+              )
+              .join('\n')}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Отмена
           </Button>
-          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleCloseModal}>
+          <Button onClick={handleClose} color="primary">
             Сохранить
           </Button>
-        </Grid>
-      </Grid>
+        </DialogActions>
+      </Dialog>
     </div>
-  )
-
-  return(
-      <Fragment>
-        <Modal open={open}>
-          {body}
-        </Modal>
-      </Fragment>
-    )
+  );
 }
