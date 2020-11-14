@@ -10,7 +10,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../components/Title'
 import { Input } from '@material-ui/core';
-import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import ModalTasks from './ModalTasks'
 
@@ -95,7 +94,6 @@ export default function Tasks() {
         </Grid>
         <Grid item xs={3}>
           <ModalTasks opened={opened} closeModal={closeModal}/>
-          {/*<Button variant="contained" color='primary' size='small' onClick={()=>setOpened(true)}>Создать</Button>*/}
         </Grid>
         <Grid item xs={3}>
           <Input placeholder={'Поиск'}></Input>
