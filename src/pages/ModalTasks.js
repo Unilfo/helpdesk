@@ -10,7 +10,8 @@ import DialogActions  from '@material-ui/core/DialogActions'
 import Title from '../components/Title'
 import ImageIcon from '@material-ui/icons/Image'
 import AttachFileIcon from '@material-ui/icons/AttachFile'
-
+import './modalTask.css'
+import ImgDialog from './ImgDialog'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight:40
   },
   editor:{
-    marginTop:20,
-    height:200,
+    height:'50%',
+    minHeight:'100%',
     outline:'none',
     display:'flex',
     flexFlow:'column'
@@ -46,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop:5,
     marginBottom:5,
     paddingLeft: 20,
-    paddingRight: 20
+    paddingRight: 20,
+    height:'50%',
+    minHeight:'30%',
   },
 }));
 
@@ -56,12 +59,12 @@ export default function ModalTasks({opened, closeModal, item}){
   const [open, setOpen] = useState(false)
   const [scroll, setScroll] = useState('paper')
   const [otvet, setOtvet] = useState('aasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasd')
-  const [file, setFile] = useState(null)
   const handleClickOpen = (scrollType) => () => {
     setOpen(true)
     setScroll(scrollType)
   };
-
+  const [ppp, setPpp] = useState(false)
+  const [img, setImg] = useState('')
 
   const handleClose = () => {
     setOpen(false)
@@ -92,18 +95,21 @@ export default function ModalTasks({opened, closeModal, item}){
 
   const load = (e) => {
     if(e.target.files.length > 0){
-      let img = new Image(300, 300)
+      let img = new Image(200, 200)
       img.classList.add('zoom')
       img.src = URL.createObjectURL(e.target.files[0])
       img.ondblclick = () => {
-        return(
-
-        )
+        setPpp(true)
+        setImg(URL.createObjectURL(e.target.files[0]))
+        console.log(img)
       }
       document.getElementById('editor').appendChild(img)
     }
   }
 
+  const closeDialog = () => {
+    setPpp(false)
+  }
 
   return (
     <div>
@@ -116,6 +122,7 @@ export default function ModalTasks({opened, closeModal, item}){
       >
         <div className={classes.dialog}>
           <Title>Заявка</Title>
+          <ImgDialog opened={ppp} closeDialog={closeDialog} img={img}/>
           <div>
             <FormControl className={classes.input}>
               <InputLabel htmlFor="my-input">Тема</InputLabel>

@@ -1,0 +1,8 @@
+.MuiDialog-paperWidthLg {
+    max-width: 90%!important;
+    max-height: 90%!important;
+    height: 90%;
+}
+.MuiDialogContent-dividers{
+    height: 50%!important;
+}

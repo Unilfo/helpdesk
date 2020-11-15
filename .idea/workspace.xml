@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TextEditor/TextEditor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TextEditor/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/ImgDialog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/modalTask.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ModalTasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ModalTasks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/TextEditor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Tasks.js" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="SCSS File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -47,7 +48,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="list.type.of.created.stylesheet" value="SCSS" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -107,6 +108,7 @@
       <workItem from="1604925029597" duration="2149000" />
       <workItem from="1604986766741" duration="19762000" />
       <workItem from="1605375646042" duration="6457000" />
+      <workItem from="1605470387094" duration="2701000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -143,11 +145,18 @@
       <option name="project" value="LOCAL" />
       <updated>1604929525611</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2">
+      <created>1605469957960</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605469957960</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

@@ -58,7 +58,7 @@ const useStyles = makeStyles({
     width: '100%',
   },
   container: {
-    maxHeight: 535,
+    maxHeight: 800,
     width: '100%',
   },
   pagination:{
