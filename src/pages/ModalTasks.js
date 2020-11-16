@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   panel:{
     display:'flex',
-    justifyContent:'space-between',
+    // justifyContent:'space-between',
     margin:20,
     wordWrap:'break-word',
   },
@@ -62,7 +62,8 @@ export default function ModalTasks({opened, closeModal, item}){
   const handleClickOpen = (scrollType) => () => {
     setOpen(true)
     setScroll(scrollType)
-  };
+  }
+
   const [ppp, setPpp] = useState(false)
   const [img, setImg] = useState('')
 
@@ -101,7 +102,6 @@ export default function ModalTasks({opened, closeModal, item}){
       img.ondblclick = () => {
         setPpp(true)
         setImg(URL.createObjectURL(e.target.files[0]))
-        console.log(img)
       }
       document.getElementById('editor').appendChild(img)
     }
@@ -151,7 +151,7 @@ export default function ModalTasks({opened, closeModal, item}){
           </div>
         </div>
         <div className={classes.panel}>
-          <div>
+          <div className='groupButtons'>
             <input accept="image/*" className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
             <label htmlFor="icon-button-file">
               <ImageIcon fontSize='large'/>

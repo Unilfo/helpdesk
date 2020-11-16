@@ -5,6 +5,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
+import './imgDialog.css'
+
 
 function PaperComponent(props) {
   return (
@@ -42,7 +44,7 @@ export default function ImgDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
-            Cancel
+            Закрыть
           </Button>
         </DialogActions>
       </Dialog>
