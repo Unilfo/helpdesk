@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/imgDialog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ImgDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ImgDialog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ModalTasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ModalTasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/modalTask.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/modalTask.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +93,9 @@
       <workItem from="1604986766741" duration="19762000" />
       <workItem from="1605375646042" duration="6457000" />
       <workItem from="1605470387094" duration="2701000" />
+      <workItem from="1605525232915" duration="2919000" />
+      <workItem from="1605528535903" duration="6000" />
+      <workItem from="1605609090760" duration="35000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -137,11 +139,18 @@
       <option name="project" value="LOCAL" />
       <updated>1605469957960</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="123">
+      <created>1605511593835</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605511593835</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -159,41 +168,42 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="1" />
     <MESSAGE value="2" />
-    <option name="LAST_COMMIT_MESSAGE" value="2" />
+    <MESSAGE value="123" />
+    <option name="LAST_COMMIT_MESSAGE" value="123" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="569" y="46" key="CommitChangelistDialog2" timestamp="1604929524453">
+    <state x="569" y="46" key="CommitChangelistDialog2" timestamp="1605511592857">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1604929524453" />
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1605509117817">
+    <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1605511592857" />
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1605528469555">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605509117817" />
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605528469555" />
     <state width="1628" height="238" key="GridCell.Tab.0.bottom/0.25.1680.948@0.25.1680.948" timestamp="1605375911184" />
-    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1605509117817">
+    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1605528469555">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605509117817" />
+    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605528469555" />
     <state width="1628" height="238" key="GridCell.Tab.0.center/0.25.1680.948@0.25.1680.948" timestamp="1605375911183" />
-    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1605509117817">
+    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1605528469555">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605509117817" />
+    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605528469555" />
     <state width="1628" height="238" key="GridCell.Tab.0.left/0.25.1680.948@0.25.1680.948" timestamp="1605375911182" />
-    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1605509117817">
+    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1605528469555">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605509117817" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605528469555" />
     <state width="1628" height="238" key="GridCell.Tab.0.right/0.25.1680.948@0.25.1680.948" timestamp="1605375911183" />
     <state x="849" y="188" key="RollbackChangesDialog" timestamp="1605166535706">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="849" y="188" key="RollbackChangesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1605166535706" />
-    <state x="517" y="209" key="Vcs.Push.Dialog.v2" timestamp="1604929527414">
+    <state x="517" y="209" key="Vcs.Push.Dialog.v2" timestamp="1605511595571">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1604929527414" />
+    <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1605511595571" />
     <state x="732" y="298" key="git4idea.merge.GitPullDialog" timestamp="1605166513917">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

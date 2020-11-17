@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Button         from '@material-ui/core/Button'
 import FormControl    from '@material-ui/core/FormControl'
@@ -12,6 +12,21 @@ import ImageIcon from '@material-ui/icons/Image'
 import AttachFileIcon from '@material-ui/icons/AttachFile'
 import './modalTask.css'
 import ImgDialog from './ImgDialog'
+import 'froala-editor/js/froala_editor.pkgd.min.js';
+
+// Require Editor CSS files.
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+
+
+import FroalaEditor from 'react-froala-wysiwyg';
+
+// Include special components if required.
+// import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
+// import FroalaEditorA from 'react-froala-wysiwyg/FroalaEditorA';
+// import FroalaEditorButton from 'react-froala-wysiwyg/FroalaEditorButton';
+// import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
+// import FroalaEditorInput from 'react-froala-wysiwyg/FroalaEditorInput';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight:40
   },
   editor:{
-    height:'50%',
+    height:'60%',
     minHeight:'100%',
     outline:'none',
     display:'flex',
@@ -34,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
   },
   panel:{
     display:'flex',
-    // justifyContent:'space-between',
     margin:20,
     wordWrap:'break-word',
   },
@@ -66,6 +80,8 @@ export default function ModalTasks({opened, closeModal, item}){
 
   const [ppp, setPpp] = useState(false)
   const [img, setImg] = useState('')
+
+  const [model, setModel] = useState('Text')
 
   const handleClose = () => {
     setOpen(false)
@@ -111,6 +127,13 @@ export default function ModalTasks({opened, closeModal, item}){
     setPpp(false)
   }
 
+  const editor = useRef(null)
+  const [content, setContent] = useState('')
+
+  const config = {
+    readonly: false // all options from https://xdsoft.net/jodit/doc/
+  }
+
   return (
     <div>
       <Button variant="contained" color='primary' size='small' onClick={handleClickOpen('paper')}>Создать</Button>
@@ -150,26 +173,39 @@ export default function ModalTasks({opened, closeModal, item}){
             </FormControl>
           </div>
         </div>
-        <div className={classes.panel}>
-          <div className='groupButtons'>
-            <input accept="image/*" className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
-            <label htmlFor="icon-button-file">
-              <ImageIcon fontSize='large'/>
-            </label>
-          </div>
-          <div>
-            <input className={classes.inputId} id="icon-button-file" type="file" />
-            <label htmlFor="icon-button-file">
-              <AttachFileIcon fontSize='large'/>
-            </label>
-          </div>
-        </div>
+        {/*<div className={classes.panel}>*/}
+        {/*  <div className='groupButtons'>*/}
+        {/*    <input accept="image/*" className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>*/}
+        {/*    <label htmlFor="icon-button-file">*/}
+        {/*      <ImageIcon fontSize='large'/>*/}
+        {/*    </label>*/}
+        {/*  </div>*/}
+        {/*  <div>*/}
+        {/*    <input className={classes.inputId} id="icon-button-file" type="file" />*/}
+        {/*    <label htmlFor="icon-button-file">*/}
+        {/*      <AttachFileIcon fontSize='large'/>*/}
+        {/*    </label>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
         <DialogContent dividers={scroll === 'paper'}>
-          <div id='editor' contentEditable suppressContentEditableWarning className={classes.editor}>
-              <div contentEditable suppressContentEditableWarning>
-                Введите текст...
-              </div>
-          </div>
+          {/*<div id='editor' contentEditable suppressContentEditableWarning className={classes.editor}>*/}
+          {/*    <div contentEditable suppressContentEditableWarning>*/}
+          {/*      Введите текст...*/}
+          {/*    </div>*/}
+          {/*</div>*/}
+          <FroalaEditor
+            tag='textarea'
+            config={{
+              placeholder: "Edit Me",
+              events : {
+                'focus' : function(e, editor) {
+                  console.log(editor.selection.get());
+                }
+              }
+            }}
+            model={model}
+            onModelChange={() => setModel('11111111')}
+          />
         </DialogContent>
         <div className={classes.otvet}>
           {otvet && <Otvet/>}
