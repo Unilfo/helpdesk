@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ImgDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ImgDialog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ModalTasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ModalTasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/modalTask.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/modalTask.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +20,9 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,7 +78,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -194,26 +198,26 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1605619622292" />
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1605620771802">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1628" height="238" key="GridCell.Tab.0.bottom" timestamp="1605726135542">
+      <screen x="0" y="25" width="1680" height="948" />
     </state>
     <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605620771802" />
-    <state width="1628" height="238" key="GridCell.Tab.0.bottom/0.25.1680.948@0.25.1680.948" timestamp="1605375911184" />
-    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1605620771802">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1628" height="238" key="GridCell.Tab.0.bottom/0.25.1680.948@0.25.1680.948" timestamp="1605726135542" />
+    <state width="1628" height="238" key="GridCell.Tab.0.center" timestamp="1605726135541">
+      <screen x="0" y="25" width="1680" height="948" />
     </state>
     <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605620771802" />
-    <state width="1628" height="238" key="GridCell.Tab.0.center/0.25.1680.948@0.25.1680.948" timestamp="1605375911183" />
-    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1605620771802">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1628" height="238" key="GridCell.Tab.0.center/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
+    <state width="1628" height="238" key="GridCell.Tab.0.left" timestamp="1605726135540">
+      <screen x="0" y="25" width="1680" height="948" />
     </state>
     <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605620771802" />
-    <state width="1628" height="238" key="GridCell.Tab.0.left/0.25.1680.948@0.25.1680.948" timestamp="1605375911182" />
-    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1605620771802">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1628" height="238" key="GridCell.Tab.0.left/0.25.1680.948@0.25.1680.948" timestamp="1605726135540" />
+    <state width="1628" height="238" key="GridCell.Tab.0.right" timestamp="1605726135541">
+      <screen x="0" y="25" width="1680" height="948" />
     </state>
     <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605620771802" />
-    <state width="1628" height="238" key="GridCell.Tab.0.right/0.25.1680.948@0.25.1680.948" timestamp="1605375911183" />
+    <state width="1628" height="238" key="GridCell.Tab.0.right/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
     <state x="849" y="188" key="RollbackChangesDialog" timestamp="1605166535706">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -222,6 +226,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1605619625043" />
+    <state x="618" y="400" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605733619197">
+      <screen x="0" y="25" width="1680" height="948" />
+    </state>
+    <state x="618" y="400" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.948@0.25.1680.948" timestamp="1605733619197" />
     <state x="732" y="298" key="git4idea.merge.GitPullDialog" timestamp="1605166513917">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

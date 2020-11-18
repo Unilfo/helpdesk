@@ -4,5 +4,9 @@
     height: 90%;
 }
 .MuiDialogContent-dividers{
-    height: 70%!important;
+    /*height: 70%!important;*/
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+.MuiDialogContent-dividers {
+    border-bottom: none!important;
 }
