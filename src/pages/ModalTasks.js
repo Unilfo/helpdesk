@@ -12,6 +12,7 @@ import ImageIcon from '@material-ui/icons/Image'
 import AttachFileIcon from '@material-ui/icons/AttachFile'
 import './modalTask.css'
 import ImgDialog from './ImgDialog'
+import Grid from '@material-ui/core/Grid'
 
 
 
@@ -30,14 +31,22 @@ const useStyles = makeStyles((theme) => ({
   editor:{
     height:'60%',
     minHeight:'100%',
-    outline:'none',
     display:'flex',
-    flexFlow:'column'
+    width:'100%'
   },
   panel:{
     display:'flex',
-    margin:20,
+    flexFlow:'column',
+    width:'100%',
     wordWrap:'break-word',
+    paddingRight:40,
+    paddingLeft:40
+  },
+  panelButtonImgsFiles:{
+    display:'flex',
+  },
+  contentEditableArea:{
+    outline:'none',
   },
   inputId:{
     display: 'none'
@@ -52,10 +61,28 @@ const useStyles = makeStyles((theme) => ({
     height:'50%',
     minHeight:'30%',
   },
+  buttons:{
+    color: '#3f51b5',
+    "&:hover": {
+      borderRadius: '5px',
+      backgroundColor: 'rgb(7, 177, 77, 0.42)'
+    },
+  },
+  groupFiles:{
+    height:'70%',
+    width:250
+  },
+  groupFilesImgs:{
+    // display:'flex',
+    // flexFlow:'row',
+  },
+  textFilesImgs:{
+  // marginRight:25
+  }
 }));
 
 
-export default function ModalTasks({opened, closeModal, item}){
+export default function ModalTasks({opened, closeModal, item}) {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [scroll, setScroll] = useState('paper')
@@ -69,8 +96,9 @@ export default function ModalTasks({opened, closeModal, item}){
     setScroll(scrollType)
   }
 
-  const [files, setFiles] = useState(null)
-
+  const [files, setFiles] = useState([])
+  const [openImg, setOpenImg] = useState(false)
+  const [img, setImg] = useState(null)
 
   const handleClose = () => {
     setOpen(false)
@@ -80,7 +108,7 @@ export default function ModalTasks({opened, closeModal, item}){
 
   useEffect(() => {
     if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
+      const {current: descriptionElement} = descriptionElementRef;
       if (descriptionElement !== null) {
         descriptionElement.focus();
       }
@@ -88,7 +116,7 @@ export default function ModalTasks({opened, closeModal, item}){
   }, [open]);
 
   const Otvet = () => {
-    return(
+    return (
       <div>
         Ответ:
         <div>
@@ -99,21 +127,44 @@ export default function ModalTasks({opened, closeModal, item}){
   }
 
   const load = (e) => {
-    setFiles({
-      name:e.target.files[0].name,
-      file:e.target.files[0]
-    })
+    let oldData = files
+    setFiles(
+      [...oldData, e.target.files[0]]
+    )
   }
 
-  const FilesUpload = () => (
-    <div>
-      {files && files.map((el)=>(
-          <div>
-            el.name
-          </div>
-        ))}
-    </div>
-  )
+
+  const Files = () => {
+    if(files.length !== 0){
+      return (
+        <div className={classes.groupFilesImgs}>
+          {files.map((el)=> <div className={classes.textFilesImgs} key={el.name} onDoubleClick={()=>openedDialog(el)}>{el.name}</div>)}
+        </div>
+      )
+    }
+    else{
+      return ''
+    }
+  }
+
+  const openedDialog = (el) => {
+    setImg(el)
+    setOpenImg(true)
+  }
+
+  const closeDialog = () => {
+    setOpenImg(false)
+  }
+
+  // const mouseUP = (e) => {
+  //   let content = document.createElement('img')
+  //   content.src = 'profile.jpg'
+  //   let selection = document.getSelection()
+  //   if (selection.getRangeAt && selection.rangeCount) {
+  //     let range = window.getSelection().getRangeAt(0)
+  //     range.insertNode(content)
+  //   }
+  // }
 
   return (
     <div>
@@ -126,7 +177,7 @@ export default function ModalTasks({opened, closeModal, item}){
       >
         <div className={classes.dialog}>
           <Title>Заявка</Title>
-          {/*<ImgDialog opened={ppp} closeDialog={closeDialog} img={img}/>*/}
+          <ImgDialog opened={openImg} closeDialog={closeDialog} img={img}/>
           <div>
             <FormControl className={classes.input}>
               <InputLabel htmlFor="my-input">Тема</InputLabel>
@@ -155,29 +206,36 @@ export default function ModalTasks({opened, closeModal, item}){
           </div>
         </div>
         <div className={classes.panel}>
-          <div className='groupButtons'>
-            <input accept="image/*" className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
-            <label htmlFor="icon-button-file">
-              <ImageIcon fontSize='large'/>
-            </label>
-          </div>
-          <div>
-            <input className={classes.inputId} id="icon-button-file" type="file" />
-            <label htmlFor="icon-button-file">
-              <AttachFileIcon fontSize='large'/>
-            </label>
-          </div>
-          <div id='files'>
-            {FilesUpload}
+          <div className={classes.panelButtonImgsFiles}>
+            <div className='groupButtons'>
+              <input accept="image/*" className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
+              <label htmlFor="icon-button-file">
+                <ImageIcon fontSize='large' className={classes.buttons}/>
+              </label>
+            </div>
+            <div>
+              <input className={classes.inputId} id="icon-button-file" type="file" />
+              <label htmlFor="icon-button-file">
+                <AttachFileIcon fontSize='large' className={classes.buttons}/>
+              </label>
+            </div>
           </div>
         </div>
-        <DialogContent dividers={scroll === 'paper'}>
-          <div id='editor' contentEditable suppressContentEditableWarning className={classes.editor}>
+        <div className={classes.editor}>
+          <DialogContent dividers={scroll === 'paper'}>
+            <div contentEditable suppressContentEditableWarning className={classes.contentEditableArea}>
               <div contentEditable suppressContentEditableWarning>
                 Введите текст...
               </div>
+            </div>
+          </DialogContent>
+          <div id='files' className={classes.groupFiles}>
+            Прикрепленные файлы
+            <div>
+              <Files/>
+            </div>
           </div>
-        </DialogContent>
+        </div>
         <div className={classes.otvet}>
           {otvet && <Otvet/>}
         </div>

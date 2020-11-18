@@ -20,10 +20,15 @@ export default function ImgDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [img, setImg] = useState('')
 
-  useEffect(()=>{
-    console.log(props.img)
-    setOpen(props.opened)
-    setImg(props.img)
+  useEffect(() => {
+    if(props.img){
+      setOpen(props.opened)
+      let fr = new FileReader();
+      fr.onloadend = function () {
+        setImg(fr.result)
+      }
+      fr.readAsDataURL(props.img);
+    }
   },[props])
 
   const handleClose = () => {
