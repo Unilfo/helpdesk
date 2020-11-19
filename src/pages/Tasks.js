@@ -29,28 +29,24 @@ function createData(id, theme, responsible, data, status, author, text) {
 
 const rows = [
   createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(2, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(3, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(4, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(5, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(6, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(7, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(8, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(9, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(10, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(11, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(12, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(13, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(14, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(15, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(16, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(17, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(18, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(19, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(20, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(21, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(22, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(23, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(2, 'Тема 2', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(3, 'Тема 3', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(4, 'Тема 4', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(5, 'Тема 5', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(6, 'Тема 6', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(7, 'Тема 7', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(8, 'Тема 8', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(9, 'Тема 9', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(10, 'Тема 10', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(11, 'Тема 11', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(12, 'Тема 12', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(13, 'Тема 13', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(14, 'Тема 14', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(15, 'Тема 15', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(16, 'Тема 16', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(17, 'Тема 17', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(18, 'Тема 18', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
+  createData(19, 'Тема 19', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
 ];
 
 const useStyles = makeStyles({
@@ -72,7 +68,7 @@ export default function Tasks() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [opened, setOpened] = useState(false)
-
+  const [item, setItem] = useState({})
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -85,7 +81,13 @@ export default function Tasks() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
+  }
+
+  const openModal = (item) => {
+    setItem(item)
+    setOpened(true)
+  }
+
   return (
     <React.Fragment>
       <Grid container spacing={3}>
@@ -93,7 +95,7 @@ export default function Tasks() {
           <Title>Задачи</Title>
         </Grid>
         <Grid item xs={3}>
-          <ModalTasks opened={opened} closeModal={closeModal}/>
+          <ModalTasks opened={opened} closeModal={closeModal} items={item}/>
         </Grid>
         <Grid item xs={3}>
           <Input placeholder={'Поиск'}></Input>
@@ -118,7 +120,13 @@ export default function Tasks() {
       <TableBody>
       {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
         return (
-          <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+          <TableRow
+            hover
+            role="checkbox"
+            tabIndex={-1}
+            key={row.id}
+            onClick={()=>openModal(row)}
+          >
             {columns.map((column) => {
               const value = row[column.id];
               return (

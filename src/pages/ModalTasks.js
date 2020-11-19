@@ -122,7 +122,7 @@ class RuLocalizedUtils extends DateFnsUtils {
 	}
 }
 
-export default function ModalTasks({opened, closeModal, item}) {
+export default function ModalTasks({opened, closeModal, items}) {
 	const classes = useStyles()
 	const [open, setOpen] = useState(false)
 	const [scroll, setScroll] = useState('paper')
@@ -134,19 +134,22 @@ export default function ModalTasks({opened, closeModal, item}) {
 		setOpen(true)
 		setScroll(scrollType)
 	}
-
+	const [item, setItem] = useState({})
 	const [files, setFiles] = useState([])
 	const [openImg, setOpenImg] = useState(false)
 	const [img, setImg] = useState(null)
 	const [startText, setStartText] = useState('Введите текст...')
 	const [checked, setChecked] = useState(true)
 	const [selectedDate, handleDateChange] = useState(new Date())
+
 	const handleChange = (event) => {
 		setChecked(event.target.checked)
 	}
 
 
+
 	const handleClose = () => {
+		closeModal()
 		setOpen(false)
 	}
 
@@ -159,6 +162,8 @@ export default function ModalTasks({opened, closeModal, item}) {
 				descriptionElement.focus()
 			}
 		}
+		setItem(items)
+		console.log(item)
 	}, [open])
 
 	const Otvet = () => {
@@ -201,6 +206,11 @@ export default function ModalTasks({opened, closeModal, item}) {
 		setOpenImg(false)
 	}
 
+	useEffect(()=>{
+		setOpen(opened)
+	},[opened])
+
+
 	// const mouseUP = (e) => {
 	//   let content = document.createElement('img')
 	//   content.src = 'profile.jpg'
@@ -214,10 +224,16 @@ export default function ModalTasks({opened, closeModal, item}) {
 
 	return (
 		<div>
-			<Button variant="contained" color='primary' size='small' onClick={handleClickOpen('paper')}>Создать</Button>
+			<Button
+				variant="contained"
+				color='primary'
+				size='small'
+				onClick={handleClickOpen('paper')}
+			>
+				Создать
+			</Button>
 			<Dialog
 				open={open}
-				onClose={handleClose}
 				scroll={scroll}
 				maxWidth={'lg'}
 			>
@@ -227,18 +243,18 @@ export default function ModalTasks({opened, closeModal, item}) {
 					<div>
 						<FormControl className={classes.input}>
 							<InputLabel htmlFor="my-input">Тема</InputLabel>
-							<Input aria-describedby="my-helper-text" value=''/>
+							<Input aria-describedby="my-helper-text" value={item.theme}/>
 						</FormControl>
 						<FormControl className={classes.input}>
 							<InputLabel htmlFor="my-input">Автор</InputLabel>
-							<Input aria-describedby="my-helper-text" value=''/>
+							<Input aria-describedby="my-helper-text" value={item.author}/>
 						</FormControl>
 						<FormControl className={classes.input}>
 							<InputLabel id="demo-simple-select-label">Ответственный</InputLabel>
 							<Select
 								labelId="demo-simple-select-label"
 								id="demo-simple-select"
-								// value={age}
+								value={item.responsible}
 								onChange={handleChange}
 							>
 								<MenuItem value={10}>Ten</MenuItem>
@@ -316,14 +332,14 @@ export default function ModalTasks({opened, closeModal, item}) {
 							{startText}
 						</Typography>
 					</DialogContent>
-					<Typography align={'center'} className={classes.labelTitle}>
+					<div align={'center'} className={classes.labelTitle}>
 						<Title>
 							Прикрепленные файлы
 						</Title>
 						<div id='files' className={classes.groupFiles}>
 							<Files/>
 						</div>
-					</Typography>
+					</div>
 				</div>
 				<div className={classes.otvet}>
 					{otvet && <Otvet/>}
