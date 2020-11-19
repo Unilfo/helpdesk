@@ -14,6 +14,13 @@ import './modalTask.css'
 import ImgDialog      from './ImgDialog'
 import Typography     from '@material-ui/core/Typography'
 import Checkbox       from '@material-ui/core/Checkbox'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import format from "date-fns/format";
+import DateFnsUtils from "@date-io/date-fns";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import ruLocale from "date-fns/locale/ru"
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 const useStyles = makeStyles((theme) => ({
 	dialog: {
@@ -23,7 +30,13 @@ const useStyles = makeStyles((theme) => ({
 		paddingBottom: 20,
 	},
 	input: {
+		width:230,
 		marginRight: 40
+	},
+	datePiker:{
+		width:130,
+		marginRight: 40,
+		marginTop:16
 	},
 	editor: {
 		height: '35%',
@@ -39,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingRight: 40,
 		paddingLeft: 40,
 		borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+    marginTop:30,
 	},
 	panelButtonImgsFiles: {
 		display: 'flex',
@@ -89,18 +103,33 @@ const useStyles = makeStyles((theme) => ({
 	textFilesImgs: {
 		marginLeft:15,
 		marginBottom:5
-	}
+	},
+	textField: {
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
+		width: 200,
+	},
 }))
+
+
+class RuLocalizedUtils extends DateFnsUtils {
+	getCalendarHeaderText(date) {
+		return format(date, "LLLL", { locale: this.locale });
+	}
+
+	getDatePickerHeaderText(date) {
+		return format(date, "dd MMMM", { locale: this.locale });
+	}
+}
 
 export default function ModalTasks({opened, closeModal, item}) {
 	const classes = useStyles()
 	const [open, setOpen] = useState(false)
 	const [scroll, setScroll] = useState('paper')
-	const [otvet, setOtvet] = useState('aasdasdasdasdasdasdasdaasdasd' +
-		'asdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdas' +
-		'dasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaa' +
-		'sdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdas' +
-		'dasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasdaasdasdasdasdasdasdasd')
+	const [otvet, setOtvet] = useState('Lorem ipsum dolor sit amet, ' +
+		'consectetur adipisicing elit. Accusamus aperiam architecto aspernatur' +
+		' assumenda beatae debitis dolore eaque explicabo fuga harum iusto maxime ' +
+		'minima nemo odit officia recusandae, sequi voluptas voluptate?')
 	const handleClickOpen = (scrollType) => () => {
 		setOpen(true)
 		setScroll(scrollType)
@@ -111,8 +140,7 @@ export default function ModalTasks({opened, closeModal, item}) {
 	const [img, setImg] = useState(null)
 	const [startText, setStartText] = useState('Введите текст...')
 	const [checked, setChecked] = useState(true)
-
-
+	const [selectedDate, handleDateChange] = useState(new Date())
 	const handleChange = (event) => {
 		setChecked(event.target.checked)
 	}
@@ -206,25 +234,63 @@ export default function ModalTasks({opened, closeModal, item}) {
 							<Input aria-describedby="my-helper-text" value=''/>
 						</FormControl>
 						<FormControl className={classes.input}>
-							<InputLabel htmlFor="my-input">Ответственный</InputLabel>
-							<Input aria-describedby="my-helper-text" value=''/>
+							<InputLabel id="demo-simple-select-label">Ответственный</InputLabel>
+							<Select
+								labelId="demo-simple-select-label"
+								id="demo-simple-select"
+								// value={age}
+								onChange={handleChange}
+							>
+								<MenuItem value={10}>Ten</MenuItem>
+								<MenuItem value={20}>Twenty</MenuItem>
+								<MenuItem value={30}>Thirty</MenuItem>
+							</Select>
+						</FormControl>
+						<MuiPickersUtilsProvider utils={RuLocalizedUtils} locale={ruLocale}>
+							<DatePicker
+								className={classes.datePiker}
+								value={selectedDate}
+								onChange={handleDateChange}
+								format={"d MMM yyyy"}
+								cancelLabel={"отмена"}
+							/>
+						</MuiPickersUtilsProvider>
+						<FormControl className={classes.input}>
+							<InputLabel id="demo-simple-select-label">Статус</InputLabel>
+							<Select
+								labelId="demo-simple-select-label"
+								id="demo-simple-select"
+								// value={age}
+								onChange={handleChange}
+							>
+								<MenuItem value={10}>Ten</MenuItem>
+								<MenuItem value={20}>Twenty</MenuItem>
+								<MenuItem value={30}>Thirty</MenuItem>
+							</Select>
 						</FormControl>
 						<FormControl className={classes.input}>
-							<InputLabel htmlFor="my-input">Дата</InputLabel>
-							<Input aria-describedby="my-helper-text" value=''/>
+							<InputLabel id="demo-simple-select-label">Приоритет</InputLabel>
+							<Select
+								labelId="demo-simple-select-label"
+								id="demo-simple-select"
+								// value={age}
+								onChange={handleChange}
+							>
+								<MenuItem value={10}>Ten</MenuItem>
+								<MenuItem value={20}>Twenty</MenuItem>
+								<MenuItem value={30}>Thirty</MenuItem>
+							</Select>
 						</FormControl>
-						<FormControl className={classes.input}>
-							<InputLabel htmlFor="my-input">Статус</InputLabel>
-							<Input aria-describedby="my-helper-text" value=''/>
-						</FormControl>
-						<FormControl className={classes.input}>
-							<InputLabel htmlFor="my-input">Приоритет</InputLabel>
-							<Input aria-describedby="my-helper-text" value=''/>
-						</FormControl>
-						<Checkbox
-							checked={checked}
-							onChange={handleChange}
-							inputProps={{ 'aria-label': 'primary checkbox' }}
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={checked}
+									onChange={handleChange}
+									name="checkedB"
+									color="primary"
+								/>
+							}
+							label="Закрыть заявку"
 						/>
 					</div>
 				</div>
@@ -245,6 +311,7 @@ export default function ModalTasks({opened, closeModal, item}) {
 						<Typography contentEditable suppressContentEditableWarning
 												className={classes.contentEditableArea}
 												onFocus={()=>setStartText(' ')}
+												onBlur={()=>setStartText('Введите текст...')}
 						>
 							{startText}
 						</Typography>
