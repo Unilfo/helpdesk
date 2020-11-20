@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import Title from '../components/Title'
+import Title from '../../components/Title/Title'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'

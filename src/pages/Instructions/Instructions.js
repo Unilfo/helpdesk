@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react'
-import Title from '../components/Title';
+import Title from '../../components/Title/Title';
 import Grid from '@material-ui/core/Grid'
 import {Input} from '@material-ui/core'
 import TreeView from '@material-ui/lab/TreeView'

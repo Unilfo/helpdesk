@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Title from '../components/Title'
+import Title from '../../components/Title/Title'
 import { Input } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid'
 import ModalTasks from './ModalTasks'

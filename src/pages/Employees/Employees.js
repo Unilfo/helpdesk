@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react'
-import Title from '../components/Title';
+import Title from '../../components/Title/Title';
 import Grid from '@material-ui/core/Grid'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableCell from '@material-ui/core/TableCell'
@@ -10,7 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import ModalForm from './Modal'
+import ModalForm from '../Instructions/Modal'
 import {Input} from '@material-ui/core'
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Button from '@material-ui/core/Button'

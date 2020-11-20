@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import Title from '../components/Title'
+import Title from '../../components/Title/Title'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'

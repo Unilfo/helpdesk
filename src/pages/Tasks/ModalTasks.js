@@ -7,11 +7,11 @@ import Input          from '@material-ui/core/Input'
 import Dialog         from '@material-ui/core/Dialog'
 import DialogContent  from '@material-ui/core/DialogContent'
 import DialogActions  from '@material-ui/core/DialogActions'
-import Title          from '../components/Title'
+import Title          from '../../components/Title/Title'
 import ImageIcon      from '@material-ui/icons/Image'
 import AttachFileIcon from '@material-ui/icons/AttachFile'
 import './modalTask.css'
-import ImgDialog      from './ImgDialog'
+import ImgDialog      from '../ImgDialog/ImgDialog'
 import Typography     from '@material-ui/core/Typography'
 import Checkbox       from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
@@ -254,12 +254,12 @@ export default function ModalTasks({opened, closeModal, items}) {
 							<Select
 								labelId="demo-simple-select-label"
 								id="demo-simple-select"
-								value={item.responsible}
+								// value=''
 								onChange={handleChange}
 							>
-								<MenuItem value={10}>Ten</MenuItem>
-								<MenuItem value={20}>Twenty</MenuItem>
-								<MenuItem value={30}>Thirty</MenuItem>
+								<MenuItem value={1}>Сидоров</MenuItem>
+								<MenuItem value={2}>Петров</MenuItem>
+								<MenuItem value={3}>Иванов</MenuItem>
 							</Select>
 						</FormControl>
 						<MuiPickersUtilsProvider utils={RuLocalizedUtils} locale={ruLocale}>
@@ -279,9 +279,8 @@ export default function ModalTasks({opened, closeModal, items}) {
 								// value={age}
 								onChange={handleChange}
 							>
-								<MenuItem value={10}>Ten</MenuItem>
-								<MenuItem value={20}>Twenty</MenuItem>
-								<MenuItem value={30}>Thirty</MenuItem>
+								<MenuItem value={1}>В работе</MenuItem>
+								<MenuItem value={2}>Закрыта</MenuItem>
 							</Select>
 						</FormControl>
 						<FormControl className={classes.input}>
@@ -292,9 +291,9 @@ export default function ModalTasks({opened, closeModal, items}) {
 								// value={age}
 								onChange={handleChange}
 							>
-								<MenuItem value={10}>Ten</MenuItem>
-								<MenuItem value={20}>Twenty</MenuItem>
-								<MenuItem value={30}>Thirty</MenuItem>
+								<MenuItem value={1}>Высокий</MenuItem>
+								<MenuItem value={2}>Средний</MenuItem>
+								<MenuItem value={3}>Низкий</MenuItem>
 							</Select>
 						</FormControl>
 						<FormControlLabel

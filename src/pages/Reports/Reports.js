@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import Title from '../components/Title'
+import Title from '../../components/Title/Title'
 
 export default function Reports() {
   return(

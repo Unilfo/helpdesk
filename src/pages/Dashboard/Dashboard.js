@@ -14,17 +14,17 @@ import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems } from './listItems';
-import Employees from './Employees';
-import Tasks from './Tasks';
+import { mainListItems } from '../listItems/listItems';
+import Employees from '../Employees/Employees';
+import Tasks from '../Tasks/Tasks';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Home from './Home'
-import Reports from './Reports'
-import Instructions from './Instructions'
+import Home from '../Home/Home'
+import Reports from '../Reports/Reports'
+import Instructions from '../Instructions/Instructions'
 
 const drawerWidth = 240;
 
