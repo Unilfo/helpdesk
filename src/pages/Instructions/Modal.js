@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ModalForm({opened, closeModal, item}){
   const classes = useStyles();
-  const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
+  const [modalStyle] = useState(getModalStyle)
+  const [open, setOpen] = useState(false)
   const [status, setStatus] = useState('')
   const [id, setId] = useState('')
   const [fio1, setFio1] = useState('')

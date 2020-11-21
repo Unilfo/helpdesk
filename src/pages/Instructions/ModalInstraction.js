@@ -57,9 +57,6 @@ export default function ModalForm({opened, closeModal, instraction}){
   const [path, setPath] = useState('')
   const [group, setGroup] = useState('')
 
-
-
-
   useEffect(()=>{
     setTitle(instraction.label)
     setPath(instraction.path)
@@ -67,11 +64,9 @@ export default function ModalForm({opened, closeModal, instraction}){
     setOpen(opened)
   },[opened])
 
-
   const handleChangeRole = (event) => {
     setGroup(event.target.value);
-  };
-
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -79,15 +74,15 @@ export default function ModalForm({opened, closeModal, instraction}){
     setPath('')
     setGroup(null)
     closeModal()
-  };
+  }
 
-  const hiddenFileInput = React.useRef(null);
+  const hiddenFileInput = React.useRef(null)
+
   const handleClick = event => {
     hiddenFileInput.current.click();
   };
   const handleChange = event => {
     const fileUploaded = event.target.files[0];
-    // setImg(URL.createObjectURL(fileUploaded))
   };
 
   const body = (

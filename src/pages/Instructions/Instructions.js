@@ -1,23 +1,17 @@
 import React, {Fragment, useEffect, useState} from 'react'
-import Title from '../../components/Title/Title';
+import Title from '../../components/Title/Title'
 import Grid from '@material-ui/core/Grid'
 import {Input} from '@material-ui/core'
 import TreeView from '@material-ui/lab/TreeView'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import TreeItem from '@material-ui/lab/TreeItem'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import { Page } from 'react-pdf';
-import { Document } from 'react-pdf/dist/esm/entry.webpack';
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
-import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import Button from '@material-ui/core/Button'
 import ModalInstraction from './ModalInstraction'
 import Typography from '@material-ui/core/Typography'
-import EditIcon from '@material-ui/icons/Edit';
-
+import EditIcon from '@material-ui/icons/Edit'
+import InstractionVeaver from './instractionVeaver'
 
 const useStyles = makeStyles({
   root: {
@@ -25,19 +19,6 @@ const useStyles = makeStyles({
     flexGrow: 1,
     maxWidth: 400,
     wordWrap: 'break-word'
-  },
-  pageControls:{
-    width:'80%',
-    display: 'flex',
-    justifyContent:'space-between',
-    alignItems:'center',
-    color: '#3f51b5',
-  },
-  pageControlsButtons:{
-    "&:hover": {
-      borderRadius: '5px',
-      backgroundColor: 'rgb(7, 177, 77, 0.42)'
-    },
   },
   labelRoot: {
     display: 'flex',
@@ -66,34 +47,24 @@ const dataFetch = [
 
 
 export default function Instructions() {
-  const classes = useStyles();
-  const [numPages, setNumPages] = useState(1);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1.3);
-  const [searchText, setSearhText] = useState('')
+  const classes = useStyles()
+  const [searchText, setSearchText] = useState('')
   const [data, setData] = useState(dataFetch)
-  const [docFile, setDocFile] = useState('')
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [instraction, setInstraction] = useState({})
+  const [openedInstraction, setOpenedInstraction] = useState(false)
 
 
   const closeModal =() => {
     setOpen(false)
+    setOpenedInstraction(false)
   }
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
-
-
 
   useEffect(()=>{
     if(searchText === ''){
       setData(dataFetch)
     }
     else{
-      // const group = dataFetch.filter((el)=> el.group === true)
       const filteredData = dataFetch.filter((el) => {
         if (!el.group){
           return el.label.toLowerCase().includes(searchText.toLowerCase().trim())
@@ -108,38 +79,12 @@ export default function Instructions() {
     setData(data)
   },[data])
 
-
   useEffect(()=>()=>{
     setInstraction({})
   },[])
 
   const handleChange = (event) => {
-    setSearhText(event.target.value)
-  }
-
-  const changeScalePlus = () => {
-    const oldScale = scale
-    setScale(oldScale+0.1)
-  }
-  const changeScaleMinus = () => {
-    const oldScale = scale
-    setScale(oldScale-0.1)
-  }
-
-  const changePrevPage = () => {
-    if(pageNumber - 1 > 0 ){
-      setPageNumber(pageNumber - 1)
-    }
-  }
-
-  const changeNextTage = () => {
-    setPageNumber(pageNumber + 1)
-  }
-
-  const handleChangeDokFile = (item) => {
-    setDocFile(item.path)
-    setPageNumber(1)
-    setNumPages(1)
+    setSearchText(event.target.value)
   }
 
   const openModal = () => {
@@ -152,10 +97,16 @@ export default function Instructions() {
     setOpen(true)
   }
 
+  const openedinatraction = (item) => {
+    setInstraction(item)
+    setOpenedInstraction(true)
+  }
+
   return (
     <Fragment>
       <Grid container spacing={3}>
         <ModalInstraction opened={open} closeModal={closeModal} instraction={instraction}/>
+        <InstractionVeaver openedInstraction={openedInstraction} instraction={instraction} closeModal={closeModal}/>
         <Grid item>
           <Title>Инструкции</Title>
         </Grid>
@@ -164,15 +115,6 @@ export default function Instructions() {
         </Grid>
         <Grid item xs={2}>
           <Button variant="contained" color='primary' size='small' onClick={openModal}>Создать</Button>
-        </Grid>
-        <Grid item xs={3}>
-          <div className={classes.pageControls}>
-            <ZoomInIcon className={classes.pageControlsButtons} fontSize={'large'} onClick={changeScalePlus}></ZoomInIcon>
-            <ZoomOutIcon className={classes.pageControlsButtons} fontSize={'large'} onClick={changeScaleMinus}></ZoomOutIcon>
-            <NavigateBeforeIcon className={classes.pageControlsButtons} fontSize={'large'} onClick={changePrevPage}></NavigateBeforeIcon>
-            <NavigateNextIcon className={classes.pageControlsButtons} fontSize={'large'} onClick={changeNextTage}></NavigateNextIcon>
-            <p>Страница {pageNumber} из {numPages}</p>
-          </div>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
@@ -188,6 +130,8 @@ export default function Instructions() {
                   return(
                       <TreeItem
                         nodeId={columnChild.nodeId}
+                        onDoubleClick={()=>openedinatraction(columnChild)}
+                        key={columnChild.nodeId}
                         label={
                           <div className={classes.labelRoot}>
                             <Typography variant="body2" >
@@ -196,8 +140,7 @@ export default function Instructions() {
                             <EditIcon className={classes.editIcon} onClick={()=>handleEditeInstraction(columnChild)}/>
                           </div>
                         }
-                        key={columnChild.nodeId}
-                        onClick={()=>handleChangeDokFile(columnChild)}>
+                      >
                       </TreeItem>
                   )})
                 :
@@ -208,8 +151,8 @@ export default function Instructions() {
                       {data.map((columnChild)=>{
                         if(!columnChild.group && columnChild.prinadlejit === column.id){
                         return(
-                          <Fragment>
                             <TreeItem
+                              onDoubleClick={()=>openedinatraction(columnChild)}
                               label={
                                 <div className={classes.labelRoot}>
                                   <Typography variant="body2" >
@@ -220,26 +163,17 @@ export default function Instructions() {
                               }
                               nodeId={columnChild.nodeId}
                               key={columnChild.nodeId}
-                              onClick={()=>handleChangeDokFile(columnChild)}>
+                            >
                             </TreeItem>
-                          </Fragment>
                         )}
+                        return ''
                       })}
                     </TreeItem>
                   )
                 }
+                return ''
               })}
             </TreeView>
-          </Grid>
-          <Grid item xs={6}>
-            <div>
-              <Document
-                file={docFile}
-                onLoadSuccess={onDocumentLoadSuccess}
-              >
-                <Page pageNumber={pageNumber} scale={scale}/>
-              </Document>
-            </div>
           </Grid>
         </Grid>
     </Fragment>

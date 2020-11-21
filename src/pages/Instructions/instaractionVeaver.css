@@ -1,0 +1,7 @@
+.react-pdf__Page__canvas{
+    height: 700px!important;
+    width: 600px!important;
+}
+.react-pdf__Page__textContent{
+    display: none;
+}
