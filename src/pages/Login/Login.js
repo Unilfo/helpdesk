@@ -69,7 +69,15 @@ export default function SignInSide() {
     return null
   }
 
-
+  const submit = (e) => {
+    e.preventDefault()
+    if(login === '1' && password === '1'){
+      localStorage.setItem('pas', '123')
+      document.location.reload();
+    }else{
+      setError(true)
+    }
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -84,7 +92,7 @@ export default function SignInSide() {
             Help desk
           </Typography>
           <Error/>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={submit}>
             <TextField
               variant="outlined"
               margin="normal"
