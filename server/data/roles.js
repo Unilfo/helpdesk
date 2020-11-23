@@ -9,4 +9,8 @@ const roles = [
   },
 ]
 
-module.exports = roles
+const getRoleById = ({ roleId }) => {
+  return roles.find(el => el.id == roleId)
+}
+
+module.exports = {roles, getRoleById}

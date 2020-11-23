@@ -1,37 +1,39 @@
 const { ApolloServer, gql } = require('apollo-server');
 
 const users = require('./data/users')
-const roles = require('./data/roles')
-const status = require('./data/status')
+const {roles, getRoleById} = require('./data/roles')
+const {statuses, getStatusById} = require('./data/statuses')
 
 const typeDefs = gql`  
     type User {
-        id: Int!
+        id: ID!
         name: String
         patronymic: String
         surname: String
-        status: Status
-        role: Role
+        status: Statuses
+        role: Roles
         tab_number: String
+        date: String
         login: String
         password: String
     }
     
-    type Role {
-        id: Int!
+    type Roles {
+        id: ID!
         title: String
     }
 
-    type Status {
-        id: Int!
+    type Statuses {
+        id: ID!
         title: String
     }
     
     type Query {
         users: [User]
-        roles: [Role]
-        status: [Status]
-        role(id: Int!): Role,
+        roles: [Roles]
+        statuses: [Statuses]
+        role(id: ID!): Roles,
+        status(id: ID!): Statuses,
     }
 `;
 
@@ -40,12 +42,14 @@ const resolvers = {
   Query: {
     users: () => users,
     roles: () => roles,
-    status: () => status,
-    role: (_, { id }) => roles.find(id, { id }),
+    statuses: () => statuses,
+    role: (_, { id }) => getRoleById({ roleId: id }),
+    status: (_, {id}) => getStatusById({statusId: id})
   },
-  // Role: {
-  //   posts: author => filter(posts, { authorId: author.id }),
-  // },
+  User: {
+    role: role => getRoleById({ roleId: role.id }),
+    status: status => getStatusById({statusId : status.id})
+  },
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
