@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/Kak_ustroen_JavaScript_2019_Krokford.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/Memo_Crimea.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/profile.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/razrabotka.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/tekhpribor.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/data/roles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/data/status.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/data/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +28,11 @@
     <option name="BRANCH" value="main" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsFlowSettings">
@@ -73,8 +75,18 @@
       <recent name="F:\Application\helpdesk\src\pages\Employees" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/server/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
@@ -87,6 +99,22 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
@@ -116,7 +144,7 @@
       <workItem from="1605814942098" duration="3921000" />
       <workItem from="1605954203308" duration="11019000" />
       <workItem from="1606041474839" duration="13671000" />
-      <workItem from="1606117048560" duration="370000" />
+      <workItem from="1606117048560" duration="7511000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -202,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606117354480</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="login">
+      <created>1606117425474</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1606117425474</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,38 +266,38 @@
     <option name="LAST_COMMIT_MESSAGE" value="login" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="569" y="46" key="CommitChangelistDialog2" timestamp="1605619622292">
+    <state x="569" y="46" key="CommitChangelistDialog2" timestamp="1606117424803">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1605619622292" />
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1606116926305">
+    <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606117424803" />
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1606126144246">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606126144246" />
     <state width="1628" height="238" key="GridCell.Tab.0.bottom/0.25.1680.948@0.25.1680.948" timestamp="1605726135542" />
-    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1606116926305">
+    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1606126144246">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
+    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606126144246" />
     <state width="1628" height="238" key="GridCell.Tab.0.center/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
-    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1606116926305">
+    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1606126144246">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
+    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606126144246" />
     <state width="1628" height="238" key="GridCell.Tab.0.left/0.25.1680.948@0.25.1680.948" timestamp="1605726135540" />
-    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1606116926305">
+    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1606126144246">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606126144246" />
     <state width="1628" height="238" key="GridCell.Tab.0.right/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
     <state x="849" y="188" key="RollbackChangesDialog" timestamp="1605166535706">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="849" y="188" key="RollbackChangesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1605166535706" />
-    <state x="517" y="209" key="Vcs.Push.Dialog.v2" timestamp="1605619625043">
+    <state x="517" y="209" key="Vcs.Push.Dialog.v2" timestamp="1606117434890">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1605619625043" />
+    <state x="517" y="209" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606117434890" />
     <state x="618" y="400" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605733619197">
       <screen x="0" y="25" width="1680" height="948" />
     </state>
