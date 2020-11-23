@@ -29,7 +29,7 @@ export default function Home() {
 
   return(
     <Fragment>
-      <Title>Home</Title>
+      <Title>Главная</Title>
       <Grid container spacing={3}>
         <Grid item xs={6} sm={3}>
           <Paper className={classes.paper}>

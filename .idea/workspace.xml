@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/Home.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,18 +66,6 @@
       <recent name="F:\Application\helpdesk\src\pages\Employees" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
@@ -96,7 +81,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -206,20 +191,19 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -236,25 +220,25 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1605619622292" />
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1605860243367">
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1606116926305">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605860243367" />
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
     <state width="1628" height="238" key="GridCell.Tab.0.bottom/0.25.1680.948@0.25.1680.948" timestamp="1605726135542" />
-    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1605860243367">
+    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1606116926305">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605860243367" />
+    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
     <state width="1628" height="238" key="GridCell.Tab.0.center/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
-    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1605860243367">
+    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1606116926305">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605860243367" />
+    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
     <state width="1628" height="238" key="GridCell.Tab.0.left/0.25.1680.948@0.25.1680.948" timestamp="1605726135540" />
-    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1605860243367">
+    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1606116926305">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605860243367" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606116926305" />
     <state width="1628" height="238" key="GridCell.Tab.0.right/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
     <state x="849" y="188" key="RollbackChangesDialog" timestamp="1605166535706">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -268,9 +252,9 @@
       <screen x="0" y="25" width="1680" height="948" />
     </state>
     <state x="618" y="400" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.948@0.25.1680.948" timestamp="1605733619197" />
-    <state x="732" y="298" key="git4idea.merge.GitPullDialog" timestamp="1605855663263">
+    <state x="732" y="298" key="git4idea.merge.GitPullDialog" timestamp="1606109949759">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="732" y="298" key="git4idea.merge.GitPullDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1605855663263" />
+    <state x="732" y="298" key="git4idea.merge.GitPullDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606109949759" />
   </component>
 </project>
