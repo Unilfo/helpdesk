@@ -25,4 +25,8 @@ const users = [
   },
 ]
 
-module.exports = users
+const getUserById = ({userId}) => {
+  return users.find(el => el.id === userId)
+}
+
+module.exports = {users, getUserById}

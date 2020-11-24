@@ -32,6 +32,17 @@ const typeDefs = gql`
 
     type Tasks {
         id: ID!
+        theme: String
+        responsible: User
+        data: String
+        status: StatusTasks
+        author: User
+        text: String
+    }
+
+    type StatusTasks {
+        id: ID!
+        title: String
     }
     
     type Query {
@@ -41,9 +52,12 @@ const typeDefs = gql`
         tasks: [Tasks]
         instractions: [Instractions]
         instraction(id: ID!): Instractions
+        user(id: ID!): User
         task(id: ID!): Tasks
         role(id: ID!): Roles
         status(id: ID!): Statuses
+        statusTasks: [StatusTasks]
+        statusTask(id: ID!): StatusTasks
     }
 `;
 
