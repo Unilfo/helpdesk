@@ -16,14 +16,12 @@ import {mainListItems} from '../listItems/listItems'
 import Employees from '../Employees/Employees'
 import Tasks from '../Tasks/Tasks'
 import {
-  BrowserRouter as Router,
   Switch,
-  Route,
+  Route, withRouter,
 } from 'react-router-dom'
 import Home from '../Home/Home'
 import Reports from '../Reports/Reports'
 import Instructions from '../Instructions/Instructions'
-
 
 const drawerWidth = 240
 
@@ -118,7 +116,6 @@ export default function Dashboard() {
   }
 
   return (
-    <Router>
       <div className={classes.root}>
         <CssBaseline/>
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -157,7 +154,7 @@ export default function Dashboard() {
           <div className={classes.appBarSpacer}/>
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
-              <Route exact path="/home" component={Home}/>
+              <Route path="/home" component={Home}/>
               <Route path="/employee" component={Employees}/>
               <Route path="/tasks" component={Tasks}/>
               <Route path="/reports" component={Reports}/>
@@ -166,7 +163,6 @@ export default function Dashboard() {
           </Container>
         </main>
       </div>
-    </Router>
   )
 }
 

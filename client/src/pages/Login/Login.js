@@ -8,6 +8,8 @@ import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import { useHistory } from "react-router-dom"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SignInSide() {
+  let history = useHistory()
   const classes = useStyles()
   const [login, setlogin] = useState('')
   const [password, setPassword] = useState('')
@@ -72,8 +75,9 @@ export default function SignInSide() {
   const submit = (e) => {
     e.preventDefault()
     if(login === '1' && password === '1'){
-      localStorage.setItem('pas', '123')
-      document.location.reload();
+      localStorage.setItem('pas', '1')
+      history.push('/home')
+      // document.location.reload();
     }else{
       setError(true)
     }
@@ -134,3 +138,4 @@ export default function SignInSide() {
     </Grid>
   )
 }
+
