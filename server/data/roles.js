@@ -13,4 +13,13 @@ const getRoleById = ({ roleId }) => {
   return roles.find(el => el.id === roleId)
 }
 
-module.exports = {roles, getRoleById}
+const addRole = (id, title) => {
+  const item = {
+    id:id,
+    title:title
+  }
+  roles.push(item)
+  return item
+}
+
+module.exports = {roles, getRoleById, addRole}

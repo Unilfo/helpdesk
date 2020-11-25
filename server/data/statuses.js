@@ -13,4 +13,13 @@ const getStatusById = ({statusId}) => {
   return statuses.find((el)=>el.id === statusId)
 }
 
-module.exports = {statuses, getStatusById}
+const addStatuses = (id, title) => {
+  const item = {
+    id:id,
+    title:title
+  }
+  statuses.push(item)
+  return item
+}
+
+module.exports = {statuses, getStatusById, addStatuses}

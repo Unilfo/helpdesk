@@ -15,4 +15,14 @@ const getInstractionById = ({instractionId}) => {
   return instractions.find(el => el.id ===  instractionId)
 }
 
-module.exports = {instractions, getInstractionById}
+const addInstraction = (id, title, path) => {
+  const item = {
+    id:id,
+    title:title,
+    path:path
+  }
+  instractions.push(item)
+  return item
+}
+
+module.exports = {instractions, getInstractionById, addInstraction}

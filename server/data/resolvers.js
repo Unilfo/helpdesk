@@ -1,9 +1,9 @@
 const {users, getUserById} = require('./users')
-const {roles, getRoleById} = require('./roles')
-const {statuses, getStatusById} = require('./statuses')
-const {instractions, getInstractionById} = require('./instractions')
+const {roles, getRoleById, addRole} = require('./roles')
+const {statuses, getStatusById, addStatuses} = require('./statuses')
+const {instractions, getInstractionById, addInstraction} = require('./instractions')
 const {tasks, getTaskById} = require('./tasks')
-const {statusTasks, getStatusTasksById} = require('./statusTasks')
+const {statusTasks, getStatusTasksById, addStatusTasks} = require('./statusTasks')
 
 const resolvers = {
   Query: {
@@ -19,6 +19,20 @@ const resolvers = {
     user: (_, {id}) => getUserById({userId: id}),
     statusTask: (_, {id}) => getStatusTasksById({statusId: id}),
     statusTasks: () => statusTasks
+  },
+  Mutation: {
+    addRoles(_,{id, title}){
+      return addRole(id, title)
+    },
+    addStatuses(_,{id, title}){
+      return addStatuses(id, title)
+    },
+    addStatusTasks(_,{id, title}){
+      return addStatusTasks(id, title)
+    },
+    addInstraction(_,{id, title, path}){
+      return addInstraction(id, title, path)
+    },
   },
   User: {
     role: role => getRoleById({ roleId: role.id }),

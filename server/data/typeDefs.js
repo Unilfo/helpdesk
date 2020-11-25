@@ -59,6 +59,14 @@ const typeDefs = gql`
         statusTasks: [StatusTasks]
         statusTask(id: ID!): StatusTasks
     }
+
+    type Mutation {
+        addRoles(id: ID!, title: String!): Roles
+        addStatuses(id: ID!, title: String!): Statuses
+        addStatusTasks(id: ID!, title: String!): StatusTasks
+        addInstraction(id: ID!, title: String!, path: String!): Instractions
+    }
+  
 `;
 
 module.exports = typeDefs
