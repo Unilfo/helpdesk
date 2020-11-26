@@ -77,6 +77,15 @@ const typeDefs = gql`
             login: String
             password: String
         ):User
+        addTask(
+            id: ID!
+            theme: String
+            responsible: ID
+            data: String
+            status: ID
+            author: ID
+            text: String
+        ): Tasks
     }
   
 `;

@@ -23,4 +23,26 @@ const getTaskById = ({taskId}) => {
   return tasks.find(el => el.id === taskId)
 }
 
-module.exports = {tasks, getTaskById}
+const addTask = (
+  id,
+  theme,
+  responsible,
+  data,
+  status,
+  author,
+  text,
+) => {
+  const item = {
+    id:id,
+    theme:theme,
+    responsible:responsible,
+    data:data,
+    status:status,
+    author:author,
+    text:text,
+  }
+  tasks.push(item)
+  return item
+}
+
+module.exports = {tasks, getTaskById, addTask}

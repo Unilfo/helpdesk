@@ -10,7 +10,7 @@ const statusTasks = [
 ]
 
 const getStatusTasksById = ({statusId}) => {
-  return statusTasks.find((el)=>el.id === statusId)
+  return statusTasks.find((el)=>el.id == statusId)
 }
 
 const addStatusTasks = (id, title) => {

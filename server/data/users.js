@@ -26,7 +26,7 @@ const users = [
 ]
 
 const getUserById = ({userId}) => {
-  return users.find(el => el.id === userId)
+  return users.find(el => el.id == userId)
 }
 
 const addUser = (
