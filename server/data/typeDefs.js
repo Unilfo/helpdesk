@@ -59,12 +59,24 @@ const typeDefs = gql`
         statusTasks: [StatusTasks]
         statusTask(id: ID!): StatusTasks
     }
-
+    
     type Mutation {
-        addRoles(id: ID!, title: String!): Roles
-        addStatuses(id: ID!, title: String!): Statuses
-        addStatusTasks(id: ID!, title: String!): StatusTasks
-        addInstraction(id: ID!, title: String!, path: String!): Instractions
+        addRoles(id: ID!, title: String!): Roles!
+        addStatuses(id: ID!, title: String!): Statuses!
+        addStatusTasks(id: ID!, title: String!): StatusTasks!
+        addInstraction(id: ID!, title: String!, path: String!): Instractions!
+        addUser(
+            id: ID!
+            name: String
+            patronymic: String
+            surname: String
+            status: ID
+            role: ID
+            tab_number: String
+            date: String
+            login: String
+            password: String
+        ):User
     }
   
 `;

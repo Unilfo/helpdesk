@@ -51,7 +51,12 @@ export default function App() {
       <Router>
         <Switch>
           <Route exact path="/login">
-            <Login/>
+            {check()?
+              <Redirect
+              to={{
+                pathname: '/home',
+              }}
+            /> :<Login/>}
           </Route>
           <PrivateRoute path="/">
             <Dashboard/>

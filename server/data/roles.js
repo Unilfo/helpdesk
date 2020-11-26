@@ -10,7 +10,7 @@ const roles = [
 ]
 
 const getRoleById = ({ roleId }) => {
-  return roles.find(el => el.id === roleId)
+  return roles.find(el => el.id == roleId)
 }
 
 const addRole = (id, title) => {

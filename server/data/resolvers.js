@@ -1,4 +1,4 @@
-const {users, getUserById} = require('./users')
+const {users, getUserById, addUser} = require('./users')
 const {roles, getRoleById, addRole} = require('./roles')
 const {statuses, getStatusById, addStatuses} = require('./statuses')
 const {instractions, getInstractionById, addInstraction} = require('./instractions')
@@ -33,10 +33,13 @@ const resolvers = {
     addInstraction(_,{id, title, path}){
       return addInstraction(id, title, path)
     },
+    addUser(parent,{id,name,patronymic,surname,status,role,tab_number,date,login,password}){
+      return addUser(id,name,patronymic,surname,status,role,tab_number,date,login,password)
+    }
   },
   User: {
-    role: role => getRoleById({ roleId: role.id }),
-    status: status => getStatusById({statusId : status.id})
+    status: ({statusId}) => getStatusById({statusId : statusId}),
+    role: ({roleId}) => getRoleById({ roleId: roleId}),
   },
   Tasks:{
     responsible: responsible => getUserById({userId: responsible.id}),

@@ -10,7 +10,7 @@ const statuses = [
 ]
 
 const getStatusById = ({statusId}) => {
-  return statuses.find((el)=>el.id === statusId)
+  return statuses.find((el)=> el.id == statusId)
 }
 
 const addStatuses = (id, title) => {
