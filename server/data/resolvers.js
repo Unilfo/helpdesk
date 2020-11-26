@@ -1,7 +1,7 @@
 const {users, getUserById, addUser} = require('./users')
 const {roles, getRoleById, addRole} = require('./roles')
 const {statuses, getStatusById, addStatuses} = require('./statuses')
-const {instractions, getInstractionById, addInstraction} = require('./instractions')
+const {instractions, getInstractionById, addInstraction, deleteInstraction} = require('./instractions')
 const {tasks, getTaskById, addTask} = require('./tasks')
 const {statusTasks, getStatusTasksById, addStatusTasks} = require('./statusTasks')
 
@@ -54,6 +54,11 @@ const resolvers = {
         author,
         text,
       )
+    },
+    deleteInstraction(_,{id}){
+      let asd = deleteInstraction(id)
+      console.log(asd)
+      return "asdasdsad"
     },
   },
   User: {

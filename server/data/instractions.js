@@ -25,4 +25,15 @@ const addInstraction = (id, title, path) => {
   return item
 }
 
-module.exports = {instractions, getInstractionById, addInstraction}
+const deleteInstraction = (id) => {
+  let newInstractions = instractions.filter(el => el.id != id)
+  this.instractions = newInstractions
+  return this.instractions
+
+}
+
+const updateInstraction = ({id}) => {
+
+}
+
+module.exports = {instractions, getInstractionById, addInstraction, deleteInstraction}

@@ -86,6 +86,9 @@ const typeDefs = gql`
             author: ID
             text: String
         ): Tasks
+        deleteInstraction(
+            id: ID
+        ): Instractions
     }
   
 `;
