@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server')
+const {gql} = require('apollo-server')
 
 const typeDefs = gql`
     type User {
@@ -44,7 +44,7 @@ const typeDefs = gql`
         id: ID!
         title: String
     }
-    
+
     type Query {
         users: [User]
         roles: [Roles]
@@ -59,7 +59,7 @@ const typeDefs = gql`
         statusTasks: [StatusTasks]
         statusTask(id: ID!): StatusTasks
     }
-    
+
     type Mutation {
         addRoles(id: ID!, title: String!): Roles!
         addStatuses(id: ID!, title: String!): Statuses!
@@ -89,8 +89,29 @@ const typeDefs = gql`
         deleteInstraction(
             id: ID
         ): Instractions
+        updateInstraction(id:ID, title: String, path: String): Instractions
+        deleteRole(id:ID): Roles
+        updateRole(id:ID, title: String): Roles
+        deleteStatuses(id:ID): Statuses
+        updateStatuses(id:ID, title: String): Statuses
+        deleteStatusTask(id:ID): StatusTasks
+        updateStatusTask(id:ID, title: String): StatusTasks
+        deleteTask(id:ID): Tasks
+        updateTask(id:ID, theme: String, responsible: ID, data: String, status: ID, author: ID, text: String): Tasks
+        deleteUser(id:ID): User
+        updateUser(id:ID,
+            name: String,
+            patronymic: String,
+            surname: String,
+            status: ID,
+            role: ID,
+            tab_number: String,
+            date: String,
+            login: String,
+            password: String
+        ):User
     }
-  
-`;
+
+`
 
 module.exports = typeDefs

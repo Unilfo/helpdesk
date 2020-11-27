@@ -22,4 +22,14 @@ const addStatusTasks = (id, title) => {
   return item
 }
 
-module.exports = {statusTasks, getStatusTasksById, addStatusTasks}
+const deleteStatusTask = (id) => {
+  return statusTasks.filter(el => el.id != id)
+}
+
+const updateStatusTask = (id, title) => {
+  let newStatus = getStatusTasksById({statusId: id})
+  newStatus.title = title
+  return newStatus
+}
+
+module.exports = {statusTasks, getStatusTasksById, addStatusTasks, deleteStatusTask, updateStatusTask}

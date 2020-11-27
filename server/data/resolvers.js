@@ -1,9 +1,9 @@
-const {users, getUserById, addUser} = require('./users')
-const {roles, getRoleById, addRole} = require('./roles')
-const {statuses, getStatusById, addStatuses} = require('./statuses')
-const {instractions, getInstractionById, addInstraction, deleteInstraction} = require('./instractions')
-const {tasks, getTaskById, addTask} = require('./tasks')
-const {statusTasks, getStatusTasksById, addStatusTasks} = require('./statusTasks')
+const {users, getUserById, addUser, deleteUser, updateUser} = require('./users')
+const {roles, getRoleById, addRole, deleteRole, updateRole} = require('./roles')
+const {statuses, getStatusById, addStatuses, deleteStatuses, updateStatuses} = require('./statuses')
+const {instractions, getInstractionById, addInstraction, deleteInstraction, updateInstraction} = require('./instractions')
+const {tasks, getTaskById, addTask, deleteTask, updateTask} = require('./tasks')
+const {statusTasks, getStatusTasksById, addStatusTasks, deleteStatusTask, updateStatusTask} = require('./statusTasks')
 
 const resolvers = {
   Query: {
@@ -56,9 +56,40 @@ const resolvers = {
       )
     },
     deleteInstraction(_,{id}){
-      let asd = deleteInstraction(id)
-      console.log(asd)
-      return "asdasdsad"
+      return deleteInstraction(id)
+    },
+    updateInstraction(prev,{id, title, path}){
+      return updateInstraction(id, title, path)
+    },
+    deleteRole(prev,{id}){
+      return deleteRole(id)
+    },
+    updateRole(prev, {id, title}){
+      return updateRole(id, title)
+    },
+    deleteStatuses(prev,{id}){
+      return deleteStatuses(id)
+    },
+    updateStatuses(prev, {id, title}){
+      return updateStatuses(id, title)
+    },
+    deleteStatusTask(prev,{id}){
+      return deleteStatusTask(id)
+    },
+    updateStatusTask(prev, {id, title}){
+      return updateStatusTask(id, title)
+    },
+    deleteTask(prev,{id}){
+      return deleteTask(id)
+    },
+    updateTask(prev, {id, theme, responsible, data, status, author, text}){
+      return updateTask(id, theme, responsible, data, status, author, text)
+    },
+    deleteUser(prev,{id}){
+      return deleteUser(id)
+    },
+    updateUser(prev, {id, name, patronymic, surname, status, role, tab_number, date, login, password}){
+      return updateUser(id, name, patronymic, surname, status, role, tab_number, date, login, password)
     },
   },
   User: {

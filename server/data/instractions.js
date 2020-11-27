@@ -12,28 +12,29 @@ const instractions = [
 ]
 
 const getInstractionById = ({instractionId}) => {
-  return instractions.find(el => el.id ===  instractionId)
+  return instractions.find(el => el.id == instractionId)
 }
 
 const addInstraction = (id, title, path) => {
   const item = {
-    id:id,
-    title:title,
-    path:path
+    id: id,
+    title: title,
+    path: path
   }
   instractions.push(item)
   return item
 }
 
 const deleteInstraction = (id) => {
-  let newInstractions = instractions.filter(el => el.id != id)
-  this.instractions = newInstractions
-  return this.instractions
-
+  return instractions.filter(el => el.id != id)
 }
 
-const updateInstraction = ({id}) => {
-
+const updateInstraction = (id, title , path) => {
+  let newInstraction = getInstractionById({instractionId: id})
+  newInstraction.title = title
+  newInstraction.path = path
+  return newInstraction
 }
 
-module.exports = {instractions, getInstractionById, addInstraction, deleteInstraction}
+
+module.exports = {instractions, getInstractionById, addInstraction, deleteInstraction, updateInstraction}

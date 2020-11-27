@@ -22,4 +22,14 @@ const addStatuses = (id, title) => {
   return item
 }
 
-module.exports = {statuses, getStatusById, addStatuses}
+const deleteStatuses = (id) => {
+  return statuses.filter(el => el.id != id)
+}
+
+const updateStatuses = (id, title) => {
+  let newStatus = getStatusById({statusId: id})
+  newStatus.title = title
+  return newStatus
+}
+
+module.exports = {statuses, getStatusById, addStatuses, deleteStatuses, updateStatuses}

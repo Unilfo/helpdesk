@@ -20,7 +20,7 @@ const tasks = [
 ]
 
 const getTaskById = ({taskId}) => {
-  return tasks.find(el => el.id === taskId)
+  return tasks.find(el => el.id == taskId)
 }
 
 const addTask = (
@@ -45,4 +45,19 @@ const addTask = (
   return item
 }
 
-module.exports = {tasks, getTaskById, addTask}
+const deleteTask = (id) => {
+  return tasks.filter(el => el.id != id)
+}
+
+const updateTask = (id, theme, responsible, data, status, author, text) => {
+  let newTask = getTaskById({taskId: id})
+  newTask.theme = theme
+  newTask.responsible = responsible
+  newTask.data = data
+  newTask.status = status
+  newTask.author = author
+  newTask.text = text
+  return newTask
+}
+
+module.exports = {tasks, getTaskById, addTask, deleteTask, updateTask}

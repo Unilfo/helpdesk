@@ -22,4 +22,14 @@ const addRole = (id, title) => {
   return item
 }
 
-module.exports = {roles, getRoleById, addRole}
+const deleteRole = (id) => {
+  return roles.filter(el => el.id != id)
+}
+
+const updateRole = (id, title) => {
+  let newRole = getRoleById({roleId: id})
+  newRole.title = title
+  return newRole
+}
+
+module.exports = {roles, getRoleById, addRole, deleteRole, updateRole}
