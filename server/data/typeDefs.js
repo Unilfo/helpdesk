@@ -1,115 +1,63 @@
 const {gql} = require('apollo-server')
 
 const typeDefs = gql`
+    scalar Date
+    
     type User {
         id: ID!
-        name: String
-        patronymic: String
-        surname: String
-        status: Statuses
-        role: Roles
-        tab_number: String
-        date: String
-        login: String
-        password: String
+        name: String!
+        patronymic: String!
+        surname: String!
+        statusId: StatusUser!
+        tab_number: String!
+        roleId: Roles!
+        login: String!
+        password: String!
     }
 
     type Roles {
         id: ID!
-        title: String
+        title: String!
     }
 
-    type Statuses {
+    type StatusUser {
         id: ID!
-        title: String
+        title: String!
     }
 
-    type Instractions {
+    type StatusTask {
         id: ID!
-        title: String
-        path: String
+        title: String!
     }
 
+    type Instraction {
+        id: ID!
+        title: String!
+    }
+    
     type Tasks {
         id: ID!
-        theme: String
-        responsible: User
-        data: String
-        status: StatusTasks
-        author: User
-        text: String
+        theme: String!
+        responsible: User!
+        date: Date!
+        status: StatusTask!
+        author: User!
+        text: String!
     }
-
-    type StatusTasks {
-        id: ID!
-        title: String
-    }
-
+    
     type Query {
-        users: [User]
-        roles: [Roles]
-        statuses: [Statuses]
-        tasks: [Tasks]
-        instractions: [Instractions]
-        instraction(id: ID!): Instractions
-        user(id: ID!): User
-        task(id: ID!): Tasks
-        role(id: ID!): Roles
-        status(id: ID!): Statuses
-        statusTasks: [StatusTasks]
-        statusTask(id: ID!): StatusTasks
-    }
-
-    type Mutation {
-        addRoles(id: ID!, title: String!): Roles!
-        addStatuses(id: ID!, title: String!): Statuses!
-        addStatusTasks(id: ID!, title: String!): StatusTasks!
-        addInstraction(id: ID!, title: String!, path: String!): Instractions!
-        addUser(
-            id: ID!
-            name: String
-            patronymic: String
-            surname: String
-            status: ID
-            role: ID
-            tab_number: String
-            date: String
-            login: String
-            password: String
-        ):User
-        addTask(
-            id: ID!
-            theme: String
-            responsible: ID
-            data: String
-            status: ID
-            author: ID
-            text: String
-        ): Tasks
-        deleteInstraction(
-            id: ID
-        ): Instractions
-        updateInstraction(id:ID, title: String, path: String): Instractions
-        deleteRole(id:ID): Roles
-        updateRole(id:ID, title: String): Roles
-        deleteStatuses(id:ID): Statuses
-        updateStatuses(id:ID, title: String): Statuses
-        deleteStatusTask(id:ID): StatusTasks
-        updateStatusTask(id:ID, title: String): StatusTasks
-        deleteTask(id:ID): Tasks
-        updateTask(id:ID, theme: String, responsible: ID, data: String, status: ID, author: ID, text: String): Tasks
-        deleteUser(id:ID): User
-        updateUser(id:ID,
-            name: String,
-            patronymic: String,
-            surname: String,
-            status: ID,
-            role: ID,
-            tab_number: String,
-            date: String,
-            login: String,
-            password: String
-        ):User
+        users: [User!]
+        getUserById(id:Int!):User
+        roles: [Roles!]
+        getRole(id:Int!): Roles
+        statusUser:[StatusUser!]
+        getStatusUser(id:Int!):StatusUser
+        instraction: [Instraction!]
+        getInstraction(id:Int!): Instraction
+        statusTask:[StatusTask!]
+        getStatusTask(id:Int!):StatusTask
+        tasks: [Tasks!]
+        getTask(id: Int!): Tasks
     }
 
 `

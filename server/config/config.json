@@ -1,0 +1,38 @@
+{
+  "development": {
+    "username": "sa",
+    "password": "saadmin",
+    "database": "help",
+    "host": "127.0.0.1",
+    "dialect": "mssql",
+    "dialectOptions": {
+      "options": {
+        "validateBulkLoadParameters": true
+      }
+    }
+  },
+  "test": {
+    "username": "sa",
+    "password": "saadmin",
+    "database": "help",
+    "host": "127.0.0.1",
+    "dialect": "mssql",
+    "dialectOptions": {
+      "options": {
+        "validateBulkLoadParameters": true
+      }
+    }
+  },
+  "production": {
+    "username": "sa",
+    "password": "saadmin",
+    "database": "help",
+    "host": "127.0.0.1",
+    "dialect": "mssql",
+    "dialectOptions": {
+      "options": {
+        "validateBulkLoadParameters": true
+      }
+    }
+  }
+}

@@ -1,105 +1,60 @@
-const {users, getUserById, addUser, deleteUser, updateUser} = require('./users')
-const {roles, getRoleById, addRole, deleteRole, updateRole} = require('./roles')
-const {statuses, getStatusById, addStatuses, deleteStatuses, updateStatuses} = require('./statuses')
-const {instractions, getInstractionById, addInstraction, deleteInstraction, updateInstraction} = require('./instractions')
-const {tasks, getTaskById, addTask, deleteTask, updateTask} = require('./tasks')
-const {statusTasks, getStatusTasksById, addStatusTasks, deleteStatusTask, updateStatusTask} = require('./statusTasks')
-
 const resolvers = {
   Query: {
-    users: () => users,
-    roles: () => roles,
-    statuses: () => statuses,
-    instractions: () => instractions,
-    tasks: () => tasks,
-    role: (_, {id}) => getRoleById({roleId: id}),
-    status: (_, {id}) => getStatusById({statusId: id}),
-    instraction: (_, {id}) => getInstractionById({instractionId: id}),
-    task: (_, {id}) => getTaskById({userId: id}),
-    user: (_, {id}) => getUserById({userId: id}),
-    statusTask: (_, {id}) => getStatusTasksById({statusId: id}),
-    statusTasks: () => statusTasks,
-  },
-  Mutation: {
-    addRoles(_, {id, title}) {
-      return addRole(id, title)
+    async users(root, args, {models}) {
+      return models.User.findAll()
     },
-    addStatuses(_, {id, title}) {
-      return addStatuses(id, title)
+    async getUserById(root, {id}, {models}) {
+      return models.User.findByPk(id)
     },
-    addStatusTasks(_, {id, title}) {
-      return addStatusTasks(id, title)
+    async roles(root, args, {models}) {
+      return models.Roles.findAll()
     },
-    addInstraction(_, {id, title, path}) {
-      return addInstraction(id, title, path)
+    async getRole(root, {id}, {models}) {
+      return models.Roles.findByPk(id)
     },
-    addUser(_, {id, name, patronymic, surname, status, role, tab_number, date, login, password}) {
-      return addUser(id, name, patronymic, surname, status, role, tab_number, date, login, password)
+    async statusUser(root, args, {models}) {
+      return models.StatusUsers.findAll()
     },
-    addTask(parent, {
-      id,
-      theme,
-      responsible,
-      data,
-      status,
-      author,
-      text,
-    }) {
-      return addTask(
-        id,
-        theme,
-        responsible,
-        data,
-        status,
-        author,
-        text,
-      )
+    async getStatusUser(root, {id}, {models}) {
+      return models.StatusUsers.findByPk(id)
     },
-    deleteInstraction(_,{id}){
-      return deleteInstraction(id)
+    async instraction(root, args, {models}) {
+      return models.Instraction.findAll()
     },
-    updateInstraction(prev,{id, title, path}){
-      return updateInstraction(id, title, path)
+    async getInstraction(root, {id}, {models}) {
+      return models.Instraction.findByPk(id)
     },
-    deleteRole(prev,{id}){
-      return deleteRole(id)
+    async statusTask(root, args, {models}) {
+      return models.StatusTasks.findAll()
     },
-    updateRole(prev, {id, title}){
-      return updateRole(id, title)
+    async getStatusTask(root, {id}, {models}) {
+      return models.StatusTasks.findByPk(id)
     },
-    deleteStatuses(prev,{id}){
-      return deleteStatuses(id)
+    async tasks(root, args, {models}) {
+      return models.Task.findAll()
     },
-    updateStatuses(prev, {id, title}){
-      return updateStatuses(id, title)
-    },
-    deleteStatusTask(prev,{id}){
-      return deleteStatusTask(id)
-    },
-    updateStatusTask(prev, {id, title}){
-      return updateStatusTask(id, title)
-    },
-    deleteTask(prev,{id}){
-      return deleteTask(id)
-    },
-    updateTask(prev, {id, theme, responsible, data, status, author, text}){
-      return updateTask(id, theme, responsible, data, status, author, text)
-    },
-    deleteUser(prev,{id}){
-      return deleteUser(id)
-    },
-    updateUser(prev, {id, name, patronymic, surname, status, role, tab_number, date, login, password}){
-      return updateUser(id, name, patronymic, surname, status, role, tab_number, date, login, password)
+    async getTask(root, {id}, {models}) {
+      return models.Task.findByPk(id)
     },
   },
   User: {
-    status: ({statusId}) => getStatusById({statusId: statusId}),
-    role: ({roleId}) => getRoleById({roleId: roleId}),
+    async statusId(status) {
+      return status.getStatusUser()
+    },
+    async roleId(roles) {
+      return roles.getRole()
+    },
   },
   Tasks: {
-    responsible: ({responsible}) => getUserById({userId:responsible}),
-    author: ({author}) => getUserById({userId: author}),
-    status: ({status}) => getStatusTasksById({statusId: status}),
+    async responsible(root, args, { models }) {
+      return models.User.findByPk(root.responsible)
+    },
+    async author(root, args, { models }) {
+      return models.User.findByPk(root.author)
+    },
+    async status(statusTask) {
+      return statusTask.getStatusTask()
+    },
   },
 }
 
