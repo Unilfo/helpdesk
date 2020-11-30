@@ -10,24 +10,23 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import ModalForm from '../Instructions/Modal'
+import ModalForm from './Modal'
 import {Input} from '@material-ui/core'
-import TableSortLabel from '@material-ui/core/TableSortLabel'
 import Button from '@material-ui/core/Button'
 
 //Нужно добавить логин пароль аватрку
 
 
 const columns = [
-  {id: 'id', label: '№', minWidth: 50,},
-  {id: 'fio1', label: 'Фамилия', minWidth: 170, maxWidth: 250, align: 'left',},
-  {id: 'fio2', label: 'Имя', minWidth: 170, maxWidth: 250, align: 'left',},
-  {id: 'fio3', label: 'Отчество', minWidth: 170, maxWidth: 250, align: 'left',},
-  {id: 'status', label: 'Статус', minWidth: 170, maxWidth: 250, align: 'left',},
+  {id: 'id', label: '№', minWidth: 80,},
+  {id: 'fio1', label: 'Фамилия', minWidth: 150, maxWidth: 250, align: 'left',},
+  {id: 'fio2', label: 'Имя', minWidth: 150, maxWidth: 250, align: 'left',},
+  {id: 'fio3', label: 'Отчество', minWidth: 150, maxWidth: 250, align: 'left',},
+  {id: 'status', label: 'Статус', minWidth: 150, maxWidth: 250, align: 'left',},
   {id: 'role', label: 'Роль', minWidth: 170, maxWidth: 250, align: 'left',},
-  {id: 'tabNumber', label: 'Табельный номер', minWidth: 170, maxWidth: 250, align: 'left',},
-  {id: 'login', label: 'login', minWidth: 170, maxWidth: 250, align: 'left',},
-  {id: 'password', label: 'password', minWidth: 170, maxWidth: 250, align: 'left',},
+  {id: 'tabNumber', label: 'Табельный номер', minWidth: 100, maxWidth: 250, align: 'left',},
+  {id: 'login', label: 'login', minWidth: 100, maxWidth: 250, align: 'left',},
+  {id: 'password', label: 'password', minWidth: 100, maxWidth: 250, align: 'left',},
 ]
 
 function createData(id, fio1, fio2, fio3, status, role, tabNumber, login, password) {
@@ -118,22 +117,16 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   title: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    },
+
   },
   input_search: {
-    marginBottom: 15
+
   },
   caption: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    },
+
   },
   button_open:{
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom:'0px!important',
-    },
+
   },
 }))
 
@@ -144,7 +137,6 @@ export default function Employees() {
   const [open, setOpen] = React.useState(false)
   const [searchText, SetSearchText] = useState(null)
   const [dataT, setData] = useState(rows)
-  const [sortData, setSortData] = useState(null)
   const [item, setItem] = useState({})
 
 
@@ -204,16 +196,6 @@ export default function Employees() {
   }, [searchText])
 
 
-  useEffect(() => {
-    if (sortData !== null) {
-      const arr = rows.sort((a, b) => (a[sortData] - b[sortData]) ? -1 : 1)
-      setData(arr)
-    }
-  }, [sortData])
-
-  useEffect(() => () => {
-    setSortData(null)
-  })
 
 
   return (
@@ -222,11 +204,11 @@ export default function Employees() {
         <Grid item className={classes.title}>
           <Title>Пользователи</Title>
         </Grid>
-        <Grid item xs={12} sm={3} className={classes.button_open}>
+        <Grid item xs={6} sm={3} md={4} className={classes.button_open}>
           <Button variant="contained" color='primary' size='small' onClick={openModal}>Добавить</Button>
           <ModalForm opened={open} closeModal={closeModal} item={item}/>
         </Grid>
-        <Grid item xs={12} sm={3} className={classes.input_search}>
+        <Grid item xs={12} sm={3} md={2} className={classes.input_search}>
           <Input placeholder={'Поиск'} onChange={search}></Input>
         </Grid>
       </Grid>
@@ -240,10 +222,8 @@ export default function Employees() {
                     key={column.id}
                     align={column.align}
                     style={{minWidth: column.minWidth}}
-                    onClick={() => setSortData(column.id)}
                   >
                     {column.label}
-                    <TableSortLabel/>
                   </TableCell>
                 ))}
               </TableRow>

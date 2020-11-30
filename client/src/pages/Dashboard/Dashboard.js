@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     position: 'relative',
+    overflow: 'hidden',
     whiteSpace: 'nowrap',
     width: drawerWidth,
     transition: theme.transitions.create('width', {

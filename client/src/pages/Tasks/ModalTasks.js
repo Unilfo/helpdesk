@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
 		paddingRight: 40,
 		paddingTop: 40,
 		paddingBottom: 20,
+		[theme.breakpoints.down('sm')]: {
+			paddingTop: 10,
+			paddingBottom: 0,
+		},
 	},
 	input: {
 		width:230,
@@ -39,11 +43,14 @@ const useStyles = makeStyles((theme) => ({
 		marginTop:16
 	},
 	editor: {
-		height: '35%',
-		minHeight: '35%',
-		maxHeight:'35%',
+		height: '30%',
+		minHeight: '30%',
+		maxHeight:'30%',
 		display: 'flex',
-		width: '100%'
+		width: '100%',
+		[theme.breakpoints.down('xs')]: {
+			flexFlow: 'column'
+		},
 	},
 	panel: {
 		display: 'flex',
@@ -74,9 +81,9 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: 5,
 		paddingLeft: 20,
 		paddingRight: 20,
-		height: '30%',
-		minHeight: '30%',
-		maxHeight:'30%',
+		height: '25%',
+		minHeight: '25%',
+		maxHeight:'25%',
 		background:'#F8F8F8',
 	},
 	buttons: {
@@ -89,8 +96,8 @@ const useStyles = makeStyles((theme) => ({
 	groupFiles: {
 		textAlign:'left',
 		borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-		maxHeight: '85%',
-		width: 250,
+		maxHeight: '82%',
+		width: 300,
 		overflow:'auto',
 	},
 	groupFilesImgs: {
@@ -99,6 +106,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	labelTitle:{
 		borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+		marginBottom: '-1px!important'
 	},
 	textFilesImgs: {
 		marginLeft:15,

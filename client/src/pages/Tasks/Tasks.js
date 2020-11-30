@@ -63,37 +63,21 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   input_search: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: '0px!important',
-      marginBottom: 15
-    },
+    marginBottom: 15
   },
   title: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    },
+
   },
   button_open:{
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom:'12px!important',
-    },
+
   },
   pagination_text:{
-    [theme.breakpoints.down('sm')]: {
-      display:'none'
-    },
+
   },
   caption: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    },
+
   },
-  container_toolbar:{
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom:0
-    },
-    paddingBottom:9
-  }
+  container_toolbar: {}
 }))
 
 export default function Tasks() {
@@ -124,13 +108,13 @@ export default function Tasks() {
   return (
     <React.Fragment>
       <Grid container spacing={3} className={classes.container_toolbar}>
-        <Grid item className={classes.title}>
+        <Grid item className={classes.title} xs={6} md={1}>
           <Title>Задачи</Title>
         </Grid>
-        <Grid item xs={12} sm={2} className={classes.button_open}>
+        <Grid item xs={6} sm={3} md={4} className={classes.button_open}>
           <ModalTasks opened={opened} closeModal={closeModal} items={item}/>
         </Grid>
-        <Grid item xs={12} sm={2} className={classes.input_search}>
+        <Grid item xs={12} sm={3} md={2} className={classes.input_search}>
           <Input placeholder={'Поиск'}></Input>
         </Grid>
       </Grid>

@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     height: 216,
     flexGrow: 1,
     maxWidth: 400,
-    wordWrap: 'break-word',
   },
   labelRoot: {
     display: 'flex',
@@ -30,7 +29,13 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       color: 'green',
     },
-  }
+  },
+  input_search: {
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '0px!important',
+      marginBottom: 15
+    },
+  },
 }))
 
 const dataFetch = [
@@ -107,18 +112,18 @@ export default function Instructions() {
       <Grid container spacing={3}>
         <ModalInstraction opened={open} closeModal={closeModal} instraction={instraction}/>
         <InstractionVeaver openedInstraction={openedInstraction} instraction={instraction} closeModal={closeModal}/>
-        <Grid item xs={12}>
+        <Grid item xs={6} md={2}>
           <Title>Инструкции</Title>
         </Grid>
-        <Grid item xs={6}>
-          <Input placeholder={'Поиск'} value={searchText} onChange={handleChange}></Input>
-        </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} md={2}>
           <Button variant="contained" color='primary' size='small' onClick={openModal}>Создать</Button>
+        </Grid>
+        <Grid item xs={12} md={2} className={classes.input_search}>
+          <Input placeholder={'Поиск'} value={searchText} onChange={handleChange}></Input>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <TreeView
             className={classes.root}
             defaultCollapseIcon={<ExpandMoreIcon/>}
