@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    // [theme.breakpoints.down('sm')]: {
+    //   display:'flex',
+    //   flexFlow: 'column'
+    // },
   },
   iconButton:{
     marginLeft:10
@@ -31,7 +35,7 @@ export default function Home() {
     <Fragment>
       <Title>Главная</Title>
       <Grid container spacing={3}>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>
             Задач мне
             <IconButton color="inherit" className={classes.iconButton}>
@@ -39,7 +43,7 @@ export default function Home() {
             </IconButton>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>
             Мои задачи
             <IconButton color="inherit" className={classes.iconButton}>
@@ -47,7 +51,7 @@ export default function Home() {
             </IconButton>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>
             Новое
             <IconButton color="inherit" className={classes.iconButton}>
@@ -55,9 +59,9 @@ export default function Home() {
             </IconButton>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>
-            Требует внимания
+            Сроки
             <IconButton color="inherit" className={classes.iconButton}>
               <Badge badgeContent={1} color="secondary"/>
             </IconButton>
