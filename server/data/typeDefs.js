@@ -2,7 +2,7 @@ const {gql} = require('apollo-server')
 
 const typeDefs = gql`
     scalar Date
-    
+
     type User {
         id: ID!
         name: String!
@@ -33,8 +33,9 @@ const typeDefs = gql`
     type Instraction {
         id: ID!
         title: String!
+        path:String!
     }
-    
+
     type Tasks {
         id: ID!
         theme: String!
@@ -44,7 +45,7 @@ const typeDefs = gql`
         author: User!
         text: String!
     }
-    
+
     type Query {
         users: [User!]
         getUserById(id:Int!):User
@@ -58,6 +59,57 @@ const typeDefs = gql`
         getStatusTask(id:Int!):StatusTask
         tasks: [Tasks!]
         getTask(id: Int!): Tasks
+    }
+
+    type Mutation {
+        createRole(title: String!): Roles!
+        createStatusTask(title: String!): StatusTask!
+        createStatusUser(title: String!): StatusUser!
+        createInstraction(title: String! path:String!): Instraction!
+        createTask(
+            theme: String!
+            responsible: Int!
+            date: Date!
+            status: Int!
+            author: Int!
+            text: String!
+        ): Tasks!
+        createUser(
+            name: String!
+            patronymic: String!
+            surname: String!
+            statusId: Int!
+            tab_number: String!
+            roleId: Int!
+            login: String!
+            password: String!
+        ): User!
+        deleteUser(id:Int!): String!
+        deleteTask(id:Int!): String!
+        updateInstraction(id:Int! title:String! path:String!): String!
+        updateStatusUser(id:Int! title:String!): String!
+        updateStatusTask(id:Int! title:String!): String!
+        updateRole(id:Int! title:String!): String!
+        updateUser(
+            id:Int!
+            name: String!
+            patronymic: String!
+            surname: String!
+            statusId: Int!
+            tab_number: String!
+            roleId: Int!
+            login: String!
+            password: String!
+        ): String!
+        updateTask(
+            id:Int!
+            theme: String!
+            responsible: Int!
+            date: Date!
+            status: Int!
+            author: Int!
+            text: String!
+        ): String!
     }
 
 `
