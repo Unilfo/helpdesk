@@ -1,6 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import {makeStyles} from '@material-ui/core/styles'
 import Title from '../../components/Title/Title'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
@@ -10,52 +9,72 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Input from '@material-ui/core/Input'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-
+import Dialog from '@material-ui/core/Dialog/Dialog'
+import DialogContent  from '@material-ui/core/DialogContent'
+import './style.css'
 
 function getModalStyle() {
-  const top = 50;
-  const left = 50;
+  const top = 50
+  const left = 50
 
   return {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
-  };
+  }
 }
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: '50%',
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2, 4, 3),
+    padding: 20,
     outline: 'none',
+    width:'100%',
+    height:'100%',
+  },
+  root:{
+    height:'60%',
+    width:'50%',
+    [theme.breakpoints.down('xs')]: {
+      height:'90%',
+      width:'90%',
+    },
+  },
+  card:{
+    display:'flex',
+    flexFlow:'column'
   },
   large: {
-    width: theme.spacing(30),
-    height: theme.spacing(30),
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+    marginBottom:20,
   },
   input: {
     marginBottom: theme.spacing(5),
     marginLeft: theme.spacing(3),
-    width:180
+    width: 180,
   },
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(4),
   },
-  groupButton:{
+  groupButton: {
     display: 'flex',
     justifyContent: 'flex-end',
     width: '100%',
+    [theme.breakpoints.down('xs')]: {
+      marginBottom:10
+    },
   },
-  inputHidden:{
-    display:'none'
-  }
-}));
+  inputHidden: {
+    display: 'none',
+  },
+}))
 
-export default function ModalForm({opened, closeModal, item}){
-  const classes = useStyles();
+export default function ModalForm({opened, closeModal, item}) {
+  const classes = useStyles()
   const [modalStyle] = useState(getModalStyle)
   const [open, setOpen] = useState(false)
   const [status, setStatus] = useState('')
@@ -70,41 +89,40 @@ export default function ModalForm({opened, closeModal, item}){
   const [password, setPasword] = useState('')
 
 
-
-  useEffect(()=>{
-      setId(item.id)
-      setFio1(item.fio1)
-      setFio2(item.fio2)
-      setFio3(item.fio3)
-      setTabNumber(item.tabNumber)
-      setStatus(()=>{
-        if(item.status){
-          return item.status.id
-        }else{
-          return ''
-        }
-      })
-      setRoleId(()=>{
-        if(item.role){
-          return item.role.id
-        }else{
-          return ''
-        }
-      })
+  useEffect(() => {
+    setId(item.id)
+    setFio1(item.fio1)
+    setFio2(item.fio2)
+    setFio3(item.fio3)
+    setTabNumber(item.tabNumber)
+    setStatus(() => {
+      if (item.status) {
+        return item.status.id
+      } else {
+        return ''
+      }
+    })
+    setRoleId(() => {
+      if (item.role) {
+        return item.role.id
+      } else {
+        return ''
+      }
+    })
     setLogin(item.login)
     setPasword(item.password)
-      setOpen(opened)
-  },[opened])
+    setOpen(opened)
+  }, [opened])
 
 
   const handleChangeRole = (event) => {
-    setRoleId(event.target.value);
-  };
+    setRoleId(event.target.value)
+  }
 
 
   const handleClose = () => {
-    setOpen(false);
-    setStatus('');
+    setOpen(false)
+    setStatus('')
     setId('')
     setFio1('')
     setFio2('')
@@ -115,21 +133,21 @@ export default function ModalForm({opened, closeModal, item}){
     setPasword('')
     setImg('profile.jpg')
     closeModal()
-  };
+  }
 
   const handleChangeStatus = (event) => {
-    setStatus(event.target.value);
-  };
+    setStatus(event.target.value)
+  }
 
   const FileUploader = props => {
-    const hiddenFileInput = React.useRef(null);
+    const hiddenFileInput = React.useRef(null)
     const handleClick = event => {
-      hiddenFileInput.current.click();
-    };
+      hiddenFileInput.current.click()
+    }
     const handleChange = event => {
-      const fileUploaded = event.target.files[0];
+      const fileUploaded = event.target.files[0]
       setImg(URL.createObjectURL(fileUploaded))
-    };
+    }
     return (
       <Fragment>
         <Avatar src={img} className={classes.large} onClick={handleClick}></Avatar>
@@ -140,30 +158,30 @@ export default function ModalForm({opened, closeModal, item}){
           style={{display: 'none'}}
         />
       </Fragment>
-    );
+    )
   }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <input type="file" className={classes.inputHidden}/>
       <Title>Карточка пользователя</Title>
-      <Grid container spacing={5}>
+      <Grid container className={classes.card}>
         <Grid item>
           <FileUploader/>
-            {/*<Avatar src='profile.jpg' className={classes.large} onClick={handleClick}></Avatar>*/}
+          {/*<Avatar src='profile.jpg' className={classes.large} onClick={handleClick}></Avatar>*/}
         </Grid>
-        <Grid item xs={8}>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Фамилия</InputLabel>
-            <Input  aria-describedby="my-helper-text" value={fio1}/>
+            <Input aria-describedby="my-helper-text" value={fio1}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя</InputLabel>
-            <Input  aria-describedby="my-helper-text" value={fio2}/>
+            <Input aria-describedby="my-helper-text" value={fio2}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Отчество</InputLabel>
-            <Input  aria-describedby="my-helper-text" value={fio3}/>
+            <Input aria-describedby="my-helper-text" value={fio3}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Роль</InputLabel>
@@ -195,14 +213,14 @@ export default function ModalForm({opened, closeModal, item}){
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Логин</InputLabel>
-            <Input  aria-describedby="my-helper-text" value={login}/>
+            <Input aria-describedby="my-helper-text" value={login}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Пароль</InputLabel>
-            <Input aria-describedby="my-helper-text"  type="password" value={password}/>
+            <Input aria-describedby="my-helper-text" type="password" value={password}/>
           </FormControl>
         </Grid>
-        <Grid item className={classes.groupButton} xs={10}>
+        <Grid item className={classes.groupButton}>
           <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleClose}>
             Закрыть
           </Button>
@@ -214,11 +232,18 @@ export default function ModalForm({opened, closeModal, item}){
     </div>
   )
 
-  return(
-      <Fragment>
-        <Modal open={open}>
+  return (
+    <Fragment>
+      <Dialog
+        open={open}
+        scroll={'paper'}
+        maxWidth={'lg'}
+        PaperProps={{ classes: {root: classes.root } }}
+      >
+        <DialogContent>
           {body}
-        </Modal>
-      </Fragment>
-    )
+        </DialogContent>
+      </Dialog>
+    </Fragment>
+  )
 }
