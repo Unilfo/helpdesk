@@ -75,7 +75,9 @@ const useStyles = makeStyles((theme) => ({
 
   },
   caption: {
-
+    [theme.breakpoints.up('xs')]: {
+      display:'none'
+    },
   },
   container_toolbar: {}
 }))

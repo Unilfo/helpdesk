@@ -1,7 +1,8 @@
-.react-pdf__Page__canvas{
-    height: 700px!important;
-    width: 600px!important;
+.viewer-layout-main{
+    background-color: white;
 }
-.react-pdf__Page__textContent{
-    display: none;
+
+[role=presentation] {
+    margin: 3%;
+    background-color: white!important;
 }

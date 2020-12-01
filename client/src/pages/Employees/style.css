@@ -1,18 +1,14 @@
 .MuiDialog-paperWidthLg {
-    width: 900px;
-    max-width: 90%!important;
-    max-height: 90%!important;
-    height: 90%;
+    /*width: 45%;*/
+    /*!*max-width: 90%!important;*!*/
+    /*!*max-height: 90%!important;*!*/
+    /*!*height: 90%;*!*/
+    /*height: 50%!important;*/
 }
-.MuiDialogContent-dividers{
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
-}
-.MuiDialogContent-dividers {
-    border-bottom: none!important;
-}
-.MuiDialogActions-root {
-    padding-right: 10px!important;
-    height: 50px!important;
-    max-height: 50px!important;
-    min-height: 50px!important;
+
+@media all and (max-width: 500px) {
+    .MuiDialog-paperWidthLg {
+        width: 90%;
+        height: 90%!important;
+    }
 }

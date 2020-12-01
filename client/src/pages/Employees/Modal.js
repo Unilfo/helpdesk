@@ -1,6 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
 import Title from '../../components/Title/Title'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
@@ -31,10 +30,25 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: 20,
     outline: 'none',
+    width:'100%',
+    height:'100%',
+  },
+  root:{
+    height:'60%',
+    width:'50%',
+    [theme.breakpoints.down('xs')]: {
+      height:'90%',
+      width:'90%',
+    },
+  },
+  card:{
+    display:'flex',
+    flexFlow:'column'
   },
   large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
+    marginBottom:20,
   },
   input: {
     marginBottom: theme.spacing(5),
@@ -44,12 +58,15 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(4),
   },
   groupButton: {
     display: 'flex',
     justifyContent: 'flex-end',
     width: '100%',
-    marginRight:40,
+    [theme.breakpoints.down('xs')]: {
+      marginBottom:10
+    },
   },
   inputHidden: {
     display: 'none',
@@ -148,12 +165,12 @@ export default function ModalForm({opened, closeModal, item}) {
     <div style={modalStyle} className={classes.paper}>
       <input type="file" className={classes.inputHidden}/>
       <Title>Карточка пользователя</Title>
-      <Grid container spacing={5}>
+      <Grid container className={classes.card}>
         <Grid item>
           <FileUploader/>
           {/*<Avatar src='profile.jpg' className={classes.large} onClick={handleClick}></Avatar>*/}
         </Grid>
-        <Grid item xs={8}>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Фамилия</InputLabel>
             <Input aria-describedby="my-helper-text" value={fio1}/>
@@ -221,14 +238,12 @@ export default function ModalForm({opened, closeModal, item}) {
         open={open}
         scroll={'paper'}
         maxWidth={'lg'}
+        PaperProps={{ classes: {root: classes.root } }}
       >
-        <DialogContent dividers={'paper'}>
+        <DialogContent>
           {body}
         </DialogContent>
       </Dialog>
-      {/*<Modal open={open}>*/}
-      {/*  {body}*/}
-      {/*</Modal>*/}
     </Fragment>
   )
 }

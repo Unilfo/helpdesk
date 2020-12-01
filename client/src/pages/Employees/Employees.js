@@ -110,20 +110,24 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   container: {
-    // maxHeight: 535,
+    // maxHeight: 100,
   },
   pagination: {
     height: 50,
     overflow: 'hidden',
   },
   title: {
-
+    [theme.breakpoints.down('sm')]: {
+      display:'none'
+    },
   },
   input_search: {
-
+    marginBottom: 15
   },
   caption: {
-
+    [theme.breakpoints.up('xs')]: {
+      display:'none'
+    },
   },
   button_open:{
 
