@@ -1,7 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import Modal from '@material-ui/core/Modal'
 import './instaractionVeaver.css'
-
 import Viewer, {Worker} from '@phuocng/react-pdf-viewer'
 import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css'
 import Button from '@material-ui/core/Button'

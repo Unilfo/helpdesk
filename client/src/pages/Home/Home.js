@@ -15,10 +15,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    // [theme.breakpoints.down('sm')]: {
-    //   display:'flex',
-    //   flexFlow: 'column'
-    // },
   },
   iconButton:{
     marginLeft:10

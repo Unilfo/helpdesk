@@ -168,7 +168,6 @@ export default function ModalForm({opened, closeModal, item}) {
       <Grid container className={classes.card}>
         <Grid item>
           <FileUploader/>
-          {/*<Avatar src='profile.jpg' className={classes.large} onClick={handleClick}></Avatar>*/}
         </Grid>
         <Grid item>
           <FormControl className={classes.input}>

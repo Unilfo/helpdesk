@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -77,7 +77,6 @@ export default function SignInSide() {
     if(login === '1' && password === '1'){
       localStorage.setItem('pas', '1')
       history.push('/home')
-      // document.location.reload();
     }else{
       setError(true)
     }

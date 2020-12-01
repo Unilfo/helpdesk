@@ -101,8 +101,7 @@ const useStyles = makeStyles((theme) => ({
 		overflow:'auto',
 	},
 	groupFilesImgs: {
-		// display:'flex',
-		// flexFlow:'row',
+
 	},
 	labelTitle:{
 		borderTop: '1px solid rgba(0, 0, 0, 0.12)',
@@ -217,17 +216,6 @@ export default function ModalTasks({opened, closeModal, items}) {
 	useEffect(()=>{
 		setOpen(opened)
 	},[opened])
-
-
-	// const mouseUP = (e) => {
-	//   let content = document.createElement('img')
-	//   content.src = 'profile.jpg'
-	//   let selection = document.getSelection()
-	//   if (selection.getRangeAt && selection.rangeCount) {
-	//     let range = window.getSelection().getRangeAt(0)
-	//     range.insertNode(content)
-	//   }
-	// }
 
 
 	return (

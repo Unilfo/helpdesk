@@ -14,7 +14,6 @@ import ModalForm from './Modal'
 import {Input} from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 
-//Нужно добавить логин пароль аватрку
 
 
 const columns = [
@@ -108,9 +107,6 @@ const rows = [
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-  },
-  container: {
-    // maxHeight: 100,
   },
   pagination: {
     height: 50,
