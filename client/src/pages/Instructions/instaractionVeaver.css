@@ -1,8 +1,35 @@
-.viewer-layout-main{
+.viewer-layout-main {
     background-color: white;
+}
+
+.button_exit{
+    position: absolute!important;
+    top: 10px!important;
+    right: 10px!important;
+    width: 20px!important;
+    z-index: 999;
 }
 
 [role=presentation] {
     margin: 3%;
-    background-color: white!important;
+    /*background-color: white !important;*/
+}
+
+.viewer-open-file{
+    display: none!important;
+}
+
+.viewer-layout-container {
+    grid-template-rows: 60px!important;
+}
+
+.viewer-toolbar-right{
+    display: none!important;
+}
+
+
+@media all and (max-width: 500px) {
+    .viewer-toolbar-left{
+        display: none!important;
+    }
 }

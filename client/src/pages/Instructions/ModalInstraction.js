@@ -25,8 +25,8 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
   root:{
-    height:'40%',
-    width:'50%',
+    height:'47%',
+    width:'39%',
     [theme.breakpoints.down('xs')]: {
       height:'90%',
       width:'90%',
@@ -40,17 +40,28 @@ const useStyles = makeStyles((theme) => ({
     height:'100%',
     padding:'2%',
     overflow:'hidden',
+    [theme.breakpoints.down('xs')]: {
+      height:'90%',
+      width:'90%',
+    },
   },
   input: {
     marginBottom: theme.spacing(5),
     marginTop: theme.spacing(5),
     width: 180,
+    marginRight:30
   },
   button: {
     marginTop: theme.spacing(3),
+    marginLeft:20,
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(16),
+    },
   },
   groupButton: {
-
+    display:'flex',
+    justifyContent:'flex-end',
+    marginRight: 25,
   },
   buttonAdd: {
     marginTop: 20,
