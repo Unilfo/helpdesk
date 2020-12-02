@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
@@ -12,42 +12,40 @@ import Title from '../../components/Title/Title'
 import {Input} from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import ModalTasks from './ModalTasks'
+import {useQuery, gql} from '@apollo/client'
 
+
+const GetAllTasks = gql`
+    query GetAllTasks{
+        tasks{
+            id
+            theme
+            responsible{
+                id
+                name
+            }
+            status{
+                id
+                title
+            }
+            author{
+                id
+                name
+            }
+            date
+            text
+        }
+    }
+`
 
 const columns = [
   {id: 'id', label: '№', minWidth: 50,},
   {id: 'theme', label: 'Тема', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'responsible', label: 'Ответственный', minWidth: 170, maxWidth: 250, align: 'left'},
-  {id: 'data', label: 'Дата', minWidth: 170, maxWidth: 250, align: 'left'},
+  {id: 'date', label: 'Дата', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'status', label: 'Статус', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'author', label: 'Автор', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'text', label: 'Текст', minWidth: 170, maxWidth: 250, align: 'left'},
-]
-
-function createData(id, theme, responsible, data, status, author, text) {
-  return {id, theme, responsible, data, status, author, text}
-}
-
-const rows = [
-  createData(1, 'Тема 1', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(2, 'Тема 2', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(3, 'Тема 3', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(4, 'Тема 4', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(5, 'Тема 5', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(6, 'Тема 6', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(7, 'Тема 7', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(8, 'Тема 8', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(9, 'Тема 9', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(10, 'Тема 10', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(11, 'Тема 11', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(12, 'Тема 12', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(13, 'Тема 13', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(14, 'Тема 14', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(15, 'Тема 15', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(16, 'Тема 16', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(17, 'Тема 17', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(18, 'Тема 18', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
-  createData(19, 'Тема 19', 'Иванов', '01012020', 'в работе', 'Петров', '123'),
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -65,29 +63,39 @@ const useStyles = makeStyles((theme) => ({
   input_search: {
     marginBottom: 15
   },
-  title: {
-
-  },
-  button_open:{
-
-  },
-  pagination_text:{
-
-  },
+  title: {},
+  button_open: {},
+  pagination_text: {},
   caption: {
-    [theme.breakpoints.up('xs')]: {
-      display:'none'
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
     },
   },
   container_toolbar: {}
 }))
 
 export default function Tasks() {
+  const {loading, error, data} = useQuery(GetAllTasks)
   const classes = useStyles()
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [opened, setOpened] = useState(false)
   const [item, setItem] = useState({})
+  const [dataTasks, setDataTasks] = useState([])
+
+
+  useEffect(() => {
+    if (!loading && data) {
+      setDataTasks(data.tasks)
+    }
+  }, [loading, data])
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+  if (error) {
+    return <p>Error </p>
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -137,7 +145,7 @@ export default function Tasks() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              {dataTasks.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                 return (
                   <TableRow
                     hover
@@ -147,10 +155,14 @@ export default function Tasks() {
                     onClick={() => openModal(row)}
                   >
                     {columns.map((column) => {
-                      const value = row[column.id]
+                      let value = row[column.id]
+                      if (row[column.id] instanceof Object) {
+                        value = row[column.id].title ? row[column.id].title : row[column.id].name
+                      }
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number' ? column.format(value) : value}
+                          {value}
+                          {/*{column.format && typeof value === 'number' ? column.format(value) : value}*/}
                         </TableCell>
                       )
                     })}
@@ -163,7 +175,7 @@ export default function Tasks() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={dataTasks.length}
           rowsPerPage={rowsPerPage}
           labelRowsPerPage={'Строк на странице'}
           page={page}

@@ -3,7 +3,7 @@
     "username": "sa",
     "password": "saadmin",
     "database": "help",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mssql",
     "dialectOptions": {
       "options": {
@@ -15,7 +15,7 @@
     "username": "sa",
     "password": "saadmin",
     "database": "help",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mssql",
     "dialectOptions": {
       "options": {
@@ -27,7 +27,7 @@
     "username": "sa",
     "password": "saadmin",
     "database": "help",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mssql",
     "dialectOptions": {
       "options": {

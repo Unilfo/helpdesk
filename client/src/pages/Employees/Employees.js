@@ -15,6 +15,7 @@ import {Input} from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import {useQuery, gql} from '@apollo/client'
 
+
 const GetAllUsers = gql`
     query GetAllUsers{
         users{
@@ -23,9 +24,11 @@ const GetAllUsers = gql`
             patronymic
             surname
             roleId{
+                id
                 title
             }
             statusId{
+                id
                 title
             }
             tab_number
@@ -66,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 15,
   },
   caption: {
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
   },
@@ -80,13 +83,38 @@ export default function Employees() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [open, setOpen] = React.useState(false)
   const [searchText, SetSearchText] = useState(null)
-  const [dataT, setData] = useState('')
+  const [dataUsers, setDataUsers] = useState([])
   const [item, setItem] = useState({})
 
-  // useEffect(()=>{
-  //   setData(data)
-  //   console.log(dataT)
-  // },[data])
+  useEffect(() => {
+    if (!loading && data) {
+      setDataUsers(data.users)
+    }
+  }, [loading, data])
+
+
+  useEffect(() => {
+    if (searchText === '')
+      setDataUsers(data.users)
+    else if (searchText === null) {
+        return dataUsers
+    } else {
+      const filteredRowsFIO = data.users.filter((data) => {
+        return data.name.toLowerCase().includes(searchText.toLowerCase().trim())
+      })
+      const filteredRowsTabelNumber = data.users.filter((data) => {
+        return data.tab_number.toLowerCase().includes(searchText.toLowerCase().trim())
+      })
+      const filteredRowsByLogin = data.users.filter((data) => {
+        return data.login.toLowerCase().includes(searchText.toLowerCase().trim())
+      })
+
+      const filteredRows = [...new Set([...filteredRowsFIO, ...filteredRowsTabelNumber, ...filteredRowsByLogin])]
+
+      setDataUsers(filteredRows)
+    }
+  }, [searchText])
+
 
   if (loading) {
     return <p>Loading...</p>
@@ -94,11 +122,6 @@ export default function Employees() {
   if (error) {
     return <p>Error </p>
   }
-
-  if (data) {
-    // console.log(data)
-  }
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -119,12 +142,12 @@ export default function Employees() {
     } else {
       const itemNull = {
         id: '',
-        fio1: '',
-        fio2: '',
-        fio3: '',
-        role: {id: '', label: ''},
-        status: {id: '', label: ''},
-        tabNumber: {},
+        name: '',
+        surname: '',
+        patronymic: '',
+        roleId: {id: '', label: ''},
+        statusId: {id: '', label: ''},
+        tab_number: {},
         login: '',
         password: '',
       }
@@ -137,25 +160,6 @@ export default function Employees() {
     SetSearchText(event.target.value)
   }
 
-  // useEffect(() => {
-  //   if (searchText == null)
-  //     return data
-  //   else {
-  //     const filteredRowsFIO = data.filter((data) => {
-  //       return data.fio1.toLowerCase().includes(searchText.toLowerCase().trim())
-  //     })
-  //     const filteredRowsTabelNumber = data.filter((data) => {
-  //       return data.tabNumber.toLowerCase().includes(searchText.toLowerCase().trim())
-  //     })
-  //     const filteredRowsByLogin = data.filter((data) => {
-  //       return data.login.toLowerCase().includes(searchText.toLowerCase().trim())
-  //     })
-  //     const filteredRows = [...new Set([...filteredRowsFIO, ...filteredRowsTabelNumber, ...filteredRowsByLogin])]
-  //     setData(filteredRows)
-  //   }
-  // }, [searchText])
-
-  // {dataT.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
   return (
     <Fragment>
       <Grid container spacing={3}>
@@ -187,12 +191,12 @@ export default function Employees() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              {dataUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => openModal(row)}>
                     {columns.map((column) => {
                       let value = row[column.id]
-                      if(row[column.id] instanceof Object){
+                      if (row[column.id] instanceof Object) {
                         value = row[column.id].title
                       }
                       return (
@@ -210,7 +214,7 @@ export default function Employees() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={data.users.length}
+          count={dataUsers.length}
           rowsPerPage={rowsPerPage}
           labelRowsPerPage={'Строк на странице'}
           page={page}

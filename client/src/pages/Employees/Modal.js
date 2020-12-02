@@ -10,8 +10,63 @@ import Input from '@material-ui/core/Input'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Dialog from '@material-ui/core/Dialog/Dialog'
-import DialogContent  from '@material-ui/core/DialogContent'
+import DialogContent from '@material-ui/core/DialogContent'
 import './style.css'
+import {gql, useMutation} from '@apollo/client'
+
+
+const ADD_USER = gql`
+    mutation CreateUser(
+        $name: String!
+        $patronymic: String! 
+        $surname: String!
+        $tab_number: String!
+        $statusId: Int!
+        $roleId: Int!
+        $login: String! 
+        $password: String!
+    ) {
+        createUser(
+            name: $name,
+            patronymic: $patronymic,
+            surname: $surname,
+            statusId: $statusId,
+            roleId: $roleId,
+            tab_number: $tab_number,
+            login: $login,
+            password: $password
+        ){
+            id
+        }
+
+    }
+`
+
+const UPDATE_USER = gql`
+    mutation CreateUser(
+        $id:Int!
+        $name: String! 
+        $patronymic: String!
+        $surname: String!
+        $tab_number: String!
+        $statusId: Int!
+        $roleId: Int!
+        $login: String! 
+        $password: String!
+    ) {
+        updateUser(
+            id:$id,
+            name: $name,
+            patronymic: $patronymic,
+            surname: $surname,
+            statusId: $statusId,
+            roleId: $roleId,
+            tab_number: $tab_number,
+            login: $login,
+            password: $password
+        )
+    }
+`
 
 function getModalStyle() {
   const top = 50
@@ -30,25 +85,25 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: 20,
     outline: 'none',
-    width:'100%',
-    height:'100%',
+    width: '100%',
+    height: '100%',
   },
-  root:{
-    height:'60%',
-    width:'50%',
+  root: {
+    height: '60%',
+    width: '50%',
     [theme.breakpoints.down('xs')]: {
-      height:'90%',
-      width:'90%',
+      height: '90%',
+      width: '90%',
     },
   },
-  card:{
-    display:'flex',
-    flexFlow:'column'
+  card: {
+    display: 'flex',
+    flexFlow: 'column'
   },
   large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
-    marginBottom:20,
+    marginBottom: 20,
   },
   input: {
     marginBottom: theme.spacing(5),
@@ -65,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     width: '100%',
     [theme.breakpoints.down('xs')]: {
-      marginBottom:10
+      marginBottom: 10
     },
   },
   inputHidden: {
@@ -74,16 +129,18 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function ModalForm({opened, closeModal, item}) {
+  const [createUser] = useMutation(ADD_USER)
+  const [updateUser] = useMutation(UPDATE_USER)
   const classes = useStyles()
   const [modalStyle] = useState(getModalStyle)
   const [open, setOpen] = useState(false)
-  const [status, setStatus] = useState('')
+  const [statusId, setStatus] = useState('')
   const [id, setId] = useState('')
-  const [fio1, setFio1] = useState('')
-  const [fio2, setFio2] = useState('')
-  const [fio3, setFio3] = useState('')
+  const [name, setName] = useState('')
+  const [patronymic, setPatronymic] = useState('')
+  const [surname, setSurname] = useState('')
   const [roleId, setRoleId] = useState('')
-  const [tabNumber, setTabNumber] = useState('')
+  const [tab_number, setTabNumber] = useState('')
   const [img, setImg] = useState('profile.jpg')
   const [login, setLogin] = useState('')
   const [password, setPasword] = useState('')
@@ -91,20 +148,20 @@ export default function ModalForm({opened, closeModal, item}) {
 
   useEffect(() => {
     setId(item.id)
-    setFio1(item.fio1)
-    setFio2(item.fio2)
-    setFio3(item.fio3)
-    setTabNumber(item.tabNumber)
+    setName(item.name)
+    setPatronymic(item.patronymic)
+    setSurname(item.surname)
+    setTabNumber(item.tab_number)
     setStatus(() => {
-      if (item.status) {
-        return item.status.id
+      if (item.statusId) {
+        return item.statusId.id
       } else {
         return ''
       }
     })
     setRoleId(() => {
-      if (item.role) {
-        return item.role.id
+      if (item.roleId) {
+        return item.roleId.id
       } else {
         return ''
       }
@@ -119,15 +176,51 @@ export default function ModalForm({opened, closeModal, item}) {
     setRoleId(event.target.value)
   }
 
+  const handleSave = (e) => {
+    e.preventDefault()
+    if (id === undefined) {
+      createUser({
+        variables: {
+          name: name,
+          patronymic: patronymic,
+          surname: surname,
+          tab_number: tab_number,
+          statusId: +statusId,
+          roleId: +roleId,
+          login: login,
+          password: password,
+        }
+      }).then(() => {
+        console.log('ура')
+      })
+    } else {
+      updateUser({
+        variables: {
+          id: +id,
+          name: name,
+          patronymic: patronymic,
+          surname: surname,
+          tab_number: tab_number,
+          statusId: +statusId,
+          roleId: +roleId,
+          login: login,
+          password: password,
+        }
+      }).then(() => {
+        console.log('ура 2')
+      })
+    }
+    handleClose()
+  }
 
   const handleClose = () => {
     setOpen(false)
     setStatus('')
     setId('')
-    setFio1('')
-    setFio2('')
-    setFio3('')
-    setRoleId(null)
+    setName('')
+    setPatronymic('')
+    setSurname('')
+    setRoleId('')
     setTabNumber('')
     setLogin('')
     setPasword('')
@@ -172,15 +265,16 @@ export default function ModalForm({opened, closeModal, item}) {
         <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Фамилия</InputLabel>
-            <Input aria-describedby="my-helper-text" value={fio1}/>
+            <Input aria-describedby="my-helper-text" value={surname} onChange={(e) => setSurname(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя</InputLabel>
-            <Input aria-describedby="my-helper-text" value={fio2}/>
+            <Input aria-describedby="my-helper-text" value={name} onChange={(e) => setName(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Отчество</InputLabel>
-            <Input aria-describedby="my-helper-text" value={fio3}/>
+            <Input aria-describedby="my-helper-text" value={patronymic}
+                   onChange={(e) => setPatronymic(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Роль</InputLabel>
@@ -196,14 +290,14 @@ export default function ModalForm({opened, closeModal, item}) {
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Табельный номер</InputLabel>
-            <Input aria-describedby="my-helper-text" value={tabNumber}/>
+            <Input aria-describedby="my-helper-text" value={tab_number} onChange={(e) => setTabNumber(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Статус</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={status}
+              value={statusId}
               onChange={handleChangeStatus}
             >
               <MenuItem value={1}>Действует</MenuItem>
@@ -212,18 +306,19 @@ export default function ModalForm({opened, closeModal, item}) {
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Логин</InputLabel>
-            <Input aria-describedby="my-helper-text" value={login}/>
+            <Input aria-describedby="my-helper-text" value={login} onChange={(e) => setLogin(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Пароль</InputLabel>
-            <Input aria-describedby="my-helper-text" type="password" value={password}/>
+            <Input aria-describedby="my-helper-text" type="password" value={password}
+                   onChange={(e) => setPasword(e.target.value)}/>
           </FormControl>
         </Grid>
         <Grid item className={classes.groupButton}>
           <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleClose}>
             Закрыть
           </Button>
-          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleClose}>
+          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleSave}>
             Сохранить
           </Button>
         </Grid>
@@ -237,7 +332,7 @@ export default function ModalForm({opened, closeModal, item}) {
         open={open}
         scroll={'paper'}
         maxWidth={'lg'}
-        PaperProps={{ classes: {root: classes.root } }}
+        PaperProps={{classes: {root: classes.root}}}
       >
         <DialogContent>
           {body}
