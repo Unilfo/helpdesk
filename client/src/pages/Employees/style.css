@@ -1,6 +1,6 @@
 @media all and (max-width: 500px) {
-    .MuiDialog-paperWidthLg {
-        width: 90%;
-        height: 90%!important;
-    }
+    /*.MuiDialog-paperWidthLg {*/
+    /*    width: 90%;*/
+    /*    height: 90%!important;*/
+    /*}*/
 }

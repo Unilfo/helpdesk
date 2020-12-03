@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+    },
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -69,6 +72,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     width: drawerWidth,
+    [theme.breakpoints.down('xs')]: {
+      width: 56,
+    },
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,

@@ -13,17 +13,19 @@ import Dialog from '@material-ui/core/Dialog/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import './style.css'
 import {gql, useMutation} from '@apollo/client'
+import Container from '@material-ui/core/Container'
+import DialogActions from '@material-ui/core/DialogActions'
 
 
 const ADD_USER = gql`
     mutation CreateUser(
         $name: String!
-        $patronymic: String! 
+        $patronymic: String!
         $surname: String!
         $tab_number: String!
         $statusId: Int!
         $roleId: Int!
-        $login: String! 
+        $login: String!
         $password: String!
         $avatar: String!
     ) {
@@ -47,13 +49,13 @@ const ADD_USER = gql`
 const UPDATE_USER = gql`
     mutation CreateUser(
         $id:Int!
-        $name: String! 
+        $name: String!
         $patronymic: String!
         $surname: String!
         $tab_number: String!
         $statusId: Int!
         $roleId: Int!
-        $login: String! 
+        $login: String!
         $password: String!
         $avatar: String!
     ) {
@@ -72,60 +74,32 @@ const UPDATE_USER = gql`
     }
 `
 
-function getModalStyle() {
-  const top = 50
-  const left = 50
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  }
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
-    backgroundColor: theme.palette.background.paper,
-    padding: 20,
-    outline: 'none',
-    width: '100%',
-    height: '100%',
+    maxWidth: 770,
   },
   root: {
-    height: '60%',
-    width: '50%',
-    [theme.breakpoints.down('xs')]: {
-      height: '90%',
-      width: '90%',
-    },
+    height: 550,
+    minHeight:580,
   },
   card: {
-    display: 'flex',
-    flexFlow: 'column'
+
   },
   large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
-    marginBottom: 20,
   },
   input: {
-    marginBottom: theme.spacing(5),
-    marginLeft: theme.spacing(3),
-    width: 180,
+    minWidth: 240,
   },
   button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(4),
+
   },
   groupButton: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    width: '100%',
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: 10
-    },
+    justifyContent:"space-between",
+    paddingRight: 18,
+    paddingLeft: 18
   },
   inputHidden: {
     display: 'none',
@@ -136,7 +110,6 @@ export default function ModalForm({opened, closeModal, item}) {
   const [createUser] = useMutation(ADD_USER)
   const [updateUser] = useMutation(UPDATE_USER)
   const classes = useStyles()
-  const [modalStyle] = useState(getModalStyle)
   const [open, setOpen] = useState(false)
   const [statusId, setStatus] = useState('')
   const [id, setId] = useState('')
@@ -194,8 +167,8 @@ export default function ModalForm({opened, closeModal, item}) {
           roleId: +roleId,
           login: login,
           password: password,
-          avatar: img
-        }
+          avatar: img,
+        },
       }).then(() => {
         console.log('ура')
       })
@@ -211,8 +184,8 @@ export default function ModalForm({opened, closeModal, item}) {
           roleId: +roleId,
           login: login,
           password: password,
-          avatar: img
-        }
+          avatar: img,
+        },
       }).then(() => {
         console.log('ура 2')
       })
@@ -246,16 +219,16 @@ export default function ModalForm({opened, closeModal, item}) {
     }
     const handleChange = event => {
       const fileUploaded = event.target.files[0]
-      let reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
+      let reader = new FileReader()
+      reader.readAsDataURL(event.target.files[0])
 
       reader.onload = function () {
-        console.log(reader.result);//base64encoded string
+        console.log(reader.result)
         setImg(reader.result)
-      };
+      }
       reader.onerror = function (error) {
-        console.log('Error: ', error);
-      };
+        console.log('Error: ', error)
+      }
     }
     return (
       <Fragment>
@@ -271,27 +244,41 @@ export default function ModalForm({opened, closeModal, item}) {
   }
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
+    <div className={classes.paper}>
       <input type="file" className={classes.inputHidden}/>
       <Title>Карточка пользователя</Title>
-      <Grid container className={classes.card}>
-        <Grid item>
+      <Grid
+        container
+        className={classes.card}
+        direction="row"
+        justify="flex-start"
+        alignItems="center"
+        spacing={3}
+      >
+        <Grid item xs={12}>
           <FileUploader/>
         </Grid>
         <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Фамилия</InputLabel>
-            <Input aria-describedby="my-helper-text" value={surname || ''} onChange={(e) => setSurname(e.target.value)}/>
+            <Input aria-describedby="my-helper-text" value={surname || ''}
+                   onChange={(e) => setSurname(e.target.value)}/>
           </FormControl>
+        </Grid>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя</InputLabel>
             <Input aria-describedby="my-helper-text" value={name || ''} onChange={(e) => setName(e.target.value)}/>
           </FormControl>
+        </Grid>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Отчество</InputLabel>
             <Input aria-describedby="my-helper-text" value={patronymic || ''}
                    onChange={(e) => setPatronymic(e.target.value)}/>
           </FormControl>
+        </Grid>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Роль</InputLabel>
             <Select
@@ -304,10 +291,15 @@ export default function ModalForm({opened, closeModal, item}) {
               <MenuItem value={1}>Администратор</MenuItem>
             </Select>
           </FormControl>
+        </Grid>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Табельный номер</InputLabel>
-            <Input aria-describedby="my-helper-text" value={tab_number || ''} onChange={(e) => setTabNumber(e.target.value)}/>
+            <Input aria-describedby="my-helper-text" value={tab_number || ''}
+                   onChange={(e) => setTabNumber(e.target.value)}/>
           </FormControl>
+        </Grid>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Статус</InputLabel>
             <Select
@@ -320,23 +312,19 @@ export default function ModalForm({opened, closeModal, item}) {
               <MenuItem value={2}>Неактивен</MenuItem>
             </Select>
           </FormControl>
+        </Grid>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Логин</InputLabel>
             <Input aria-describedby="my-helper-text" value={login || ''} onChange={(e) => setLogin(e.target.value)}/>
           </FormControl>
+        </Grid>
+        <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Пароль</InputLabel>
             <Input aria-describedby="my-helper-text" type="password" value={password || ''}
                    onChange={(e) => setPasword(e.target.value)}/>
           </FormControl>
-        </Grid>
-        <Grid item className={classes.groupButton}>
-          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleClose}>
-            Закрыть
-          </Button>
-          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleSave}>
-            Сохранить
-          </Button>
         </Grid>
       </Grid>
     </div>
@@ -344,16 +332,28 @@ export default function ModalForm({opened, closeModal, item}) {
 
   return (
     <Fragment>
-      <Dialog
-        open={open}
-        scroll={'paper'}
-        maxWidth={'lg'}
-        PaperProps={{classes: {root: classes.root}}}
-      >
-        <DialogContent>
-          {body}
-        </DialogContent>
-      </Dialog>
+      <Container fixed>
+        <Dialog
+          open={open}
+          scroll={'paper'}
+          maxWidth={'lg'}
+          PaperProps={{classes: {root: classes.root}}}
+        >
+          <DialogContent>
+            {body}
+          </DialogContent>
+          <DialogActions>
+            <Grid item xs={12} className={classes.groupButton}>
+              <Button variant="contained" color="primary" size="small" onClick={handleClose}>
+                Закрыть
+              </Button>
+              <Button variant="contained" color="primary" size="small" onClick={handleSave}>
+                Сохранить
+              </Button>
+            </Grid>
+          </DialogActions>
+        </Dialog>
+      </Container>
     </Fragment>
   )
 }

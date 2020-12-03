@@ -13,6 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import {gql, useMutation} from '@apollo/client'
+import Container from '@material-ui/core/Container'
 
 
 const ADD_INSTRACTION = gql`
@@ -41,66 +42,25 @@ const ADD_INSTRACTION = gql`
     }
 `
 
-function getModalStyle() {
-  const top = 50
-  const left = 50
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  }
-}
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '60%',
-    width: '25%',
-    [theme.breakpoints.down('xs')]: {
-      height: '90%',
-      width: '90%',
-    },
+
   },
   paper: {
-    position: 'absolute',
-    backgroundColor: theme.palette.background.paper,
-    outline: 'none',
-    width: '100%',
-    height: '100%',
-    padding: '2%',
-    overflow: 'hidden',
-    [theme.breakpoints.down('xs')]: {
-      height: '90%',
-      width: '90%',
-    },
+
   },
   input: {
-    marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(5),
-    width: 400,
-    marginRight: 30,
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: 20,
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(16),
-    },
+    minWidth:250
   },
   groupButton: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    marginRight: 25,
+    justifyContent:"space-between",
   },
-  buttonAdd: {
-    marginTop: 20,
-  }
 }))
 
 export default function ModalForm({opened, closeModal, instraction}) {
   const classes = useStyles()
   const [createInstraction] = useMutation(ADD_INSTRACTION)
-  const [modalStyle] = useState(getModalStyle)
   const [open, setOpen] = useState(false)
   const [id, setId] = useState('')
   const [title, setTitle] = useState('')
@@ -108,7 +68,6 @@ export default function ModalForm({opened, closeModal, instraction}) {
   const [group, setGroup] = useState(false)
   const [belongs, setBelongs] = useState('')
   const [fileName, setFileName] = useState('')
-
 
 
   useEffect(() => {
@@ -174,12 +133,12 @@ export default function ModalForm({opened, closeModal, instraction}) {
     if (id === undefined) {
       createInstraction({
         variables: {
-          title:title,
+          title: title,
           name: fileName,
-          path:path,
-          belongs:+belongs,
-          group:false
-        }
+          path: path,
+          belongs: +belongs,
+          group: false,
+        },
       }).then(() => {
         console.log('ура')
       })
@@ -190,21 +149,31 @@ export default function ModalForm({opened, closeModal, instraction}) {
   }
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
+    <div className={classes.paper}>
       <Title>Добавление инструкции</Title>
-      <Grid container>
-        <Grid item xs={12} sm={12}>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="stretch"
+        spacing={2}
+      >
+        <Grid item xs={12}>
           <FileUploader/>
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item  xs={12}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Наименование</InputLabel>
             <Input aria-describedby="my-helper-text" value={title || ''} onChange={(e) => setTitle(e.target.value)}/>
           </FormControl>
+        </Grid>
+        <Grid item  xs={12}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя файла</InputLabel>
             <Input aria-describedby="my-helper-text" value={fileName || ''}/>
           </FormControl>
+        </Grid>
+        <Grid item  xs={12}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Группа</InputLabel>
             <Select
@@ -217,6 +186,8 @@ export default function ModalForm({opened, closeModal, instraction}) {
               <MenuItem value={2}>Axapta</MenuItem>
             </Select>
           </FormControl>
+        </Grid>
+        <Grid item  xs={12}>
           <FormControlLabel
             control={
               <Checkbox
@@ -229,11 +200,14 @@ export default function ModalForm({opened, closeModal, instraction}) {
             label="Это группа?"
           />
         </Grid>
-        <Grid item className={classes.groupButton} xs={12} sm={12}>
-          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleClose}>
+        <Grid
+          item
+          className={classes.groupButton}
+        >
+          <Button variant="contained" color="primary" size="small" onClick={handleClose}>
             Закрыть
           </Button>
-          <Button className={classes.button} variant="contained" color="primary" size="small" onClick={handleSave}>
+          <Button variant="contained" color="primary" size="small" onClick={handleSave}>
             Сохранить
           </Button>
         </Grid>
@@ -243,16 +217,18 @@ export default function ModalForm({opened, closeModal, instraction}) {
 
   return (
     <Fragment>
-      <Dialog
-        open={open}
-        scroll={'paper'}
-        maxWidth={'lg'}
-        PaperProps={{classes: {root: classes.root}}}
-      >
-        <DialogContent>
-          {body}
-        </DialogContent>
-      </Dialog>
+      <Container maxWidth="lg">
+        <Dialog
+          open={open}
+          scroll={'paper'}
+          maxWidth={'xs'}
+          PaperProps={{classes: {root: classes.root}}}
+        >
+          <DialogContent>
+            {body}
+          </DialogContent>
+        </Dialog>
+      </Container>
     </Fragment>
   )
 }

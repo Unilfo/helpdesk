@@ -14,12 +14,11 @@ import EditIcon from '@material-ui/icons/Edit'
 import InstractionVeaver from './instractionVeaver'
 import './instraction.css'
 import {gql, useQuery} from '@apollo/client'
+import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: 216,
-    flexGrow: 1,
-    maxWidth: 400,
+
   },
   labelRoot: {
     display: 'flex',
@@ -32,10 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   input_search: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: '0px!important',
-      marginBottom: 15
-    },
+    minWidth:225
   },
 }))
 
@@ -61,19 +57,21 @@ export default function Instructions() {
   const [instraction, setInstraction] = useState({})
   const [openedInstraction, setOpenedInstraction] = useState(false)
 
-  // useEffect(() => {
-  //   if (searchText === '') {
-  //     setData(dataFetch)
-  //   } else {
-  //     const filteredData = dataFetch.filter((el) => {
-  //       if (!el.group) {
-  //         return el.label.toLowerCase().includes(searchText.toLowerCase().trim())
-  //       }
-  //     })
-  //     const newData = [...new Set([...filteredData])]
-  //     setData(newData)
-  //   }
-  // }, [searchText])
+  useEffect(() => {
+    if (searchText === '') {
+      if (!loading && data) {
+        setDataInstraction(data.instraction)
+      }
+    } else {
+      const filteredData = dataInstraction.filter((el) => {
+        if (!el.group) {
+          return el.title.toLowerCase().includes(searchText.toLowerCase().trim())
+        }
+      })
+      const newData = [...new Set([...filteredData])]
+      setDataInstraction(newData)
+    }
+  }, [searchText])
 
   useEffect(() => {
     if (!loading && data) {
@@ -118,82 +116,87 @@ export default function Instructions() {
 
   return (
     <Fragment>
-      <Grid container spacing={3}>
-        <ModalInstraction opened={open} closeModal={closeModal} instraction={instraction}/>
-        <InstractionVeaver openedInstraction={openedInstraction} instraction={instraction} closeModal={closeModal}/>
-        <Grid item xs={6} md={2}>
-          <Title>Инструкции</Title>
-        </Grid>
-        <Grid item xs={6} md={2}>
-          <Button variant="contained" color='primary' size='small' onClick={openModal}>Создать</Button>
-        </Grid>
-        <Grid item xs={12} md={2} className={classes.input_search}>
-          <Input placeholder={'Поиск'} value={searchText} onChange={handleChange}></Input>
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TreeView
-            className={classes.root}
-            defaultCollapseIcon={<ExpandMoreIcon/>}
-            defaultExpandIcon={<ChevronRightIcon/>}
-            multiSelect
-            xs={12}
-          >
-            {searchText !== '' ?
-              dataInstraction.map((columnChild) => {
-                return (
-                  <TreeItem
-                    nodeId={columnChild.id}
-                    onDoubleClick={() => openedinatraction(columnChild)}
-                    key={columnChild.id}
-                    label={
-                      <div className={classes.labelRoot}>
-                        <Typography variant="body2">
-                          {columnChild.title}
-                        </Typography>
-                        <EditIcon className={classes.editIcon} onClick={() => handleEditeInstraction(columnChild)}/>
-                      </div>
-                    }
-                  >
-                  </TreeItem>
-                )
-              })
-              :
-              dataInstraction.map((column) => {
-                if (column.group) {
+      <Container maxWidth="lg">
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+          spacing={3}
+        >
+          <ModalInstraction opened={open} closeModal={closeModal} instraction={instraction}/>
+          <InstractionVeaver openedInstraction={openedInstraction} instraction={instraction} closeModal={closeModal}/>
+          <Grid item>
+            <Title>Инструкции</Title>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color='primary' size='small' onClick={openModal}>Создать</Button>
+          </Grid>
+          <Grid item>
+            <Input placeholder={'Поиск'} value={searchText} onChange={handleChange} className={classes.input_search}></Input>
+          </Grid>
+          <Grid item xs={12} md={12} lg={12} sm={12}>
+            <TreeView
+              className={classes.root}
+              defaultCollapseIcon={<ExpandMoreIcon/>}
+              defaultExpandIcon={<ChevronRightIcon/>}
+              multiSelect
+            >
+              {searchText !== '' ?
+                dataInstraction.map((columnChild) => {
                   return (
-                    <TreeItem nodeId={column.id} label={column.title} key={column.id}>
-                      {dataInstraction.map((columnChild) => {
-                        if (!columnChild.group && columnChild.belongs == column.id) {
-                          return (
-                            <TreeItem
-                              onDoubleClick={() => openedinatraction(columnChild)}
-                              label={
-                                <div className={classes.labelRoot}>
-                                  <Typography variant="body2">
-                                    {columnChild.title}
-                                  </Typography>
-                                  <EditIcon className={classes.editIcon}
-                                            onClick={() => handleEditeInstraction(columnChild)}/>
-                                </div>
-                              }
-                              nodeId={columnChild.id}
-                              key={columnChild.id}
-                            >
-                            </TreeItem>
-                          )
-                        }
-                        return ''
-                      })}
+                    <TreeItem
+                      nodeId={columnChild.id}
+                      onDoubleClick={() => openedinatraction(columnChild)}
+                      key={columnChild.id}
+                      label={
+                        <div className={classes.labelRoot}>
+                          <Typography>
+                            {columnChild.title}
+                          </Typography>
+                          <EditIcon className={classes.editIcon} onClick={() => handleEditeInstraction(columnChild)}/>
+                        </div>
+                      }
+                    >
                     </TreeItem>
                   )
-                }
-                return ''
-              })}
-          </TreeView>
+                })
+                :
+                dataInstraction.map((column) => {
+                  if (column.group) {
+                    return (
+                      <TreeItem nodeId={column.id} label={column.title} key={column.id}>
+                        {dataInstraction.map((columnChild) => {
+                          if (!columnChild.group && columnChild.belongs == column.id) {
+                            return (
+                              <TreeItem
+                                onDoubleClick={() => openedinatraction(columnChild)}
+                                label={
+                                  <div className={classes.labelRoot}>
+                                    <Typography>
+                                      {columnChild.title}
+                                    </Typography>
+                                    <EditIcon className={classes.editIcon}
+                                              onClick={() => handleEditeInstraction(columnChild)}/>
+                                  </div>
+                                }
+                                nodeId={columnChild.id}
+                                key={columnChild.id}
+                              >
+                              </TreeItem>
+                            )
+                          }
+                          return ''
+                        })}
+                      </TreeItem>
+                    )
+                  }
+                  return ''
+                })}
+            </TreeView>
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </Fragment>
   )
 }

@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
+import Container from '@material-ui/core/Container'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,54 +17,62 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-  iconButton:{
-    marginLeft:10
-  }
-}));
+  iconButton: {
+    marginLeft: 10,
+  },
+}))
 
 
 export default function Home() {
 
-  const classes = useStyles();
+  const classes = useStyles()
 
 
-  return(
+  return (
     <Fragment>
-      <Title>Главная</Title>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={3}>
-          <Paper className={classes.paper}>
-            Задач мне
-            <IconButton color="inherit" className={classes.iconButton}>
-              <Badge badgeContent={2} color="secondary"/>
-            </IconButton>
-          </Paper>
+      <Container maxWidth='xl'>
+        <Title>Главная</Title>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+          spacing={3}
+        >
+          <Grid item xs={12} sm={3}>
+            <Paper className={classes.paper}>
+              Задач мне
+              <IconButton color="inherit" className={classes.iconButton}>
+                <Badge badgeContent={2} color="secondary"/>
+              </IconButton>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Paper className={classes.paper}>
+              Мои задачи
+              <IconButton color="inherit" className={classes.iconButton}>
+                <Badge badgeContent={10} color="secondary"/>
+              </IconButton>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Paper className={classes.paper}>
+              Новое
+              <IconButton color="inherit" className={classes.iconButton}>
+                <Badge badgeContent={4} color="secondary"/>
+              </IconButton>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Paper className={classes.paper}>
+              Сроки
+              <IconButton color="inherit" className={classes.iconButton}>
+                <Badge badgeContent={1} color="secondary"/>
+              </IconButton>
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <Paper className={classes.paper}>
-            Мои задачи
-            <IconButton color="inherit" className={classes.iconButton}>
-              <Badge badgeContent={10} color="secondary"/>
-            </IconButton>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <Paper className={classes.paper}>
-            Новое
-            <IconButton color="inherit" className={classes.iconButton}>
-              <Badge badgeContent={4} color="secondary"/>
-            </IconButton>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <Paper className={classes.paper}>
-            Сроки
-            <IconButton color="inherit" className={classes.iconButton}>
-              <Badge badgeContent={1} color="secondary"/>
-            </IconButton>
-          </Paper>
-        </Grid>
-      </Grid>
+      </Container>
     </Fragment>
   )
 };
