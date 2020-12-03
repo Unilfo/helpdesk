@@ -1,3 +1,4 @@
+// npx sequelize-cli db:migrate
 'use strict'
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -41,6 +42,9 @@ module.exports = {
           model: 'roles',
           key: 'id',
         },
+      },
+      avatar: {
+        type: Sequelize.STRING('MAX'),
       },
       createdAt: {
         allowNull: false,

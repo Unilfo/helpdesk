@@ -13,6 +13,7 @@ const typeDefs = gql`
         roleId: Roles!
         login: String!
         password: String!
+        avatar: String!
     }
 
     type Roles {
@@ -83,6 +84,7 @@ const typeDefs = gql`
             roleId: Int!
             login: String!
             password: String!
+            avatar: String!
         ): User!
         deleteUser(id:Int!): String!
         deleteTask(id:Int!): String!
@@ -100,6 +102,7 @@ const typeDefs = gql`
             roleId: Int!
             login: String!
             password: String!
+            avatar: String!
         ): String!
         updateTask(
             id:Int!

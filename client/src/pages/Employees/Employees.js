@@ -34,6 +34,7 @@ const GetAllUsers = gql`
             tab_number
             login
             password
+            avatar
         }
     }
 `

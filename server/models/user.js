@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     login: DataTypes.STRING,
     password: DataTypes.STRING,
     tab_number: DataTypes.STRING,
+    avatar: DataTypes.STRING('MAX')
   }, {
     sequelize,
     modelName: 'User',

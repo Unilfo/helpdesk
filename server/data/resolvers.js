@@ -69,7 +69,7 @@ const resolvers = {
         author
       })
     },
-    async createUser(root, {name, patronymic, surname, statusId, tab_number, roleId, login, password,}, {models}) {
+    async createUser(root, {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}, {models}) {
       return models.User.create({
         name,
         patronymic,
@@ -79,6 +79,7 @@ const resolvers = {
         roleId,
         login,
         password,
+        avatar
       })
     },
     async deleteUser(root, {id}, {models}) {
@@ -134,16 +135,17 @@ const resolvers = {
         })
       return 'OK'
     },
-    async updateUser(root, {id,name, patronymic, surname, statusId, tab_number, roleId, login, password }, {models}) {
+    async updateUser(root, {id, name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}, {models}) {
       models.User.update({
-          name:name,
-          patronymic:patronymic,
-          surname:surname,
-          statusId:statusId,
-          tab_number:tab_number,
-          roleId:roleId,
-          login:login,
-          password:password,
+          name: name,
+          patronymic: patronymic,
+          surname: surname,
+          statusId: statusId,
+          tab_number: tab_number,
+          roleId: roleId,
+          login: login,
+          password: password,
+          avatar
         },
         {
           where: {
@@ -152,7 +154,7 @@ const resolvers = {
         })
       return 'OK'
     },
-    async updateTask(root, {id,theme, date, text, status, responsible, author }, {models}) {
+    async updateTask(root, {id, theme, date, text, status, responsible, author}, {models}) {
       models.Task.update({
           theme: theme,
           date: date,

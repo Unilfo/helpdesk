@@ -19,6 +19,7 @@
     "fontsource-roboto": "^3.0.3",
     "graphql": "^15.4.0",
     "history": "^5.0.0",
+    "js-base64": "^3.6.0",
     "mui-rte": "^1.26.2",
     "node-sass": "^5.0.0",
     "pdfjs-dist": "^2.5.207",

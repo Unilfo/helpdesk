@@ -25,6 +25,7 @@ const ADD_USER = gql`
         $roleId: Int!
         $login: String! 
         $password: String!
+        $avatar: String!
     ) {
         createUser(
             name: $name,
@@ -34,7 +35,8 @@ const ADD_USER = gql`
             roleId: $roleId,
             tab_number: $tab_number,
             login: $login,
-            password: $password
+            password: $password,
+            avatar: $avatar
         ){
             id
         }
@@ -53,6 +55,7 @@ const UPDATE_USER = gql`
         $roleId: Int!
         $login: String! 
         $password: String!
+        $avatar: String!
     ) {
         updateUser(
             id:$id,
@@ -63,7 +66,8 @@ const UPDATE_USER = gql`
             roleId: $roleId,
             tab_number: $tab_number,
             login: $login,
-            password: $password
+            password: $password,
+            avatar: $avatar
         )
     }
 `
@@ -141,7 +145,7 @@ export default function ModalForm({opened, closeModal, item}) {
   const [surname, setSurname] = useState('')
   const [roleId, setRoleId] = useState('')
   const [tab_number, setTabNumber] = useState('')
-  const [img, setImg] = useState('profile.jpg')
+  const [img, setImg] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPasword] = useState('')
 
@@ -168,6 +172,8 @@ export default function ModalForm({opened, closeModal, item}) {
     })
     setLogin(item.login)
     setPasword(item.password)
+    setImg(item.avatar)
+    console.log(item)
     setOpen(opened)
   }, [opened])
 
@@ -189,6 +195,7 @@ export default function ModalForm({opened, closeModal, item}) {
           roleId: +roleId,
           login: login,
           password: password,
+          avatar: img
         }
       }).then(() => {
         console.log('ура')
@@ -205,6 +212,7 @@ export default function ModalForm({opened, closeModal, item}) {
           roleId: +roleId,
           login: login,
           password: password,
+          avatar: img
         }
       }).then(() => {
         console.log('ура 2')
@@ -224,7 +232,7 @@ export default function ModalForm({opened, closeModal, item}) {
     setTabNumber('')
     setLogin('')
     setPasword('')
-    setImg('profile.jpg')
+    setImg('')
     closeModal()
   }
 
@@ -239,7 +247,17 @@ export default function ModalForm({opened, closeModal, item}) {
     }
     const handleChange = event => {
       const fileUploaded = event.target.files[0]
-      setImg(URL.createObjectURL(fileUploaded))
+      let reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = function () {
+        console.log(reader.result);//base64encoded string
+        setImg(reader.result)
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+      // setImg(URL.createObjectURL(fileUploaded))
     }
     return (
       <Fragment>
@@ -265,15 +283,15 @@ export default function ModalForm({opened, closeModal, item}) {
         <Grid item>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Фамилия</InputLabel>
-            <Input aria-describedby="my-helper-text" value={surname} onChange={(e) => setSurname(e.target.value)}/>
+            <Input aria-describedby="my-helper-text" value={surname || ''} onChange={(e) => setSurname(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя</InputLabel>
-            <Input aria-describedby="my-helper-text" value={name} onChange={(e) => setName(e.target.value)}/>
+            <Input aria-describedby="my-helper-text" value={name || ''} onChange={(e) => setName(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Отчество</InputLabel>
-            <Input aria-describedby="my-helper-text" value={patronymic}
+            <Input aria-describedby="my-helper-text" value={patronymic || ''}
                    onChange={(e) => setPatronymic(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
@@ -290,7 +308,7 @@ export default function ModalForm({opened, closeModal, item}) {
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Табельный номер</InputLabel>
-            <Input aria-describedby="my-helper-text" value={tab_number} onChange={(e) => setTabNumber(e.target.value)}/>
+            <Input aria-describedby="my-helper-text" value={tab_number || ''} onChange={(e) => setTabNumber(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Статус</InputLabel>
@@ -306,11 +324,11 @@ export default function ModalForm({opened, closeModal, item}) {
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Логин</InputLabel>
-            <Input aria-describedby="my-helper-text" value={login} onChange={(e) => setLogin(e.target.value)}/>
+            <Input aria-describedby="my-helper-text" value={login || ''} onChange={(e) => setLogin(e.target.value)}/>
           </FormControl>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Пароль</InputLabel>
-            <Input aria-describedby="my-helper-text" type="password" value={password}
+            <Input aria-describedby="my-helper-text" type="password" value={password || ''}
                    onChange={(e) => setPasword(e.target.value)}/>
           </FormControl>
         </Grid>
