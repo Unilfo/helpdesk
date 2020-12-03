@@ -34,7 +34,10 @@ const typeDefs = gql`
     type Instraction {
         id: ID!
         title: String!
+        name: String!
         path:String!
+        belongs: Int!
+        group: Boolean!
     }
 
     type Tasks {
@@ -66,7 +69,7 @@ const typeDefs = gql`
         createRole(title: String!): Roles!
         createStatusTask(title: String!): StatusTask!
         createStatusUser(title: String!): StatusUser!
-        createInstraction(title: String! path:String!): Instraction!
+        createInstraction(title: String! path:String! belongs: Int! group: Boolean! name: String!): Instraction!
         createTask(
             theme: String!
             responsible: Int!
@@ -88,7 +91,7 @@ const typeDefs = gql`
         ): User!
         deleteUser(id:Int!): String!
         deleteTask(id:Int!): String!
-        updateInstraction(id:Int! title:String! path:String!): String!
+        updateInstraction(id:Int! title:String! path:String! belongs: Int! group: Boolean! name: String!): String!
         updateStatusUser(id:Int! title:String!): String!
         updateStatusTask(id:Int! title:String!): String!
         updateRole(id:Int! title:String!): String!

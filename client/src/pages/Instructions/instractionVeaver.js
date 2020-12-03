@@ -6,7 +6,6 @@ import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css'
 import Button from '@material-ui/core/Button'
 
 
-
 export default function InstractionVeaver({openedInstraction, closeModal, instraction}) {
   const [open, setOpen] = useState(false)
   const [docFile, setDocFile] = useState('')
@@ -29,7 +28,7 @@ export default function InstractionVeaver({openedInstraction, closeModal, instra
   )
 
   return (
-    <Modal open={open} onClose={() => closeModal()} >
+    <Modal open={open} onClose={() => closeModal()}>
       {body}
     </Modal>
   )

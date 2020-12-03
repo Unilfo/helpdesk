@@ -173,7 +173,6 @@ export default function ModalForm({opened, closeModal, item}) {
     setLogin(item.login)
     setPasword(item.password)
     setImg(item.avatar)
-    console.log(item)
     setOpen(opened)
   }, [opened])
 
@@ -257,7 +256,6 @@ export default function ModalForm({opened, closeModal, item}) {
       reader.onerror = function (error) {
         console.log('Error: ', error);
       };
-      // setImg(URL.createObjectURL(fileUploaded))
     }
     return (
       <Fragment>

@@ -36,6 +36,18 @@ export default function ImgDialog(props) {
   const [img, setImg] = useState('')
   const classes = useStyles()
 
+  // const fileUploaded = event.target.files[0]
+  // let reader = new FileReader();
+  // reader.readAsDataURL(event.target.files[0]);
+  //
+  // reader.onload = function () {
+  //   console.log(reader.result);//base64encoded string
+  //   setImg(reader.result)
+  // };
+  // reader.onerror = function (error) {
+  //   console.log('Error: ', error);
+  // };
+
   useEffect(() => {
     if (props.img) {
       setOpen(props.opened)

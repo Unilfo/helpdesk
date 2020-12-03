@@ -311,10 +311,6 @@ export default function ModalTasks({opened, closeModal, items}) {
 						<label htmlFor="icon-button-file">
 							<ImageIcon fontSize='large' className={classes.buttons}/>
 						</label>
-						<input className={classes.inputId} id="icon-button-file" type="file"/>
-						<label htmlFor="icon-button-file">
-							<AttachFileIcon fontSize='large' className={classes.buttons}/>
-						</label>
 					</div>
 				</div>
 				<div className={classes.editor}>

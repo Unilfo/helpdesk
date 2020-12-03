@@ -53,10 +53,13 @@ const resolvers = {
         title
       })
     },
-    async createInstraction(root, {title, path}, {models}) {
+    async createInstraction(root, {title, path, belongs, group, name}, {models}) {
       return models.Instraction.create({
         title,
-        path
+        path,
+        belongs,
+        group,
+        name
       })
     },
     async createTask(root, {theme, date, text, status, responsible, author}, {models}) {
@@ -96,10 +99,13 @@ const resolvers = {
         }
       })
     },
-    async updateInstraction(root, {id, title, path}, {models}) {
+    async updateInstraction(root, {id, title, path, belongs, group, name}, {models}) {
       models.Instraction.update({
           title: title,
-          path: path
+          path: path,
+          belongs: belongs,
+          group: group,
+          name: name
         },
         {
           where: {

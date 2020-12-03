@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Instraction.init({
     title: DataTypes.STRING,
-    path: DataTypes.STRING,
+    name: DataTypes.STRING,
+    path: DataTypes.STRING('MAX'),
+    belongs: DataTypes.INTEGER,
+    group: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Instraction',

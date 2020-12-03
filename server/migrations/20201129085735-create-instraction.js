@@ -10,9 +10,23 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       path: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING('MAX'),
+        allowNull: false,
+      },
+      belongs: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      group: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

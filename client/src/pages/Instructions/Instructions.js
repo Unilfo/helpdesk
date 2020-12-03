@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import EditIcon from '@material-ui/icons/Edit'
 import InstractionVeaver from './instractionVeaver'
 import './instraction.css'
+import {gql, useQuery} from '@apollo/client'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,55 +39,63 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const dataFetch = [
-  {id: 1, nodeId: '1', label: '1c', path: 'asd', prinadlejit: 1, group: true},
-  {id: 2, nodeId: '2', label: 'Axapta', path: 'asd', prinadlejit: 2, group: true},
-  {id: 3, nodeId: '3', label: 'q', path: 'Kak_ustroen_JavaScript_2019_Krokford.pdf', prinadlejit: 1, group: false},
-  {id: 4, nodeId: '4', label: 'w', path: 'asd', prinadlejit: 1, group: false},
-  {id: 5, nodeId: '5', label: 'инструкция', path: 'asd', prinadlejit: 1, group: false},
-  {id: 6, nodeId: '6', label: 'rrrr', path: 'asd', prinadlejit: 2, group: false},
-  {id: 7, nodeId: '7', label: 'ПроцессуальныособенностиПроцессуальныособенности', path: 'Memo_Crimea.pdf', prinadlejit: 1, group: false},
-  {id: 8, nodeId: '8', label: 'инструкция по 1с', path: 'asd', prinadlejit: 2, group: false},
-  {id: 9, nodeId: '9', label: 'u', path: 'asd', prinadlejit: 1, group: false},
-  {id: 10, nodeId: '10', label: 'i', path: 'asd', prinadlejit: 1, group: false},
-]
-
+const GetAllInstractions = gql`
+    query GetAllInstractions{
+        instraction{
+            id
+            title
+            path
+            belongs
+            group
+            name
+        }
+    }
+`
 
 export default function Instructions() {
+  const {loading, error, data} = useQuery(GetAllInstractions)
   const classes = useStyles()
   const [searchText, setSearchText] = useState('')
-  const [data, setData] = useState(dataFetch)
+  const [dataInstraction, setDataInstraction] = useState([])
   const [open, setOpen] = useState(false)
   const [instraction, setInstraction] = useState({})
   const [openedInstraction, setOpenedInstraction] = useState(false)
 
+  // useEffect(() => {
+  //   if (searchText === '') {
+  //     setData(dataFetch)
+  //   } else {
+  //     const filteredData = dataFetch.filter((el) => {
+  //       if (!el.group) {
+  //         return el.label.toLowerCase().includes(searchText.toLowerCase().trim())
+  //       }
+  //     })
+  //     const newData = [...new Set([...filteredData])]
+  //     setData(newData)
+  //   }
+  // }, [searchText])
+
+  useEffect(() => {
+    if (!loading && data) {
+      setDataInstraction(data.instraction)
+    }
+  }, [loading, data])
+
+  useEffect(() => () => {
+    setInstraction({})
+  }, [])
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+  if (error) {
+    return <p>Error </p>
+  }
 
   const closeModal = () => {
     setOpen(false)
     setOpenedInstraction(false)
   }
-
-  useEffect(() => {
-    if (searchText === '') {
-      setData(dataFetch)
-    } else {
-      const filteredData = dataFetch.filter((el) => {
-        if (!el.group) {
-          return el.label.toLowerCase().includes(searchText.toLowerCase().trim())
-        }
-      })
-      const newData = [...new Set([...filteredData])]
-      setData(newData)
-    }
-  }, [searchText])
-
-  useEffect(() => {
-    setData(data)
-  }, [data])
-
-  useEffect(() => () => {
-    setInstraction({})
-  }, [])
 
   const handleChange = (event) => {
     setSearchText(event.target.value)
@@ -132,16 +141,16 @@ export default function Instructions() {
             xs={12}
           >
             {searchText !== '' ?
-              data.map((columnChild) => {
+              dataInstraction.map((columnChild) => {
                 return (
                   <TreeItem
-                    nodeId={columnChild.nodeId}
+                    nodeId={columnChild.id}
                     onDoubleClick={() => openedinatraction(columnChild)}
-                    key={columnChild.nodeId}
+                    key={columnChild.id}
                     label={
                       <div className={classes.labelRoot}>
                         <Typography variant="body2">
-                          {columnChild.label}
+                          {columnChild.title}
                         </Typography>
                         <EditIcon className={classes.editIcon} onClick={() => handleEditeInstraction(columnChild)}/>
                       </div>
@@ -151,26 +160,26 @@ export default function Instructions() {
                 )
               })
               :
-              data.map((column) => {
+              dataInstraction.map((column) => {
                 if (column.group) {
                   return (
-                    <TreeItem nodeId={column.nodeId} label={column.label} key={column.nodeId}>
-                      {data.map((columnChild) => {
-                        if (!columnChild.group && columnChild.prinadlejit === column.id) {
+                    <TreeItem nodeId={column.id} label={column.title} key={column.id}>
+                      {dataInstraction.map((columnChild) => {
+                        if (!columnChild.group && columnChild.belongs == column.id) {
                           return (
                             <TreeItem
                               onDoubleClick={() => openedinatraction(columnChild)}
                               label={
                                 <div className={classes.labelRoot}>
                                   <Typography variant="body2">
-                                    {columnChild.label}
+                                    {columnChild.title}
                                   </Typography>
                                   <EditIcon className={classes.editIcon}
                                             onClick={() => handleEditeInstraction(columnChild)}/>
                                 </div>
                               }
-                              nodeId={columnChild.nodeId}
-                              key={columnChild.nodeId}
+                              nodeId={columnChild.id}
+                              key={columnChild.id}
                             >
                             </TreeItem>
                           )
