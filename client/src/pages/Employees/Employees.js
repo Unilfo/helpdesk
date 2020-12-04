@@ -61,6 +61,11 @@ const useStyles = makeStyles((theme) => ({
     height: 50,
     overflow: 'hidden',
   },
+  cell:{
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
   title: {
     [theme.breakpoints.down('sm')]: {
       display: 'none',
@@ -185,6 +190,7 @@ export default function Employees() {
                     key={column.id}
                     align={column.align}
                     style={{minWidth: column.minWidth}}
+                    className={column.id === 'tab_number' || column.id === 'surname' ? classes.cellOne : classes.cell}
                   >
                     {column.label}
                   </TableCell>
@@ -201,7 +207,7 @@ export default function Employees() {
                         value = row[column.id].title
                       }
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} className={column.id === 'tab_number' || column.id === 'surname' ? classes.cellOne : classes.cell}>
                           {value}
                         </TableCell>
                       )

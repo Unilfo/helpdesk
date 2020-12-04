@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
+  cell:{
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
+    },
+  },
   container: {
     maxHeight: 800,
     width: '100%',
@@ -138,6 +143,7 @@ export default function Tasks() {
                     key={column.id}
                     align={column.align}
                     style={{minWidth: column.minWidth}}
+                    className={column.id === 'theme'? classes.cellOne :classes.cell}
                   >
                     {column.label}
                   </TableCell>
@@ -160,7 +166,7 @@ export default function Tasks() {
                         value = row[column.id].title ? row[column.id].title : row[column.id].name
                       }
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} className={column.id === 'theme'? classes.cellOne :classes.cell}>
                           {value}
                           {/*{column.format && typeof value === 'number' ? column.format(value) : value}*/}
                         </TableCell>
