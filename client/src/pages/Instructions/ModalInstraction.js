@@ -115,6 +115,7 @@ export default function ModalForm({opened, closeModal, instraction}) {
       <Fragment>
         <Button variant="contained" color="primary" onClick={handleClick}>Выбрать файл</Button>
         <input
+          accept="application/pdf"
           type="file"
           ref={hiddenFileInput}
           onChange={handleChange}
@@ -195,6 +196,7 @@ export default function ModalForm({opened, closeModal, instraction}) {
                 onChange={handleChangeChecked}
                 name="checkedB"
                 color="primary"
+                disabled
               />
             }
             label="Это группа?"

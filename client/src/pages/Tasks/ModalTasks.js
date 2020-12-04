@@ -9,7 +9,6 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import Title from '../../components/Title/Title'
 import ImageIcon from '@material-ui/icons/Image'
-import AttachFileIcon from '@material-ui/icons/AttachFile'
 import './modalTask.css'
 import ImgDialog from '../ImgDialog/ImgDialog'
 import Typography from '@material-ui/core/Typography'
@@ -23,6 +22,8 @@ import ruLocale from 'date-fns/locale/ru'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
+import {gql, useMutation} from '@apollo/client'
+import TextField from '@material-ui/core/TextField'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,10 +36,10 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     width: 240,
-    marginRight: 30
+    marginRight: 30,
   },
   datePiker: {
-    marginTop: 16
+    marginTop: 16,
   },
   editor: {
     overflowY: 'auto',
@@ -52,10 +53,11 @@ const useStyles = makeStyles((theme) => ({
   },
   contentEditableArea: {
     height: '100%',
+    width:'100%',
     outline: 'none',
   },
   inputId: {
-    display: 'none'
+    display: 'none',
   },
   otvet: {
     borderTop: '1px solid rgba(0, 0, 0, 0.12)',
@@ -65,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#3f51b5',
     '&:hover': {
       borderRadius: '5px',
-      backgroundColor: 'rgb(7, 177, 77, 0.42)'
+      backgroundColor: 'rgb(7, 177, 77, 0.42)',
     },
   },
   groupFiles: {
@@ -73,16 +75,60 @@ const useStyles = makeStyles((theme) => ({
   },
   groupFilesImgs: {
     overflowY: 'auto',
-    height: 310
+    height: 310,
   },
   labelTitle: {
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   root: {
-    minHeight: 600
-  }
+    minHeight: 600,
+  },
 }))
 
+const ADD_TASK = gql`
+    mutation CreateTask(
+        $theme: String!
+        $responsible: Int!
+        $date: Date!
+        $status: Int!
+        $author: Int!
+        $text: String!
+    ) {
+        createTask(
+            theme: $theme
+            responsible: $responsible
+            date: $date
+            status:$status
+            author: $author
+            text: $text
+        ){
+            id
+        }
+
+    }
+`
+
+const UPDATE_TASK = gql`
+    mutation UpdateTask(
+        $id: Int!
+        $theme: String!
+        $responsible: Int!
+        $date: Date!
+        $status: Int!
+        $author: Int!
+        $text: String!
+    ) {
+        updateTask(
+            id: $id
+            theme: $theme
+            responsible: $responsible
+            date: $date
+            status:$status
+            author: $author
+            text: $text
+        )
+    }
+`
 
 class RuLocalizedUtils extends DateFnsUtils {
   getCalendarHeaderText(date) {
@@ -111,29 +157,26 @@ export default function ModalTasks({opened, closeModal, items}) {
     'consectetur adipisicing elit. Accusamus aperiam architecto aspernatur' +
     ' assumenda beatae debitis dolore eaque explicabo fuga harum iusto maxime ' +
     'minima nemo odit officia recusandae, sequi voluptas voluptate?')
-  const handleClickOpen = (scrollType) => () => {
-    setOpen(true)
-    setScroll(scrollType)
-  }
+
   const [item, setItem] = useState({})
   const [files, setFiles] = useState([])
   const [openImg, setOpenImg] = useState(false)
   const [img, setImg] = useState(null)
   const [startText, setStartText] = useState('Введите текст...')
   const [checked, setChecked] = useState(true)
-  const [selectedDate, handleDateChange] = useState(new Date())
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked)
-  }
-
-
-  const handleClose = () => {
-    closeModal()
-    setOpen(false)
-  }
-
+  // const [selectedDate, setDate] = useState(new Date())
   const descriptionElementRef = React.useRef(null)
+  const [createTask] = useMutation(ADD_TASK)
+  const [updateTask] = useMutation(UPDATE_TASK)
+  const [id, setId] = useState('')
+  const [theme, setTheme] = useState('')
+  const [responsible, setResponsible] = useState('')
+  const [date, setDate] = useState(new Date())
+  const [status, setStatus] = useState('')
+  const [author, setAuthor] = useState('')
+  const [text, setText] = useState('')
+  const [endTask, setEndTask] = useState(false)
+  const [priority, setPriority] = useState('')
 
   useEffect(() => {
     if (open) {
@@ -142,9 +185,114 @@ export default function ModalTasks({opened, closeModal, items}) {
         descriptionElement.focus()
       }
     }
-    setItem(items)
-    console.log(item)
+
+    setId(items.id)
+    setTheme(items.theme)
+    setResponsible(() => {
+      if (items.responsible) {
+        return items.responsible.id
+      } else {
+        return ''
+      }
+    })
+    setStatus(() => {
+      if (items.status) {
+        return items.status.id
+      } else {
+        return ''
+      }
+    })
+    setAuthor(() => {
+      if (items.author) {
+        return items.author.id
+      } else {
+        return ''
+      }
+    })
+    setDate(items.date)
+    setText(items.text)
+
   }, [open])
+
+  function formatDate(date) {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear()
+
+    if (month.length < 2)
+      month = '0' + month
+    if (day.length < 2)
+      day = '0' + day
+
+    return [year, month, day].join('-')
+  }
+
+  const handleClickOpen = (scrollType) => () => {
+    setOpen(true)
+    setScroll(scrollType)
+  }
+
+  const handleChangeResponsible = (event) => {
+    setResponsible(event.target.value)
+  }
+
+  const handleChangeStatus = (event) => {
+    setStatus(event.target.value)
+  }
+
+  const handleChangeEndTask = (event) => {
+    setEndTask(event.target.checked)
+  }
+
+  const handleChangePriority = (event) => {
+    setPriority(event.target.value)
+  }
+
+  const handleClose = () => {
+    closeModal()
+    setOpen(false)
+  }
+
+  const handleSave = (e) => {
+    e.preventDefault()
+    if (id === undefined) {
+      createTask({
+        variables: {
+          theme: theme,
+          responsible: +responsible,
+          date: date,
+          status: +status,
+          author: +author,
+          text: text,
+        },
+      }).then(() => {
+        console.log('ура')
+      })
+    } else {
+      console.log(id)
+      console.log(theme)
+      console.log(responsible)
+      console.log(date)
+      console.log(status)
+      console.log(author)
+      console.log(text)
+      updateTask({
+        variables: {
+          id: +id,
+          theme: theme,
+          responsible: +responsible,
+          date: date,
+          status: +status,
+          author: +author,
+          text: text,
+        },
+      }).then(() => {
+        console.log('ура 2')
+      })
+    }
+    handleClose()
+  }
 
   const Otvet = () => {
     return (
@@ -160,7 +308,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   const load = (e) => {
     let oldData = files
     setFiles(
-      [...oldData, e.target.files[0]]
+      [...oldData, e.target.files[0]],
     )
   }
 
@@ -224,19 +372,32 @@ export default function ModalTasks({opened, closeModal, items}) {
             <Grid item xs={12} md={12} sm={12} lg={12}>
               <FormControl className={classes.input}>
                 <InputLabel htmlFor="my-input">Тема</InputLabel>
-                <Input aria-describedby="my-helper-text" value={item.theme}/>
+                <Input
+                  aria-describedby="my-helper-text"
+                  value={theme || ''}
+                  onChange={(e) => setTheme(e.target.value)}
+                />
               </FormControl>
               <FormControl className={classes.input}>
                 <InputLabel htmlFor="my-input">Автор</InputLabel>
-                <Input aria-describedby="my-helper-text" value={item.author}/>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={author || ''}
+                  onChange={(e) => setAuthor(e.target.value)}
+                >
+                  <MenuItem value={1}>Сидоров</MenuItem>
+                  <MenuItem value={2}>Петров</MenuItem>
+                  <MenuItem value={3}>Иванов</MenuItem>
+                </Select>
               </FormControl>
               <FormControl className={classes.input}>
                 <InputLabel id="demo-simple-select-label">Ответственный</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  // value=''
-                  onChange={handleChange}
+                  value={responsible || ''}
+                  onChange={handleChangeResponsible}
                 >
                   <MenuItem value={1}>Сидоров</MenuItem>
                   <MenuItem value={2}>Петров</MenuItem>
@@ -246,8 +407,10 @@ export default function ModalTasks({opened, closeModal, items}) {
               <MuiPickersUtilsProvider utils={RuLocalizedUtils} locale={ruLocale}>
                 <DatePicker
                   className={classes.datePiker}
-                  value={selectedDate}
-                  onChange={handleDateChange}
+                  value={date}
+                  onChange={(e) => {
+                    setDate(formatDate(e))
+                  }}
                   format={'d MMM yyyy'}
                   cancelLabel={'отмена'}
                 />
@@ -257,8 +420,8 @@ export default function ModalTasks({opened, closeModal, items}) {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  // value={age}
-                  onChange={handleChange}
+                  value={status || ''}
+                  onChange={handleChangeStatus}
                 >
                   <MenuItem value={1}>В работе</MenuItem>
                   <MenuItem value={2}>Закрыта</MenuItem>
@@ -269,8 +432,8 @@ export default function ModalTasks({opened, closeModal, items}) {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  // value={age}
-                  onChange={handleChange}
+                  value={priority}
+                  onChange={handleChangePriority}
                 >
                   <MenuItem value={1}>Высокий</MenuItem>
                   <MenuItem value={2}>Средний</MenuItem>
@@ -280,8 +443,8 @@ export default function ModalTasks({opened, closeModal, items}) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
+                    checked={endTask}
+                    onChange={handleChangeEndTask}
                     name="checkedB"
                     color="primary"
                   />
@@ -299,13 +462,20 @@ export default function ModalTasks({opened, closeModal, items}) {
               <Grid item xs={12} sm={9} className={classes.dialogContent}>
                 <DialogContent>
                   <div className={classes.editor}>
-                    <Typography contentEditable suppressContentEditableWarning
-                                className={classes.contentEditableArea}
-                                onFocus={() => setStartText(' ')}
-                                onBlur={() => setStartText('Введите текст...')}
-                    >
-                      {startText}
-                    </Typography>
+                    <TextField
+                      id="outlined-multiline-static"
+                      multiline
+                      InputProps={{ disableUnderline: true }}
+                      // rows={4}
+                      placeholder='Введите текст...'
+                      value={text}
+                      contentEditable
+                      suppressContentEditableWarning
+                      className={classes.contentEditableArea}
+                      onChange={(e) => {
+                        setText(e.target.value)
+                      }}
+                    />
                   </div>
                 </DialogContent>
               </Grid>
@@ -327,7 +497,7 @@ export default function ModalTasks({opened, closeModal, items}) {
           <Button variant="contained" color='primary' size='small' onClick={handleClose} color="primary">
             Отмена
           </Button>
-          <Button variant="contained" color='primary' size='small' onClick={handleClose} color="primary">
+          <Button variant="contained" color='primary' size='small' onClick={handleSave} color="primary">
             Сохранить
           </Button>
         </DialogActions>

@@ -47,7 +47,7 @@ const ADD_USER = gql`
 `
 
 const UPDATE_USER = gql`
-    mutation CreateUser(
+    mutation UpdateUser(
         $id:Int!
         $name: String!
         $patronymic: String!
