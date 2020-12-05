@@ -1,4 +1,12 @@
+// const  pubsub = require('../index')
+const USER_ADDED = 'USER_ADDED'
+
 const resolvers = {
+  Subscription: {
+    UserCreated: {
+      subscribe: (_,__, {pubsub}) => pubsub.asyncIterator(USER_ADDED),
+    },
+  },
   Query: {
     async users(root, args, {models}) {
       return models.User.findAll()
@@ -72,7 +80,9 @@ const resolvers = {
         author
       })
     },
-    async createUser(root, {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}, {models}) {
+    async createUser(root, {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}, {models, pubsub}) {
+      const user = {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}
+      pubsub.publish(USER_ADDED, { UserCreated: user })
       return models.User.create({
         name,
         patronymic,
@@ -178,8 +188,11 @@ const resolvers = {
     },
   },
   User: {
-    async statusId(status) {
-      return status.getStatusUser()
+    async statusId(status,_, {models}) {
+       let asd = models.StatusUsers.findByPk(status.statusId)
+      console.log(asd)
+      return  asd
+      // return status.getStatusUser()
     },
     async roleId(roles) {
       return roles.getRole()

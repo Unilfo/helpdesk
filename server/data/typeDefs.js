@@ -117,7 +117,10 @@ const typeDefs = gql`
             text: String!
         ): String!
     }
-
+    
+    type Subscription {
+        UserCreated: User
+    }
 `
 
 module.exports = typeDefs
