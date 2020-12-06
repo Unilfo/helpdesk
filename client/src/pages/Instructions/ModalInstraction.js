@@ -12,35 +12,10 @@ import Dialog from '@material-ui/core/Dialog/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-import {gql, useMutation} from '@apollo/client'
+import {useMutation} from '@apollo/client'
 import Container from '@material-ui/core/Container'
+import {ADD_INSTRACTION, GetAllInstractions} from './query'
 
-
-const ADD_INSTRACTION = gql`
-    mutation CreateInstraction(
-        $title: String!
-        $path: String!
-        $belongs: Int!
-        $group: Boolean!
-        $name: String!
-    ) {
-        createInstraction(
-            title: $title,
-            path: $path,
-            belongs: $belongs,
-            group: $group,
-            name: $name
-        ){
-            id
-            title
-            path
-            belongs
-            group
-            name
-        }
-
-    }
-`
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -140,6 +115,7 @@ export default function ModalForm({opened, closeModal, instraction}) {
           belongs: +belongs,
           group: false,
         },
+        refetchQueries:[{query: GetAllInstractions}]
       }).then(() => {
         console.log('ура')
       })

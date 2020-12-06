@@ -12,67 +12,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Dialog from '@material-ui/core/Dialog/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import './style.css'
-import {gql, useMutation} from '@apollo/client'
+import {useMutation} from '@apollo/client'
 import Container from '@material-ui/core/Container'
 import DialogActions from '@material-ui/core/DialogActions'
+import {GetAllUsers, UPDATE_USER, ADD_USER} from './query'
 
-
-const ADD_USER = gql`
-    mutation CreateUser(
-        $name: String!
-        $patronymic: String!
-        $surname: String!
-        $tab_number: String!
-        $statusId: Int!
-        $roleId: Int!
-        $login: String!
-        $password: String!
-        $avatar: String!
-    ) {
-        createUser(
-            name: $name,
-            patronymic: $patronymic,
-            surname: $surname,
-            statusId: $statusId,
-            roleId: $roleId,
-            tab_number: $tab_number,
-            login: $login,
-            password: $password,
-            avatar: $avatar
-        ){
-            id
-        }
-
-    }
-`
-
-const UPDATE_USER = gql`
-    mutation UpdateUser(
-        $id:Int!
-        $name: String!
-        $patronymic: String!
-        $surname: String!
-        $tab_number: String!
-        $statusId: Int!
-        $roleId: Int!
-        $login: String!
-        $password: String!
-        $avatar: String!
-    ) {
-        updateUser(
-            id:$id,
-            name: $name,
-            patronymic: $patronymic,
-            surname: $surname,
-            statusId: $statusId,
-            roleId: $roleId,
-            tab_number: $tab_number,
-            login: $login,
-            password: $password,
-            avatar: $avatar
-        )
-    }
-`
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -169,6 +113,7 @@ export default function ModalForm({opened, closeModal, item}) {
           password: password,
           avatar: img,
         },
+        refetchQueries:[{query: GetAllUsers}]
       }).then(() => {
         console.log('ура')
       })
@@ -186,6 +131,7 @@ export default function ModalForm({opened, closeModal, item}) {
           password: password,
           avatar: img,
         },
+        refetchQueries:[{query: GetAllUsers}]
       }).then(() => {
         console.log('ура 2')
       })
@@ -223,7 +169,6 @@ export default function ModalForm({opened, closeModal, item}) {
       reader.readAsDataURL(event.target.files[0])
 
       reader.onload = function () {
-        console.log(reader.result)
         setImg(reader.result)
       }
       reader.onerror = function (error) {
@@ -287,8 +232,8 @@ export default function ModalForm({opened, closeModal, item}) {
               value={roleId}
               onChange={handleChangeRole}
             >
-              <MenuItem value={2}>Пользователь</MenuItem>
-              <MenuItem value={1}>Администратор</MenuItem>
+              <MenuItem value={1}>Пользователь</MenuItem>
+              <MenuItem value={2}>Администратор</MenuItem>
             </Select>
           </FormControl>
         </Grid>

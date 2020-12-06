@@ -17,11 +17,12 @@ import Employees from '../Employees/Employees'
 import Tasks from '../Tasks/Tasks'
 import {
   Switch,
-  Route, withRouter,
+  Route,
 } from 'react-router-dom'
 import Home from '../Home/Home'
 import Reports from '../Reports/Reports'
 import Instructions from '../Instructions/Instructions'
+
 
 const drawerWidth = 240
 
@@ -112,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Dashboard() {
+export default function Dashboard({isLogined}) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
   const handleDrawerOpen = () => {

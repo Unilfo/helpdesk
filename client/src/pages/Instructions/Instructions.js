@@ -13,8 +13,9 @@ import Typography from '@material-ui/core/Typography'
 import EditIcon from '@material-ui/icons/Edit'
 import InstractionVeaver from './instractionVeaver'
 import './instraction.css'
-import {gql, useQuery} from '@apollo/client'
+import { useQuery} from '@apollo/client'
 import Container from '@material-ui/core/Container'
+import {GetAllInstractions} from './query'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,19 +35,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth:225
   },
 }))
-
-const GetAllInstractions = gql`
-    query GetAllInstractions{
-        instraction{
-            id
-            title
-            path
-            belongs
-            group
-            name
-        }
-    }
-`
 
 export default function Instructions() {
   const {loading, error, data} = useQuery(GetAllInstractions)

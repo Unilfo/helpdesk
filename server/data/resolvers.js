@@ -1,10 +1,11 @@
-// const  pubsub = require('../index')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const USER_ADDED = 'USER_ADDED'
 
 const resolvers = {
   Subscription: {
     UserCreated: {
-      subscribe: (_,__, {pubsub}) => pubsub.asyncIterator(USER_ADDED),
+      subscribe: (_, __, {pubsub}) => pubsub.asyncIterator(USER_ADDED),
     },
   },
   Query: {
@@ -48,17 +49,17 @@ const resolvers = {
   Mutation: {
     async createRole(root, {title}, {models}) {
       return models.Roles.create({
-        title
+        title,
       })
     },
     async createStatusTask(root, {title}, {models}) {
       return models.StatusTasks.create({
-        title
+        title,
       })
     },
     async createStatusUser(root, {title}, {models}) {
       return models.StatusUsers.create({
-        title
+        title,
       })
     },
     async createInstraction(root, {title, path, belongs, group, name}, {models}) {
@@ -67,7 +68,7 @@ const resolvers = {
         path,
         belongs,
         group,
-        name
+        name,
       })
     },
     async createTask(root, {theme, date, text, status, responsible, author}, {models}) {
@@ -77,12 +78,12 @@ const resolvers = {
         text,
         status,
         responsible,
-        author
+        author,
       })
     },
     async createUser(root, {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}, {models, pubsub}) {
       const user = {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}
-      pubsub.publish(USER_ADDED, { UserCreated: user })
+      pubsub.publish(USER_ADDED, {UserCreated: user})
       return models.User.create({
         name,
         patronymic,
@@ -91,22 +92,44 @@ const resolvers = {
         tab_number,
         roleId,
         login,
-        password,
-        avatar
+        password: bcrypt.hashSync(password, 3),
+        avatar,
       })
+    },
+    loginUser: async (root, args, {models}, info) => {
+      const {login, password, token} = args
+      if (token) {
+        return jwt.verify(token, 'nottake', function (err, decoded) {
+          if (err) {
+            return {token: 'fail'}
+          }
+          if (decoded) {
+            return {token: 'ok'}
+          }
+        })
+      }
+      const theUser = await models.User.findOne({where: {login: login}})
+      if (!theUser) {
+        return {token: 'fail'}
+      }
+      const isMatch = bcrypt.compareSync(password, theUser.password)
+      if (!isMatch) {
+        return {token: 'fail'}
+      }
+      return {token: jwt.sign(theUser.toJSON(), 'nottake')}
     },
     async deleteUser(root, {id}, {models}) {
       return models.User.destroy({
         where: {
-          id: id
-        }
+          id: id,
+        },
       })
     },
     async deleteTask(root, {id}, {models}) {
       return models.Task.destroy({
         where: {
-          id: id
-        }
+          id: id,
+        },
       })
     },
     async updateInstraction(root, {id, title, path, belongs, group, name}, {models}) {
@@ -115,12 +138,12 @@ const resolvers = {
           path: path,
           belongs: belongs,
           group: group,
-          name: name
+          name: name,
         },
         {
           where: {
-            id: id
-          }
+            id: id,
+          },
         })
       return 'OK'
     },
@@ -128,8 +151,8 @@ const resolvers = {
       models.StatusUsers.update({title: title},
         {
           where: {
-            id: id
-          }
+            id: id,
+          },
         })
       return 'OK'
     },
@@ -137,8 +160,8 @@ const resolvers = {
       models.StatusTasks.update({title: title},
         {
           where: {
-            id: id
-          }
+            id: id,
+          },
         })
       return 'OK'
     },
@@ -146,8 +169,8 @@ const resolvers = {
       models.Roles.update({title: title},
         {
           where: {
-            id: id
-          }
+            id: id,
+          },
         })
       return 'OK'
     },
@@ -161,12 +184,12 @@ const resolvers = {
           roleId: roleId,
           login: login,
           password: password,
-          avatar
+          avatar,
         },
         {
           where: {
-            id: id
-          }
+            id: id,
+          },
         })
       return 'OK'
     },
@@ -181,18 +204,18 @@ const resolvers = {
         },
         {
           where: {
-            id: id
-          }
+            id: id,
+          },
         })
       return 'OK'
     },
   },
   User: {
-    async statusId(status,_, {models}) {
-       let asd = models.StatusUsers.findByPk(status.statusId)
-      console.log(asd)
-      return  asd
-      // return status.getStatusUser()
+    async statusId(status) {
+      // ,_, {models}
+      //  let findedStatus = models.StatusUsers.findByPk(status.statusId)
+      // return  findedStatus
+      return status.getStatusUser()
     },
     async roleId(roles) {
       return roles.getRole()

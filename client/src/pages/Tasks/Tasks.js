@@ -12,34 +12,11 @@ import Title from '../../components/Title/Title'
 import {Input} from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import ModalTasks from './ModalTasks'
-import {useQuery, gql} from '@apollo/client'
-
-
-const GetAllTasks = gql`
-    query GetAllTasks{
-        tasks{
-            id
-            theme
-            responsible{
-                id
-                name
-            }
-            status{
-                id
-                title
-            }
-            author{
-                id
-                name
-            }
-            date
-            text
-        }
-    }
-`
+import {useQuery} from '@apollo/client'
+import {GetAllTasks} from './query'
 
 const columns = [
-  {id: 'id', label: '№', minWidth: 50,},
+  {id: 'id', label: '№', minWidth: 50},
   {id: 'theme', label: 'Тема', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'responsible', label: 'Ответственный', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'date', label: 'Дата', minWidth: 170, maxWidth: 250, align: 'left'},
@@ -52,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
-  cell:{
+  cell: {
     [theme.breakpoints.down('xs')]: {
-      display: 'none'
+      display: 'none',
     },
   },
   container: {
@@ -66,17 +43,17 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   input_search: {
-    marginBottom: 15
+    marginBottom: 15,
   },
   title: {},
   button_open: {},
   pagination_text: {},
   caption: {
     [theme.breakpoints.down('xs')]: {
-      display: 'none'
+      display: 'none',
     },
   },
-  container_toolbar: {}
+  container_toolbar: {},
 }))
 
 export default function Tasks() {
@@ -87,13 +64,27 @@ export default function Tasks() {
   const [opened, setOpened] = useState(false)
   const [item, setItem] = useState({})
   const [dataTasks, setDataTasks] = useState([])
-
+  const [searchText, setSearchText] = useState(null)
 
   useEffect(() => {
     if (!loading && data) {
       setDataTasks(data.tasks)
     }
   }, [loading, data])
+
+  useEffect(() => {
+    if (searchText === '') {
+      setDataTasks(data.tasks)
+    }
+    else if(searchText === null) {
+      return dataTasks
+    }else {
+      const filteredData = data.tasks.filter((data) => {
+        return data.theme.toLowerCase().includes(searchText.toLowerCase().trim())
+      })
+      setDataTasks(filteredData)
+    }
+  }, [searchText])
 
   if (loading) {
     return <p>Loading...</p>
@@ -130,7 +121,7 @@ export default function Tasks() {
           <ModalTasks opened={opened} closeModal={closeModal} items={item}/>
         </Grid>
         <Grid item xs={12} sm={3} md={2} className={classes.input_search}>
-          <Input placeholder={'Поиск'}></Input>
+          <Input placeholder={'Поиск'} value={searchText} onChange={(e) => setSearchText(e.target.value)}></Input>
         </Grid>
       </Grid>
       <Paper className={classes.root}>
@@ -143,7 +134,7 @@ export default function Tasks() {
                     key={column.id}
                     align={column.align}
                     style={{minWidth: column.minWidth}}
-                    className={column.id === 'theme'? classes.cellOne :classes.cell}
+                    className={column.id === 'theme' ? classes.cellOne : classes.cell}
                   >
                     {column.label}
                   </TableCell>
@@ -166,7 +157,8 @@ export default function Tasks() {
                         value = row[column.id].title ? row[column.id].title : row[column.id].name
                       }
                       return (
-                        <TableCell key={column.id} align={column.align} className={column.id === 'theme'? classes.cellOne :classes.cell}>
+                        <TableCell key={column.id} align={column.align}
+                                   className={column.id === 'theme' ? classes.cellOne : classes.cell}>
                           {value}
                           {/*{column.format && typeof value === 'number' ? column.format(value) : value}*/}
                         </TableCell>

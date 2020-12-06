@@ -14,30 +14,8 @@ import ModalForm from './Modal'
 import {Input} from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import {useQuery, gql} from '@apollo/client'
+import {GetAllUsers} from './query'
 
-
-const GetAllUsers = gql`
-    query GetAllUsers{
-        users{
-            id
-            name
-            patronymic
-            surname
-            roleId{
-                id
-                title
-            }
-            statusId{
-                id
-                title
-            }
-            tab_number
-            login
-            password
-            avatar
-        }
-    }
-`
 
 
 const columns = [

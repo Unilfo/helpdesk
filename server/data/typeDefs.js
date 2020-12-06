@@ -49,6 +49,9 @@ const typeDefs = gql`
         author: User!
         text: String!
     }
+    type AuthPayLoad {
+        token: String!
+    }
 
     type Query {
         users: [User!]
@@ -116,6 +119,7 @@ const typeDefs = gql`
             author: Int!
             text: String!
         ): String!
+        loginUser(login: String password: String token: String): AuthPayLoad!
     }
     
     type Subscription {

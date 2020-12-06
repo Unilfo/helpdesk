@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -7,9 +7,10 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import {useHistory} from 'react-router-dom'
-
+import {makeStyles} from '@material-ui/core/styles'
+import {useHistory, withRouter} from 'react-router-dom'
+import {LOGIN} from './query'
+import {useMutation} from '@apollo/client'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,18 +41,24 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  error:{
+  error: {
     marginTop: 15,
-    color: 'red'
-  }
+    color: 'red',
+  },
 }))
 
-export default function SignInSide() {
+function SignInSide() {
   let history = useHistory()
   const classes = useStyles()
   const [login, setlogin] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+  const [logined] = useMutation(LOGIN)
+
+
+  useEffect(() => {
+    history.push('/home')
+  }, [])
 
   const changeLogin = (e) => {
     setlogin(e.target.value)
@@ -62,8 +69,8 @@ export default function SignInSide() {
   }
 
   const Error = () => {
-    if(error){
-      return(
+    if (error) {
+      return (
         <div className={classes.error}>
           Неверный логин или пароль
         </div>
@@ -74,23 +81,32 @@ export default function SignInSide() {
 
   const submit = (e) => {
     e.preventDefault()
-    if(login === '1' && password === '1'){
-      localStorage.setItem('pas', '1')
-      history.push('/home')
-    }else{
-      setError(true)
-    }
+    logined({
+      variables: {
+        login,
+        password,
+      },
+    }).then(({data}) => {
+      if (data.loginUser.token !== 'fail') {
+        localStorage.setItem('token', data.loginUser.token)
+        history.push({
+          pathname: '/home',
+        });
+      } else {
+        setError(true)
+      }
+    })
   }
 
 
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <CssBaseline/>
+      <Grid item xs={false} sm={4} md={7} className={classes.image}/>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <LockOutlinedIcon/>
           </Avatar>
           <Typography component="h1" variant="h5">
             Help desk
@@ -138,4 +154,6 @@ export default function SignInSide() {
     </Grid>
   )
 }
+
+export default withRouter(SignInSide )
 

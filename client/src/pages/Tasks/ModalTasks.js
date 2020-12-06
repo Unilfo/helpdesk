@@ -11,7 +11,6 @@ import Title from '../../components/Title/Title'
 import ImageIcon from '@material-ui/icons/Image'
 import './modalTask.css'
 import ImgDialog from '../ImgDialog/ImgDialog'
-import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -22,9 +21,9 @@ import ruLocale from 'date-fns/locale/ru'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
-import {gql, useMutation} from '@apollo/client'
+import {useMutation} from '@apollo/client'
 import TextField from '@material-ui/core/TextField'
-
+import {ADD_TASK, UPDATE_TASK, GetAllTasks} from './query'
 
 const useStyles = makeStyles((theme) => ({
   dialogContent: {
@@ -85,51 +84,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ADD_TASK = gql`
-    mutation CreateTask(
-        $theme: String!
-        $responsible: Int!
-        $date: Date!
-        $status: Int!
-        $author: Int!
-        $text: String!
-    ) {
-        createTask(
-            theme: $theme
-            responsible: $responsible
-            date: $date
-            status:$status
-            author: $author
-            text: $text
-        ){
-            id
-        }
-
-    }
-`
-
-const UPDATE_TASK = gql`
-    mutation UpdateTask(
-        $id: Int!
-        $theme: String!
-        $responsible: Int!
-        $date: Date!
-        $status: Int!
-        $author: Int!
-        $text: String!
-    ) {
-        updateTask(
-            id: $id
-            theme: $theme
-            responsible: $responsible
-            date: $date
-            status:$status
-            author: $author
-            text: $text
-        )
-    }
-`
-
 class RuLocalizedUtils extends DateFnsUtils {
   getCalendarHeaderText(date) {
     return format(date, 'LLLL', {locale: this.locale})
@@ -158,13 +112,9 @@ export default function ModalTasks({opened, closeModal, items}) {
     ' assumenda beatae debitis dolore eaque explicabo fuga harum iusto maxime ' +
     'minima nemo odit officia recusandae, sequi voluptas voluptate?')
 
-  const [item, setItem] = useState({})
   const [files, setFiles] = useState([])
   const [openImg, setOpenImg] = useState(false)
   const [img, setImg] = useState(null)
-  const [startText, setStartText] = useState('Введите текст...')
-  const [checked, setChecked] = useState(true)
-  // const [selectedDate, setDate] = useState(new Date())
   const descriptionElementRef = React.useRef(null)
   const [createTask] = useMutation(ADD_TASK)
   const [updateTask] = useMutation(UPDATE_TASK)
@@ -266,17 +216,11 @@ export default function ModalTasks({opened, closeModal, items}) {
           author: +author,
           text: text,
         },
+        refetchQueries:[{query: GetAllTasks}]
       }).then(() => {
         console.log('ура')
       })
     } else {
-      console.log(id)
-      console.log(theme)
-      console.log(responsible)
-      console.log(date)
-      console.log(status)
-      console.log(author)
-      console.log(text)
       updateTask({
         variables: {
           id: +id,
@@ -287,6 +231,7 @@ export default function ModalTasks({opened, closeModal, items}) {
           author: +author,
           text: text,
         },
+        refetchQueries:[{query: GetAllTasks}]
       }).then(() => {
         console.log('ура 2')
       })
