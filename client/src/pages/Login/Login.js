@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -8,9 +8,11 @@ import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
-import {useHistory, withRouter} from 'react-router-dom'
-import {LOGIN} from './query'
-import {useMutation} from '@apollo/client'
+import useLocalStorage from '../utils/useLocalStorage'
+import useFetch from '../utils/useFetch'
+import {CurrentUserContext} from '../utils/CurrentUser'
+import {Redirect} from 'react-router-dom'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,55 +49,48 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function SignInSide() {
-  let history = useHistory()
+export default function SignInSide(props) {
   const classes = useStyles()
-  const [login, setlogin] = useState('')
+  // const isLogin = props.match.path === '/login'
+  const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(false)
-  const [logined] = useMutation(LOGIN)
+  const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false)
+  const [{isLoading, response, error}, doFetch] = useFetch()
+  const [, setToken] = useLocalStorage('token')
+  const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext)
+  console.log('currentUserState', currentUserState)
 
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    doFetch({
+      login,
+      password,
+    })
+  }
 
   useEffect(() => {
-    history.push('/home')
-  }, [])
-
-  const changeLogin = (e) => {
-    setlogin(e.target.value)
-  }
-
-  const changePassword = (e) => {
-    setPassword(e.target.value)
-  }
-
-  const Error = () => {
-    if (error) {
-      return (
-        <div className={classes.error}>
-          Неверный логин или пароль
-        </div>
-      )
+    if (!response) {
+      return
     }
-    return null
-  }
 
-  const submit = (e) => {
-    e.preventDefault()
-    logined({
-      variables: {
-        login,
-        password,
-      },
-    }).then(({data}) => {
-      if (data.loginUser.token !== 'fail') {
-        localStorage.setItem('token', data.loginUser.token)
-        history.push({
-          pathname: '/home',
-        });
-      } else {
-        setError(true)
-      }
-    })
+    console.log('response', response)
+    if(response.token === 'ok'){
+
+    }else if(response.token !== 'ok' && response.token !== 'fail'){
+      setToken(response.token)
+    }
+    setIsSuccessfullSubmit(true)
+    setCurrentUserState(state => ({
+      ...state,
+      isLoggedIn: true,
+      isLoading: false,
+      currentUser: response.token,
+    }))
+  }, [response, setToken, setCurrentUserState])
+
+  if (isSuccessfullSubmit) {
+    return <Redirect to="/"/>
   }
 
 
@@ -111,8 +106,8 @@ function SignInSide() {
           <Typography component="h1" variant="h5">
             Help desk
           </Typography>
-          <Error/>
-          <form className={classes.form} onSubmit={submit}>
+          {/*<Error/>*/}
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -124,7 +119,7 @@ function SignInSide() {
               autoComplete="email"
               autoFocus
               value={login}
-              onChange={changeLogin}
+              onChange={(e) => setLogin(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -137,7 +132,7 @@ function SignInSide() {
               id="password"
               autoComplete="current-password"
               value={password}
-              onChange={changePassword}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
@@ -155,5 +150,4 @@ function SignInSide() {
   )
 }
 
-export default withRouter(SignInSide )
 

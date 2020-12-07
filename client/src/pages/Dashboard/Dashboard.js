@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import clsx from 'clsx'
 import {makeStyles} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -17,11 +17,12 @@ import Employees from '../Employees/Employees'
 import Tasks from '../Tasks/Tasks'
 import {
   Switch,
-  Route,
+  Route, Redirect,
 } from 'react-router-dom'
 import Home from '../Home/Home'
 import Reports from '../Reports/Reports'
 import Instructions from '../Instructions/Instructions'
+import {CurrentUserContext} from '../utils/CurrentUser'
 
 
 const drawerWidth = 240
@@ -113,9 +114,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Dashboard({isLogined}) {
+export default function Dashboard() {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
+  const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(()=>{
+    return <Redirect to='/home'/>
+  },[currentUserState])
+
   const handleDrawerOpen = () => {
     setOpen(true)
   }

@@ -1,36 +1,22 @@
+import React from 'react'
 import './App.css'
-import Routes from './pages/Router'
-import {useEffect, useState} from 'react'
-import {useMutation} from '@apollo/client'
-import {LOGIN} from './pages/Login/query'
+import Routes from './pages/Routes'
+import {CurrentUserProvider} from './pages/utils/CurrentUser'
+import CurrentUserChecker from './pages/utils/CurrentUserChecker'
+import {BrowserRouter as Router} from 'react-router-dom'
 
-export default function App(){
-  const [isLogined, setisLogined] = useState(false)
-  const [logined] = useMutation(LOGIN)
 
-  useEffect(() => {
-    let token = localStorage.getItem('token')
-    if (token) {
-      setisLogined(true)
-      logined({
-        variables: {
-          token
-        },
-      }).then(({data}) => {
-        if(data.loginUser.token === 'ok'){
-          setisLogined(true)
-        }else{
-          setisLogined(false)
-        }
-      })
-    } else {
-      setisLogined(false)
-    }
-  }, [])
+export default function App() {
 
   return (
     <div className="App">
-      <Routes isLogined={isLogined}/>
+      <CurrentUserProvider>
+        <CurrentUserChecker>
+          <Router>
+            <Routes/>
+          </Router>
+        </CurrentUserChecker>
+      </CurrentUserProvider>
     </div>
   )
 }
