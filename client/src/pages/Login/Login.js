@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState} from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -8,10 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
-import useLocalStorage from '../utils/useLocalStorage'
-import useFetch from '../utils/useFetch'
-import {CurrentUserContext} from '../utils/CurrentUser'
-import {Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,49 +47,17 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SignInSide(props) {
+  let history = useHistory()
   const classes = useStyles()
-  // const isLogin = props.match.path === '/login'
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-  const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false)
-  const [{isLoading, response, error}, doFetch] = useFetch()
-  const [, setToken] = useLocalStorage('token')
-  const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext)
-  console.log('currentUserState', currentUserState)
 
+  // console.log(props)
 
   const handleSubmit = event => {
     event.preventDefault()
-    doFetch({
-      login,
-      password,
-    })
+    history.push('/home')
   }
-
-  useEffect(() => {
-    if (!response) {
-      return
-    }
-
-    console.log('response', response)
-    if(response.token === 'ok'){
-
-    }else if(response.token !== 'ok' && response.token !== 'fail'){
-      setToken(response.token)
-    }
-    setIsSuccessfullSubmit(true)
-    setCurrentUserState(state => ({
-      ...state,
-      isLoggedIn: true,
-      isLoading: false,
-      currentUser: response.token,
-    }))
-  }, [response, setToken, setCurrentUserState])
-
-  if (isSuccessfullSubmit) {
-    return <Redirect to="/"/>
-  }
-
 
   return (
     <Grid container component="main" className={classes.root}>

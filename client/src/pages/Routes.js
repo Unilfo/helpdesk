@@ -1,56 +1,68 @@
 import {Switch} from 'react-router-dom'
 import Login from './Login/Login'
 import Dashboard from './Dashboard/Dashboard'
-import React, {useContext, useEffect, useMemo, useState} from 'react'
-import {Route} from 'react-router'
-import {CurrentUserContext} from './utils/CurrentUser'
-import {Redirect} from 'react-router-dom'
-import useFetch from './utils/useFetch'
+import React, {Fragment, useEffect, useState} from 'react'
+import {Redirect, Route} from 'react-router-dom'
+import {useMutation} from '@apollo/client'
 
-const Routes = () => {
-  const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  console.log('currentUserStateRoute', currentUserState)
-  const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false)
+const {LOGIN} = require('./Login/query')
 
-  function PrivateRoute({children, ...rest}) {
+function Routes(props) {
+  console.log('props - ', props)
+  const [check] = useMutation(LOGIN)
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [auth, setAuth] = useState(false)
 
-    return (
-      <Route
-        {...rest}
-        render={({location}) =>
-          currentUserState.isLoggedIn? (
-            children
-          ) : (
-            <Redirect
-              to={{
-                pathname: '/login',
-                state: {from: location},
-              }}
-            />
-          )
-        }
-      />
-    )
+  useEffect(() => {
+    async function fetchMyAPI() {
+      await check({
+        variables: {
+          login: '',
+          password: '',
+          token,
+        },
+      })
+        .then(({data}) => {
+          console.log('check-', data)
+          setAuth(data.loginUser)
+        })
+        .catch(error => {
+          console.log('ERROR - ', error)
+        })
+    }
+
+    fetchMyAPI()
+  }, [])
+
+  if (auth) {
+    console.log('auth', auth)
   }
 
   return (
-    <Switch>
-      {/*<Route exact path='/' component={Dashboard}/>*/}
-      {/*<Route path='/login' component={Login}/>*/}
-      <Route exact path="/login">
-        {currentUserState.isLoggedIn?
-          <Redirect
-            to={{
-              pathname: '/home',
-            }}
-          /> :<Login/>}
-      </Route>
-      <PrivateRoute path="/">
-        <Dashboard/>
-      </PrivateRoute>
-    </Switch>
+    <div>
+      {auth.error
+        ? (
+        <Fragment>
+          <Route path="/login" component={Login}/>
+          <Redirect to='/login'/>
+        </Fragment>
+      )
+        :(
+          <Switch>
+            {/*<Route path="/login" component={Login}/>*/}
+            <Route path='/' component={Dashboard}/>
+          </Switch>
+        )}
+    </div>
   )
 }
 
 export default Routes
+// <Switch>
+// <Route path="/login" component={Login}/>
+// {auth.error
+//   ? <Redirect to='/'/>
+//   : <Redirect to='/login'/>
+// }
+// <Route exact path='/' component={Dashboard}/>
+// </Switch>

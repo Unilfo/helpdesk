@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {Fragment, useEffect} from 'react'
 import clsx from 'clsx'
 import {makeStyles} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -17,12 +17,11 @@ import Employees from '../Employees/Employees'
 import Tasks from '../Tasks/Tasks'
 import {
   Switch,
-  Route, Redirect,
+  Route, Redirect, useHistory,
 } from 'react-router-dom'
 import Home from '../Home/Home'
 import Reports from '../Reports/Reports'
 import Instructions from '../Instructions/Instructions'
-import {CurrentUserContext} from '../utils/CurrentUser'
 
 
 const drawerWidth = 240
@@ -114,15 +113,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  let history = useHistory()
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
-  const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  useEffect(()=>{
-    return <Redirect to='/home'/>
-  },[currentUserState])
+  // useEffect(()=>{
+  //   if(!props.auth.isLogined){
+  //     history.push('/login')
+  //   }
+  // },[history, props.auth.isLogined])
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -132,7 +132,8 @@ export default function Dashboard() {
   }
 
   return (
-      <div className={classes.root}>
+    <div className={classes.root}>
+        <Fragment>
         <CssBaseline/>
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
@@ -170,7 +171,7 @@ export default function Dashboard() {
           <div className={classes.appBarSpacer}/>
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
-              <Route path="/home" component={Home}/>
+              <Route path="/" component={Home}/>
               <Route path="/employee" component={Employees}/>
               <Route path="/tasks" component={Tasks}/>
               <Route path="/reports" component={Reports}/>
@@ -178,7 +179,8 @@ export default function Dashboard() {
             </Switch>
           </Container>
         </main>
-      </div>
+      </Fragment>
+    </div>
   )
 }
 

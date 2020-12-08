@@ -101,22 +101,48 @@ const resolvers = {
       if (token) {
         return jwt.verify(token, 'nottake', function (err, decoded) {
           if (err) {
-            return {token: 'fail'}
+            return {
+              message:'Не коректный токен',
+              error:true,
+              user:null,
+              token: null
+            }
           }
           if (decoded) {
-            return {token: 'ok'}
+            return {
+              message:'ok',
+              error:false,
+              user:decoded,
+              token: token
+            }
           }
         })
+      }else{
+        const theUser = await models.User.findOne({where: {login: login}})
+        if (!theUser) {
+          return {
+            message:'user not found',
+            error:true,
+            user:null,
+            token: null
+          }
+        }
+        const isMatch = bcrypt.compareSync(password, theUser.password)
+        if (!isMatch) {
+          return {
+            message:'Incorrect password',
+            error:true,
+            user:null,
+            token: null
+          }
+        }
+        return {
+          message:'ok',
+          error:false,
+          user:theUser,
+          token: jwt.sign(theUser.toJSON(), 'nottake')
+        }
       }
-      const theUser = await models.User.findOne({where: {login: login}})
-      if (!theUser) {
-        return {token: 'fail'}
-      }
-      const isMatch = bcrypt.compareSync(password, theUser.password)
-      if (!isMatch) {
-        return {token: 'fail'}
-      }
-      return {token: jwt.sign(theUser.toJSON(), 'nottake')}
     },
     async deleteUser(root, {id}, {models}) {
       return models.User.destroy({

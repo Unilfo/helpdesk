@@ -50,7 +50,11 @@ const typeDefs = gql`
         text: String!
     }
     type AuthPayLoad {
-        token: String!
+        message: String
+        error: Boolean
+        user: User
+        token: String
+        
     }
 
     type Query {
