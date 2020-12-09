@@ -45,6 +45,54 @@ const resolvers = {
     async getTask(root, {id}, {models}) {
       return models.Task.findByPk(id)
     },
+    async loginUser(root, args, {models}, info){
+      const {login, password, token} = args
+      if (token) {
+        return jwt.verify(token, 'nottake', function (err, decoded) {
+          if (err) {
+            return {
+              message: 'Не коректный токен',
+              error: true,
+              user: null,
+              token: null,
+            }
+          }
+          if (decoded) {
+            return {
+              message: 'ok',
+              error: false,
+              user: decoded,
+              token: token,
+            }
+          }
+        })
+      } else {
+        const theUser = await models.User.findOne({where: {login: login}})
+        if (!theUser) {
+          return {
+            message: 'user not found',
+            error: true,
+            user: null,
+            token: null,
+          }
+        }
+        const isMatch = bcrypt.compareSync(password, theUser.password)
+        if (!isMatch) {
+          return {
+            message: 'Incorrect password',
+            error: true,
+            user: null,
+            token: null,
+          }
+        }
+        return {
+          message: 'ok',
+          error: false,
+          user: theUser,
+          token: jwt.sign(theUser.toJSON(), 'nottake'),
+        }
+      }
+    },
   },
   Mutation: {
     async createRole(root, {title}, {models}) {
@@ -95,54 +143,6 @@ const resolvers = {
         password: bcrypt.hashSync(password, 3),
         avatar,
       })
-    },
-    loginUser: async (root, args, {models}, info) => {
-      const {login, password, token} = args
-      if (token) {
-        return jwt.verify(token, 'nottake', function (err, decoded) {
-          if (err) {
-            return {
-              message:'Не коректный токен',
-              error:true,
-              user:null,
-              token: null
-            }
-          }
-          if (decoded) {
-            return {
-              message:'ok',
-              error:false,
-              user:decoded,
-              token: token
-            }
-          }
-        })
-      }else{
-        const theUser = await models.User.findOne({where: {login: login}})
-        if (!theUser) {
-          return {
-            message:'user not found',
-            error:true,
-            user:null,
-            token: null
-          }
-        }
-        const isMatch = bcrypt.compareSync(password, theUser.password)
-        if (!isMatch) {
-          return {
-            message:'Incorrect password',
-            error:true,
-            user:null,
-            token: null
-          }
-        }
-        return {
-          message:'ok',
-          error:false,
-          user:theUser,
-          token: jwt.sign(theUser.toJSON(), 'nottake')
-        }
-      }
     },
     async deleteUser(root, {id}, {models}) {
       return models.User.destroy({

@@ -171,7 +171,7 @@ export default function Dashboard(props) {
           <div className={classes.appBarSpacer}/>
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
-              <Route path="/" component={Home}/>
+              <Route path="/home" component={Home}/>
               <Route path="/employee" component={Employees}/>
               <Route path="/tasks" component={Tasks}/>
               <Route path="/reports" component={Reports}/>

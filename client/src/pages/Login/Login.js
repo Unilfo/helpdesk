@@ -52,11 +52,10 @@ export default function SignInSide(props) {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
 
-  // console.log(props)
 
   const handleSubmit = event => {
     event.preventDefault()
-    history.push('/home')
+    history.push('/vbnvn')
   }
 
   return (

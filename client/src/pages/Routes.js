@@ -1,68 +1,26 @@
 import {Switch} from 'react-router-dom'
+import React, {Fragment, lazy, Suspense} from 'react'
+import {Route} from 'react-router-dom'
+import PrivateRoute from './utils/PrivateRoute'
 import Login from './Login/Login'
-import Dashboard from './Dashboard/Dashboard'
-import React, {Fragment, useEffect, useState} from 'react'
-import {Redirect, Route} from 'react-router-dom'
-import {useMutation} from '@apollo/client'
+import IsLoggedIn from './utils/isLoggedIn'
+import {useQuery} from '@apollo/client'
+import {LOGIN} from './Login/query'
 
-const {LOGIN} = require('./Login/query')
+const Dashboard = lazy(() => import('./Dashboard/Dashboard'))
 
-function Routes(props) {
-  console.log('props - ', props)
-  const [check] = useMutation(LOGIN)
-  const [token, setToken] = useState(localStorage.getItem('token'))
-  const [auth, setAuth] = useState(false)
 
-  useEffect(() => {
-    async function fetchMyAPI() {
-      await check({
-        variables: {
-          login: '',
-          password: '',
-          token,
-        },
-      })
-        .then(({data}) => {
-          console.log('check-', data)
-          setAuth(data.loginUser)
-        })
-        .catch(error => {
-          console.log('ERROR - ', error)
-        })
-    }
-
-    fetchMyAPI()
-  }, [])
-
-  if (auth) {
-    console.log('auth', auth)
-  }
-
+function Routes() {
   return (
-    <div>
-      {auth.error
-        ? (
-        <Fragment>
-          <Route path="/login" component={Login}/>
-          <Redirect to='/login'/>
-        </Fragment>
-      )
-        :(
-          <Switch>
-            {/*<Route path="/login" component={Login}/>*/}
-            <Route path='/' component={Dashboard}/>
-          </Switch>
-        )}
-    </div>
+    <Fragment>
+      <IsLoggedIn/>
+      <Route exact path="/login" component={Login}/>
+      {/*<Switch>*/}
+      {/*  <Route exact path="/" component={} />*/}
+      {/*</Switch>*/}
+    </Fragment>
   )
 }
 
 export default Routes
-// <Switch>
-// <Route path="/login" component={Login}/>
-// {auth.error
-//   ? <Redirect to='/'/>
-//   : <Redirect to='/login'/>
-// }
-// <Route exact path='/' component={Dashboard}/>
-// </Switch>
+

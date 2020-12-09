@@ -70,6 +70,7 @@ const typeDefs = gql`
         getStatusTask(id:Int!):StatusTask
         tasks: [Tasks!]
         getTask(id: Int!): Tasks
+        loginUser(login: String password: String token: String): AuthPayLoad!
     }
 
     type Mutation {
@@ -123,7 +124,6 @@ const typeDefs = gql`
             author: Int!
             text: String!
         ): String!
-        loginUser(login: String password: String token: String): AuthPayLoad!
     }
     
     type Subscription {
