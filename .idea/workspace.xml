@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="sever mutations and">
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Instructions/instraction.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Employees/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Employees/Employees.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Instructions/Instructions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Instructions/Instructions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Tasks/Tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Tasks/Tasks.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,6 +160,7 @@
       <workItem from="1606368817788" duration="24208000" />
       <workItem from="1606455567757" duration="11320000" />
       <workItem from="1606714572885" duration="18683000" />
+      <workItem from="1607497077401" duration="2045000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -347,25 +344,25 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="569" y="46" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606737033649" />
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1606737288578">
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom" timestamp="1607501130902">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606737288578" />
+    <state width="2021" height="291" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1607501130902" />
     <state width="1628" height="238" key="GridCell.Tab.0.bottom/0.25.1680.948@0.25.1680.948" timestamp="1605726135542" />
-    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1606737288577">
+    <state width="2021" height="291" key="GridCell.Tab.0.center" timestamp="1607501130901">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606737288577" />
+    <state width="2021" height="291" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1607501130901" />
     <state width="1628" height="238" key="GridCell.Tab.0.center/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
-    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1606737288577">
+    <state width="2021" height="291" key="GridCell.Tab.0.left" timestamp="1607501130901">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606737288577" />
+    <state width="2021" height="291" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1607501130901" />
     <state width="1628" height="238" key="GridCell.Tab.0.left/0.25.1680.948@0.25.1680.948" timestamp="1605726135540" />
-    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1606737288578">
+    <state width="2021" height="291" key="GridCell.Tab.0.right" timestamp="1607501130901">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606737288578" />
+    <state width="2021" height="291" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1607501130901" />
     <state width="1628" height="238" key="GridCell.Tab.0.right/0.25.1680.948@0.25.1680.948" timestamp="1605726135541" />
     <state x="849" y="188" key="RollbackChangesDialog" timestamp="1606455909216">
       <screen x="0" y="0" width="2048" height="1112" />
