@@ -17,7 +17,7 @@ const PrivateRoute = ({comp: Component, ...rest}) => {
         data.loginUser.error && !loading ? (
           <Redirect to="/login"/>
         ) : (
-          <Component {...props} />
+          <Component {...props} user={data.loginUser}/>
         )
       }
     />
