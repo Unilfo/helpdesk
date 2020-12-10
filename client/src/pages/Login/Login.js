@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function SignInSide(props){
+function SignInSide(props) {
   let history = useHistory()
   const classes = useStyles()
   const [login, setLogin] = useState('')
@@ -57,7 +57,8 @@ function SignInSide(props){
 
   const handleSubmit = event => {
     event.preventDefault()
-    if(!loading && !error && !data.loginUser.error){
+    if (!loading && !error && !data.loginUser.error) {
+      localStorage.setItem('token', data.loginUser.token)
       history.push('/home')
     }
   }

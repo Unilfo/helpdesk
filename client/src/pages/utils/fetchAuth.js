@@ -5,11 +5,11 @@ const {LOGIN} = require('./query')
 function FetchAuth(login = '', password = '') {
   const token = localStorage.getItem('token')
 
-  if(!token){
+  if (!token) {
     localStorage.setItem('token', '')
   }
 
-  if(login && password && token){
+  if (login && password && token) {
     localStorage.setItem('token', '')
   }
 
@@ -19,12 +19,7 @@ function FetchAuth(login = '', password = '') {
         password: password,
         token: token,
       },
-      onCompleted: (data) => {
-        if (data.loginUser.token) {
-          localStorage.setItem('token', data.loginUser.token)
-        }
-      }
-    }
+    },
   )
   return {loading, error, data}
 }
