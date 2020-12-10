@@ -1,24 +1,19 @@
 import {Switch} from 'react-router-dom'
-import React, {Fragment, lazy, Suspense} from 'react'
+import React from 'react'
 import {Route} from 'react-router-dom'
 import PrivateRoute from './utils/PrivateRoute'
 import Login from './Login/Login'
-import IsLoggedIn from './utils/isLoggedIn'
-import {useQuery} from '@apollo/client'
-import {LOGIN} from './Login/query'
-
-const Dashboard = lazy(() => import('./Dashboard/Dashboard'))
+import Dashboard from './Dashboard/Dashboard'
 
 
 function Routes() {
+
   return (
-    <Fragment>
-      <IsLoggedIn/>
-      <Route exact path="/login" component={Login}/>
-      {/*<Switch>*/}
-      {/*  <Route exact path="/" component={} />*/}
-      {/*</Switch>*/}
-    </Fragment>
+    <Switch>
+      <Route exact path='/login'><Login/></Route>
+      <PrivateRoute path="/" comp={Dashboard}></PrivateRoute>
+      <PrivateRoute exact path="/home" comp={Dashboard}></PrivateRoute>
+    </Switch>
   )
 }
 

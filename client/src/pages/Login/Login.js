@@ -9,6 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
 import {useHistory} from 'react-router-dom'
+import FetchAuth from '../utils/fetchAuth'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,16 +47,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function SignInSide(props) {
+function SignInSide(props){
   let history = useHistory()
   const classes = useStyles()
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
 
+  const {loading, error, data} = FetchAuth(login, password)
 
   const handleSubmit = event => {
     event.preventDefault()
-    history.push('/vbnvn')
+    if(!loading && !error && !data.loginUser.error){
+      history.push('/home')
+    }
   }
 
   return (
@@ -114,4 +118,4 @@ export default function SignInSide(props) {
   )
 }
 
-
+export default SignInSide

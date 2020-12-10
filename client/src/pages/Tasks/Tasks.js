@@ -121,7 +121,7 @@ export default function Tasks() {
           <ModalTasks opened={opened} closeModal={closeModal} items={item}/>
         </Grid>
         <Grid item xs={12} sm={3} md={2} className={classes.input_search}>
-          <Input placeholder={'Поиск'} value={searchText} onChange={(e) => setSearchText(e.target.value)}></Input>
+          <Input placeholder={'Поиск'} value={searchText || ''} onChange={(e) => setSearchText(e.target.value)}></Input>
         </Grid>
       </Grid>
       <Paper className={classes.root}>

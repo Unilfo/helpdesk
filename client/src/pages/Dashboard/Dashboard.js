@@ -22,6 +22,7 @@ import {
 import Home from '../Home/Home'
 import Reports from '../Reports/Reports'
 import Instructions from '../Instructions/Instructions'
+import PrivateRoute from '../utils/PrivateRoute'
 
 
 const drawerWidth = 240
@@ -118,12 +119,6 @@ export default function Dashboard(props) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
 
-  // useEffect(()=>{
-  //   if(!props.auth.isLogined){
-  //     history.push('/login')
-  //   }
-  // },[history, props.auth.isLogined])
-
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -133,7 +128,7 @@ export default function Dashboard(props) {
 
   return (
     <div className={classes.root}>
-        <Fragment>
+      <Fragment>
         <CssBaseline/>
         <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
@@ -175,7 +170,9 @@ export default function Dashboard(props) {
               <Route path="/employee" component={Employees}/>
               <Route path="/tasks" component={Tasks}/>
               <Route path="/reports" component={Reports}/>
-              <Route path="/instructions" component={Instructions}/>
+              <PrivateRoute>
+                <Route path="/instructions" component={Instructions}/>
+              </PrivateRoute>
             </Switch>
           </Container>
         </main>

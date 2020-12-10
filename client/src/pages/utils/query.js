@@ -9,6 +9,7 @@ const LOGIN = gql`
                 id
                 name
                 login
+                surname
             }
             token
         }
