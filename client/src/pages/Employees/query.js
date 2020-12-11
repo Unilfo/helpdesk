@@ -22,6 +22,7 @@ const GetAllUsers = gql`
         }
     }
 `
+
 const ADD_USER = gql`
     mutation CreateUser(
         $name: String!
@@ -78,4 +79,15 @@ const UPDATE_USER = gql`
         )
     }
 `
-export {GetAllUsers,ADD_USER,UPDATE_USER}
+
+const DELETE_USER = gql`
+    mutation DeleteUser(
+        $id:Int!
+    ) {
+        deleteUser(
+            id:$id,
+        )
+    }
+`
+
+export {GetAllUsers,ADD_USER,UPDATE_USER, DELETE_USER}

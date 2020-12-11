@@ -209,7 +209,7 @@ const resolvers = {
           tab_number: tab_number,
           roleId: roleId,
           login: login,
-          password: password,
+          password: bcrypt.hashSync(password, 3),
           avatar,
         },
         {

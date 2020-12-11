@@ -15,7 +15,7 @@ import './style.css'
 import {useMutation} from '@apollo/client'
 import Container from '@material-ui/core/Container'
 import DialogActions from '@material-ui/core/DialogActions'
-import {GetAllUsers, UPDATE_USER, ADD_USER} from './query'
+import {GetAllUsers, UPDATE_USER, ADD_USER, DELETE_USER} from './query'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ModalForm({opened, closeModal, item}) {
   const [createUser] = useMutation(ADD_USER)
   const [updateUser] = useMutation(UPDATE_USER)
+  const [deleteUser] = useMutation(DELETE_USER)
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [statusId, setStatus] = useState('')
@@ -98,6 +99,20 @@ export default function ModalForm({opened, closeModal, item}) {
     setRoleId(event.target.value)
   }
 
+  const handleDeleteUser = () => {
+    deleteUser({
+      variables: {
+        id: +id,
+      },
+      refetchQueries:[{query: GetAllUsers}]
+    }).then(()=>{
+      alert('Пользователь удален')
+    }).catch((error)=>{
+      alert('Имеются документы ссылающиеся на пользователя')
+    })
+    closeModal()
+  }
+
   const handleSave = (e) => {
     e.preventDefault()
     if (id === undefined) {
@@ -111,7 +126,7 @@ export default function ModalForm({opened, closeModal, item}) {
           roleId: +roleId,
           login: login,
           password: password,
-          avatar: img,
+          avatar: img || 'profile.jpg',
         },
         refetchQueries:[{query: GetAllUsers}]
       }).then(() => {
@@ -129,7 +144,7 @@ export default function ModalForm({opened, closeModal, item}) {
           roleId: +roleId,
           login: login,
           password: password,
-          avatar: img,
+          avatar: img || 'profile.jpg',
         },
         refetchQueries:[{query: GetAllUsers}]
       }).then(() => {
@@ -169,6 +184,7 @@ export default function ModalForm({opened, closeModal, item}) {
       reader.readAsDataURL(event.target.files[0])
 
       reader.onload = function () {
+        console.log('RESULT---', reader.result)
         setImg(reader.result)
       }
       reader.onerror = function (error) {
@@ -191,7 +207,6 @@ export default function ModalForm({opened, closeModal, item}) {
   const body = (
     <div className={classes.paper}>
       <input type="file" className={classes.inputHidden}/>
-      <Title>Карточка пользователя</Title>
       <Grid
         container
         className={classes.card}
@@ -200,6 +215,14 @@ export default function ModalForm({opened, closeModal, item}) {
         alignItems="center"
         spacing={3}
       >
+        <Grid item xs={9}>
+          <Title>Карточка пользователя</Title>
+        </Grid>
+        <Grid item xs={3}>
+          <Button variant="contained" color="secondary" size="small" onClick={handleDeleteUser}>
+            Удалить запись
+          </Button>
+        </Grid>
         <Grid item xs={12}>
           <FileUploader/>
         </Grid>

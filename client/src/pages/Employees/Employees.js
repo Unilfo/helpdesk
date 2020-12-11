@@ -27,7 +27,7 @@ const columns = [
   {id: 'roleId', label: 'Роль', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'tab_number', label: 'Табельный номер', minWidth: 100, maxWidth: 250, align: 'left'},
   {id: 'login', label: 'login', minWidth: 100, maxWidth: 250, align: 'left'},
-  {id: 'password', label: 'password', minWidth: 100, maxWidth: 250, align: 'left'},
+  // {id: 'password', label: 'password', minWidth: 100, maxWidth: 250, align: 'left'}
 ]
 
 
