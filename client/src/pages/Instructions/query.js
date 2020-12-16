@@ -38,4 +38,24 @@ const ADD_INSTRACTION = gql`
     }
 `
 
-export {GetAllInstractions,ADD_INSTRACTION}
+const UPDATE_INSTRACTION = gql`
+    mutation UpdateInstraction(
+        $id: Int!
+        $title: String!
+        $path: String!
+        $belongs: Int!
+        $group: Boolean!
+        $name: String!
+    ) {
+        updateInstraction(
+            id: $id,
+            title: $title,
+            path: $path,
+            belongs: $belongs,
+            group: $group,
+            name: $name
+        )
+    }
+`
+
+export {GetAllInstractions, ADD_INSTRACTION, UPDATE_INSTRACTION}

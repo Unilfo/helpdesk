@@ -14,7 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import {useMutation} from '@apollo/client'
 import Container from '@material-ui/core/Container'
-import {ADD_INSTRACTION, GetAllInstractions} from './query'
+import {ADD_INSTRACTION, GetAllInstractions, UPDATE_INSTRACTION} from './query'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ModalForm({opened, closeModal, instraction}) {
   const classes = useStyles()
   const [createInstraction] = useMutation(ADD_INSTRACTION)
+  const [updateInstraction] = useMutation(UPDATE_INSTRACTION)
   const [open, setOpen] = useState(false)
   const [id, setId] = useState('')
   const [title, setTitle] = useState('')
@@ -120,7 +121,19 @@ export default function ModalForm({opened, closeModal, instraction}) {
         console.log('ура')
       })
     } else {
-
+      updateInstraction({
+        variables: {
+          id: +id,
+          title: title,
+          name: fileName,
+          path: path,
+          belongs: +belongs,
+          group: false,
+        },
+        refetchQueries: [{query: GetAllInstractions}]
+      }).then(() => {
+        console.log('ура 2')
+      })
     }
     handleClose()
   }
