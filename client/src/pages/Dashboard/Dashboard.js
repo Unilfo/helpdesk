@@ -23,7 +23,8 @@ import Home from '../Home/Home'
 import Reports from '../Reports/Reports'
 import Instructions from '../Instructions/Instructions'
 import PrivateRoute from '../utils/PrivateRoute'
-
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import Button from '@material-ui/core/Button'
 
 const drawerWidth = 240
 
@@ -127,6 +128,11 @@ export default function Dashboard(props) {
     setOpen(false)
   }
 
+  const logout = () => {
+    localStorage.setItem('token', '')
+    history.push('/login')
+  }
+
   return (
     <div className={classes.root}>
       <Fragment>
@@ -145,6 +151,9 @@ export default function Dashboard(props) {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               Help Desk
             </Typography>
+            <Button color="primary" onClick={logout}>
+              <ExitToAppIcon fontSize='large'/>
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer

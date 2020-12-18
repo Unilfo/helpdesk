@@ -47,17 +47,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function SignInSide(props) {
+function SignInSide() {
   let history = useHistory()
   const classes = useStyles()
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-
+  const [errorMessage, setErrorMessage] = useState(false)
   const {loading, error, data} = FetchAuth(login, password)
 
   const handleSubmit = event => {
     event.preventDefault()
+    if(data.loginUser.error){
+      setErrorMessage(true)
+    }
     if (!loading && !error && !data.loginUser.error) {
+      setErrorMessage(false)
       localStorage.setItem('token', data.loginUser.token)
       history.push('/home')
     }
@@ -75,7 +79,7 @@ function SignInSide(props) {
           <Typography component="h1" variant="h5">
             Help desk
           </Typography>
-          {/*<Error/>*/}
+          {errorMessage && <div className={classes.error}>Не верный логин или пароль</div>}
           <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"

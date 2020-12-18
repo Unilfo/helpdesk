@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="123">
+    <list default="true" id="9670d412-dbd0-4401-bd2c-f0995868946f" name="Default Changelist" comment="formik">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/client/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Employees/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Employees/Modal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Instructions/ModalInstraction.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Instructions/ModalInstraction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Instructions/query.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Instructions/query.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Login/Login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +176,10 @@
       <workItem from="1607696171201" duration="146000" />
       <workItem from="1607938835776" duration="2517000" />
       <workItem from="1608030384553" duration="1824000" />
-      <workItem from="1608120652856" duration="4299000" />
+      <workItem from="1608120652856" duration="4516000" />
+      <workItem from="1608184252519" duration="2598000" />
+      <workItem from="1608201162109" duration="3791000" />
+      <workItem from="1608275167642" duration="5697000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1604854352422</created>
@@ -346,7 +349,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607696265683</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="formik">
+      <created>1608127498334</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1608127498334</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +389,8 @@
     <MESSAGE value="end routing and auth" />
     <MESSAGE value="add user" />
     <MESSAGE value="123" />
-    <option name="LAST_COMMIT_MESSAGE" value="123" />
+    <MESSAGE value="formik" />
+    <option name="LAST_COMMIT_MESSAGE" value="formik" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

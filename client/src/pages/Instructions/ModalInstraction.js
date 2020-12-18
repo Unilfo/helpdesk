@@ -18,19 +18,18 @@ import {ADD_INSTRACTION, GetAllInstractions, UPDATE_INSTRACTION} from './query'
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-
-  },
-  paper: {
-
-  },
+  root: {},
+  paper: {},
   input: {
-    minWidth:250
+    minWidth: 250
   },
   groupButton: {
     display: 'flex',
-    justifyContent:"space-between",
+    justifyContent: 'space-between',
   },
+  error: {
+    color:'red'
+  }
 }))
 
 export default function ModalForm({opened, closeModal, instraction}) {
@@ -44,7 +43,7 @@ export default function ModalForm({opened, closeModal, instraction}) {
   const [group, setGroup] = useState(false)
   const [belongs, setBelongs] = useState('')
   const [fileName, setFileName] = useState('')
-
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     setId(instraction.id)
@@ -67,6 +66,7 @@ export default function ModalForm({opened, closeModal, instraction}) {
     setBelongs('')
     setGroup(false)
     setFileName('')
+    setError(false)
     closeModal()
   }
 
@@ -107,6 +107,10 @@ export default function ModalForm({opened, closeModal, instraction}) {
 
   const handleSave = (e) => {
     e.preventDefault()
+    if (title === undefined || fileName === undefined || belongs === undefined) {
+      setError(true)
+      return
+    }
     if (id === undefined) {
       createInstraction({
         variables: {
@@ -116,7 +120,7 @@ export default function ModalForm({opened, closeModal, instraction}) {
           belongs: +belongs,
           group: false,
         },
-        refetchQueries:[{query: GetAllInstractions}]
+        refetchQueries: [{query: GetAllInstractions}]
       }).then(() => {
         console.log('ура')
       })
@@ -135,6 +139,7 @@ export default function ModalForm({opened, closeModal, instraction}) {
         console.log('ура 2')
       })
     }
+    setError(false)
     handleClose()
   }
 
@@ -151,19 +156,19 @@ export default function ModalForm({opened, closeModal, instraction}) {
         <Grid item xs={12}>
           <FileUploader/>
         </Grid>
-        <Grid item  xs={12}>
+        <Grid item xs={12}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Наименование</InputLabel>
             <Input aria-describedby="my-helper-text" value={title || ''} onChange={(e) => setTitle(e.target.value)}/>
           </FormControl>
         </Grid>
-        <Grid item  xs={12}>
+        <Grid item xs={12}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Имя файла</InputLabel>
             <Input aria-describedby="my-helper-text" value={fileName || ''}/>
           </FormControl>
         </Grid>
-        <Grid item  xs={12}>
+        <Grid item xs={12}>
           <FormControl className={classes.input}>
             <InputLabel htmlFor="my-input">Группа</InputLabel>
             <Select
@@ -177,7 +182,8 @@ export default function ModalForm({opened, closeModal, instraction}) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item  xs={12}>
+        <Grid item xs={12}>
+          {error && <div className={classes.error}>Проверте корректнось данных</div>}
           <FormControlLabel
             control={
               <Checkbox

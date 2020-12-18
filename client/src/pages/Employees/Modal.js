@@ -24,11 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     height: 550,
-    minHeight:580,
+    minHeight: 580,
   },
-  card: {
-
-  },
+  card: {},
   large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
@@ -36,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
   input: {
     minWidth: 240,
   },
-  button: {
-
+  error: {
+    color: 'red'
   },
   groupButton: {
     display: 'flex',
-    justifyContent:"space-between",
+    justifyContent: 'space-between',
     paddingRight: 18,
     paddingLeft: 18
   },
@@ -66,7 +64,7 @@ export default function ModalForm({opened, closeModal, item}) {
   const [img, setImg] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPasword] = useState('')
-
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     setId(item.id)
@@ -104,10 +102,10 @@ export default function ModalForm({opened, closeModal, item}) {
       variables: {
         id: +id,
       },
-      refetchQueries:[{query: GetAllUsers}]
-    }).then(()=>{
+      refetchQueries: [{query: GetAllUsers}]
+    }).then(() => {
       alert('Пользователь удален')
-    }).catch((error)=>{
+    }).catch((error) => {
       alert('Имеются документы ссылающиеся на пользователя')
     })
     closeModal()
@@ -115,6 +113,18 @@ export default function ModalForm({opened, closeModal, item}) {
 
   const handleSave = (e) => {
     e.preventDefault()
+    if (name === undefined
+      || patronymic === undefined
+      || surname === undefined
+      || tab_number === undefined
+      || statusId === undefined
+      || roleId === undefined
+      || login === undefined
+      || password === undefined
+    ) {
+      setError(true)
+      return
+    }
     if (id === undefined) {
       createUser({
         variables: {
@@ -128,7 +138,7 @@ export default function ModalForm({opened, closeModal, item}) {
           password: password,
           avatar: img || 'profile.jpg',
         },
-        refetchQueries:[{query: GetAllUsers}]
+        refetchQueries: [{query: GetAllUsers}]
       }).then(() => {
         console.log('ура')
       })
@@ -146,11 +156,12 @@ export default function ModalForm({opened, closeModal, item}) {
           password: password,
           avatar: img || 'profile.jpg',
         },
-        refetchQueries:[{query: GetAllUsers}]
+        refetchQueries: [{query: GetAllUsers}]
       }).then(() => {
         console.log('ура 2')
       })
     }
+    setError(false)
     handleClose()
   }
 
@@ -166,6 +177,7 @@ export default function ModalForm({opened, closeModal, item}) {
     setLogin('')
     setPasword('')
     setImg('')
+    setError(false)
     closeModal()
   }
 
@@ -217,6 +229,7 @@ export default function ModalForm({opened, closeModal, item}) {
       >
         <Grid item xs={9}>
           <Title>Карточка пользователя</Title>
+          {error && <div className={classes.error}>Проверте корректнось данных</div>}
         </Grid>
         <Grid item xs={3}>
           <Button variant="contained" color="secondary" size="small" onClick={handleDeleteUser}>
