@@ -52,13 +52,14 @@ const useStyles = makeStyles((theme) => ({
   },
   contentEditableArea: {
     height: '100%',
-    width:'100%',
+    width: '100%',
     outline: 'none',
   },
   inputId: {
     display: 'none',
   },
   otvet: {
+    width: '100%',
     borderTop: '1px solid rgba(0, 0, 0, 0.12)',
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
   },
@@ -98,19 +99,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [scroll, setScroll] = useState('paper')
-  const [otvet, setOtvet] = useState('Lorem ipsum dolor sit amet, ' +
-    'consectetur adipisicing elit. Accusamus aperiam architecto aspernatur' +
-    ' assumenda beatae debitis dolore eaque explicabo fuga harum iusto maxime ' +
-    'minima nemo odit officia recusandae, sequi voluptas voluptate?Lorem ipsum dolor sit amet, ' +
-    'consectetur adipisicing elit. Accusamus aperiam architecto aspernatur' +
-    ' assumenda beatae debitis dolore eaque explicabo fuga harum iusto maxime ' +
-    'minima nemo odit officia recusandae, sequi voluptas voluptate?Lorem ipsum dolor sit amet, ' +
-    'consectetur adipisicing elit. Accusamus aperiam architecto aspernatur' +
-    ' assumenda beatae debitis dolore eaque explicabo fuga harum iusto maxime ' +
-    'minima nemo odit officia recusandae, sequi voluptas voluptate?Lorem ipsum dolor sit amet, ' +
-    'consectetur adipisicing elit. Accusamus aperiam architecto aspernatur' +
-    ' assumenda beatae debitis dolore eaque explicabo fuga harum iusto maxime ' +
-    'minima nemo odit officia recusandae, sequi voluptas voluptate?')
+  const [otvet, setOtvet] = useState('')
 
   const [files, setFiles] = useState([])
   const [openImg, setOpenImg] = useState(false)
@@ -216,7 +205,7 @@ export default function ModalTasks({opened, closeModal, items}) {
           author: +author,
           text: text,
         },
-        refetchQueries:[{query: GetAllTasks}]
+        refetchQueries: [{query: GetAllTasks}]
       }).then(() => {
         console.log('ура')
       })
@@ -231,23 +220,12 @@ export default function ModalTasks({opened, closeModal, items}) {
           author: +author,
           text: text,
         },
-        refetchQueries:[{query: GetAllTasks}]
+        refetchQueries: [{query: GetAllTasks}]
       }).then(() => {
         console.log('ура 2')
       })
     }
     handleClose()
-  }
-
-  const Otvet = () => {
-    return (
-      <div>
-        Ответ:
-        <div>
-          {otvet}
-        </div>
-      </div>
-    )
   }
 
   const load = (e) => {
@@ -361,18 +339,6 @@ export default function ModalTasks({opened, closeModal, items}) {
                 />
               </MuiPickersUtilsProvider>
               <FormControl className={classes.input}>
-                <InputLabel id="demo-simple-select-label">Статус</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={status || ''}
-                  onChange={handleChangeStatus}
-                >
-                  <MenuItem value={1}>В работе</MenuItem>
-                  <MenuItem value={2}>Закрыта</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl className={classes.input}>
                 <InputLabel id="demo-simple-select-label">Приоритет</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -388,7 +354,7 @@ export default function ModalTasks({opened, closeModal, items}) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={endTask}
+                    checked={status}
                     onChange={handleChangeEndTask}
                     name="checkedB"
                     color="primary"
@@ -410,7 +376,7 @@ export default function ModalTasks({opened, closeModal, items}) {
                     <TextField
                       id="outlined-multiline-static"
                       multiline
-                      InputProps={{ disableUnderline: true }}
+                      InputProps={{disableUnderline: true}}
                       // rows={4}
                       placeholder='Введите текст...'
                       value={text}
@@ -434,7 +400,23 @@ export default function ModalTasks({opened, closeModal, items}) {
               </Grid>
             </Grid>
             <Grid item className={classes.otvet}>
-              {otvet && <Otvet/>}
+              <div>
+                Ответ:
+                <div>
+                  <TextField
+                    id="outlined-multiline-static"
+                    multiline
+                    InputProps={{disableUnderline: true}}
+                    value={otvet}
+                    contentEditable
+                    suppressContentEditableWarning
+                    className={classes.contentEditableArea}
+                    onChange={(e) => {
+                      setOtvet(e.target.value)
+                    }}
+                  />
+                </div>
+              </div>
             </Grid>
           </Grid>
         </Container>

@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react'
+import React, {Fragment} from 'react'
 import clsx from 'clsx'
 import {makeStyles} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -17,7 +17,7 @@ import Employees from '../Employees/Employees'
 import Tasks from '../Tasks/Tasks'
 import {
   Switch,
-  Route, Redirect, useHistory,
+  Route, useHistory,
 } from 'react-router-dom'
 import Home from '../Home/Home'
 import Reports from '../Reports/Reports'
@@ -25,6 +25,7 @@ import Instructions from '../Instructions/Instructions'
 import PrivateRoute from '../utils/PrivateRoute'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import Button from '@material-ui/core/Button'
+import {Avatar} from '@material-ui/core'
 
 const drawerWidth = 240
 
@@ -151,8 +152,9 @@ export default function Dashboard(props) {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               Help Desk
             </Typography>
-            <Button color="primary" onClick={logout}>
-              <ExitToAppIcon fontSize='large'/>
+            <Avatar src={props.user?.user?.avatar}/>
+            <Button onClick={logout}>
+              <ExitToAppIcon fontSize='large' style={{color: 'black'}}/>
             </Button>
           </Toolbar>
         </AppBar>

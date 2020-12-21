@@ -10,6 +10,8 @@ const LOGIN = gql`
                 name
                 login
                 surname
+                tab_number
+                avatar
             }
             token
         }

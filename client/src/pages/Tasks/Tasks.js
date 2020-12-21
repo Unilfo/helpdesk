@@ -21,6 +21,7 @@ const columns = [
   {id: 'responsible', label: 'Ответственный', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'date', label: 'Дата', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'status', label: 'Статус', minWidth: 170, maxWidth: 250, align: 'left'},
+  {id: 'priority', label: 'Приоритет', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'author', label: 'Автор', minWidth: 170, maxWidth: 250, align: 'left'},
   {id: 'text', label: 'Текст', minWidth: 170, maxWidth: 250, align: 'left'},
 ]

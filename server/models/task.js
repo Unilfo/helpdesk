@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     theme: DataTypes.STRING,
     date: DataTypes.DATE,
-    text: DataTypes.STRING
+    text: DataTypes.STRING,
   }, {});
   Task.associate = function(models) {
     Task.belongsTo(models.StatusTasks, {
