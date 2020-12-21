@@ -33,11 +33,11 @@ const resolvers = {
     async getInstraction(root, {id}, {models}) {
       return models.Instraction.findByPk(id)
     },
-    async statusTask(root, args, {models}) {
-      return models.StatusTasks.findAll()
+    async priority(root, args, {models}) {
+      return models.Priority.findAll()
     },
-    async getStatusTask(root, {id}, {models}) {
-      return models.StatusTasks.findByPk(id)
+    async getPriority(root, {id}, {models}) {
+      return models.Priority.findByPk(id)
     },
     async tasks(root, args, {models}) {
       return models.Task.findAll()
@@ -100,8 +100,8 @@ const resolvers = {
         title,
       })
     },
-    async createStatusTask(root, {title}, {models}) {
-      return models.StatusTasks.create({
+    async createPriority(root, {title}, {models}) {
+      return models.Priority.create({
         title,
       })
     },
@@ -119,12 +119,13 @@ const resolvers = {
         name,
       })
     },
-    async createTask(root, {theme, date, text, status, responsible, author}, {models}) {
+    async createTask(root, {theme, date, text, status, responsible, author, priority}, {models}) {
       return models.Task.create({
         theme,
         date,
         text,
         status,
+        priority,
         responsible,
         author,
       })
@@ -182,8 +183,8 @@ const resolvers = {
         })
       return 'OK'
     },
-    async updateStatusTask(root, {id, title}, {models}) {
-      models.StatusTasks.update({title: title},
+    async updatePriority(root, {id, title}, {models}) {
+      models.Priority.update({title: title},
         {
           where: {
             id: id,
@@ -219,12 +220,13 @@ const resolvers = {
         })
       return 'OK'
     },
-    async updateTask(root, {id, theme, date, text, status, responsible, author}, {models}) {
+    async updateTask(root, {id, theme, date, text, status, responsible, author, priority}, {models}) {
       models.Task.update({
           theme: theme,
           date: date,
           text: text,
           status: status,
+          priority: priority,
           responsible: responsible,
           author: author,
         },
@@ -254,8 +256,11 @@ const resolvers = {
     async author(root, args, {models}) {
       return models.User.findByPk(root.author)
     },
-    async status(statusTask) {
-      return statusTask.getStatusTask()
+    async priority(root, args ,{models}) {
+      let asd = models.Priority.findByPk(1)
+      console.log(asd)
+      // return models.Priority.findByPk(root.priority)
+      // return priority.getPriority()
     },
   },
 }

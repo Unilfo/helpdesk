@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Tasks() {
   const {loading, error, data} = useQuery(GetAllTasks)
+  console.log(error)
   const classes = useStyles()
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)

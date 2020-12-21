@@ -26,7 +26,7 @@ const typeDefs = gql`
         title: String!
     }
 
-    type StatusTask {
+    type Priority {
         id: ID!
         title: String!
     }
@@ -45,7 +45,8 @@ const typeDefs = gql`
         theme: String!
         responsible: User!
         date: Date!
-        status: StatusTask!
+        priority: Priority!
+        status: Boolean!
         author: User!
         text: String!
     }
@@ -66,8 +67,8 @@ const typeDefs = gql`
         getStatusUser(id:Int!):StatusUser
         instraction: [Instraction!]
         getInstraction(id:Int!): Instraction
-        statusTask:[StatusTask!]
-        getStatusTask(id:Int!):StatusTask
+        priority:[Priority!]
+        getPriority(id:Int!):Priority
         tasks: [Tasks!]
         getTask(id: Int!): Tasks
         loginUser(login: String password: String token: String): AuthPayLoad!
@@ -75,14 +76,15 @@ const typeDefs = gql`
 
     type Mutation {
         createRole(title: String!): Roles!
-        createStatusTask(title: String!): StatusTask!
+        createPriority(title: String!): Priority!
         createStatusUser(title: String!): StatusUser!
         createInstraction(title: String! path:String! belongs: Int! group: Boolean! name: String!): Instraction!
         createTask(
             theme: String!
             responsible: Int!
             date: Date!
-            status: Int!
+            status: Boolean!
+            priority: Int!
             author: Int!
             text: String!
         ): Tasks!
@@ -101,7 +103,7 @@ const typeDefs = gql`
         deleteTask(id:Int!): String!
         updateInstraction(id:Int! title:String! path:String! belongs: Int! group: Boolean! name: String!): String!
         updateStatusUser(id:Int! title:String!): String!
-        updateStatusTask(id:Int! title:String!): String!
+        updatePriority(id:Int! title:String!): String!
         updateRole(id:Int! title:String!): String!
         updateUser(
             id:Int!
@@ -120,7 +122,8 @@ const typeDefs = gql`
             theme: String!
             responsible: Int!
             date: Date!
-            status: Int!
+            status: Boolean!
+            priority: Int!
             author: Int!
             text: String!
         ): String!

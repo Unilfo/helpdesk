@@ -30,13 +30,16 @@ module.exports = {
       date: {
         type: Sequelize.DATEONLY
       },
-      status: {
+      priority: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'StatusTasks',
+          model: 'Priority',
           key: 'id',
         },
+      },
+      status:{
+        type: Sequelize.BOOLEAN
       },
       text: {
         type: Sequelize.STRING

@@ -4,10 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     theme: DataTypes.STRING,
     date: DataTypes.DATE,
     text: DataTypes.STRING,
+    status: DataTypes.BOOLEAN
   }, {});
   Task.associate = function(models) {
-    Task.belongsTo(models.StatusTasks, {
-      foreignKey: 'status',
+    Task.belongsTo(models.Priority, {
+      foreignKey: 'priority',
     })
     Task.belongsTo(models.User, {
       foreignKey: 'responsible',

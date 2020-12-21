@@ -9,7 +9,8 @@ const GetAllTasks = gql`
                 id
                 name
             }
-            status{
+            status
+            priority{
                 id
                 title
             }
@@ -27,7 +28,8 @@ const ADD_TASK = gql`
         $theme: String!
         $responsible: Int!
         $date: Date!
-        $status: Int!
+        $status: Boolean!
+        $priority: Int!
         $author: Int!
         $text: String!
     ) {
@@ -36,6 +38,7 @@ const ADD_TASK = gql`
             responsible: $responsible
             date: $date
             status:$status
+            priority: $priority
             author: $author
             text: $text
         ){
@@ -51,7 +54,8 @@ const UPDATE_TASK = gql`
         $theme: String!
         $responsible: Int!
         $date: Date!
-        $status: Int!
+        $status: Boolean!
+        $priority: Int!
         $author: Int!
         $text: String!
     ) {
@@ -61,6 +65,7 @@ const UPDATE_TASK = gql`
             responsible: $responsible
             date: $date
             status:$status
+            priority: $priority
             author: $author
             text: $text
         )
