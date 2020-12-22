@@ -240,9 +240,6 @@ const resolvers = {
   },
   User: {
     async statusId(status) {
-      // ,_, {models}
-      //  let findedStatus = models.StatusUsers.findByPk(status.statusId)
-      // return  findedStatus
       return status.getStatusUser()
     },
     async roleId(roles) {
@@ -257,10 +254,7 @@ const resolvers = {
       return models.User.findByPk(root.author)
     },
     async priority(root, args ,{models}) {
-      let asd = models.Priority.findByPk(1)
-      console.log(asd)
-      // return models.Priority.findByPk(root.priority)
-      // return priority.getPriority()
+      return models.Priority.findByPk(root.priority)
     },
   },
 }

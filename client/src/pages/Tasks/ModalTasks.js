@@ -100,7 +100,6 @@ export default function ModalTasks({opened, closeModal, items}) {
   const [open, setOpen] = useState(false)
   const [scroll, setScroll] = useState('paper')
   const [otvet, setOtvet] = useState('')
-
   const [files, setFiles] = useState([])
   const [openImg, setOpenImg] = useState(false)
   const [img, setImg] = useState(null)
@@ -114,8 +113,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   const [status, setStatus] = useState('')
   const [author, setAuthor] = useState('')
   const [text, setText] = useState('')
-  const [endTask, setEndTask] = useState(false)
-  const [priority, setPriority] = useState('')
+  const [priority, setPriority] = useState(false)
 
   useEffect(() => {
     if (open) {
@@ -134,9 +132,10 @@ export default function ModalTasks({opened, closeModal, items}) {
         return ''
       }
     })
-    setStatus(() => {
-      if (items.status) {
-        return items.status.id
+    setStatus(items.status || false)
+    setPriority(() => {
+      if (items.priority) {
+        return items.priority.id
       } else {
         return ''
       }
@@ -148,7 +147,7 @@ export default function ModalTasks({opened, closeModal, items}) {
         return ''
       }
     })
-    setDate(items.date)
+    setDate(items.date || new Date())
     setText(items.text)
 
   }, [open])
@@ -177,12 +176,9 @@ export default function ModalTasks({opened, closeModal, items}) {
   }
 
   const handleChangeStatus = (event) => {
-    setStatus(event.target.value)
+    setStatus(event.target.checked)
   }
 
-  const handleChangeEndTask = (event) => {
-    setEndTask(event.target.checked)
-  }
 
   const handleChangePriority = (event) => {
     setPriority(event.target.value)
@@ -195,13 +191,22 @@ export default function ModalTasks({opened, closeModal, items}) {
 
   const handleSave = (e) => {
     e.preventDefault()
+    console.log('theme',theme)
+    console.log('responsible',responsible)
+    console.log('date',date)
+    console.log('status',status)
+    console.log('priority',priority)
+    console.log('author',author)
+    console.log('text',text)
+
     if (id === undefined) {
       createTask({
         variables: {
           theme: theme,
           responsible: +responsible,
           date: date,
-          status: +status,
+          status: status,
+          priority: priority,
           author: +author,
           text: text,
         },
@@ -216,7 +221,8 @@ export default function ModalTasks({opened, closeModal, items}) {
           theme: theme,
           responsible: +responsible,
           date: date,
-          status: +status,
+          status: status,
+          priority: priority,
           author: +author,
           text: text,
         },
@@ -343,7 +349,7 @@ export default function ModalTasks({opened, closeModal, items}) {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={priority}
+                  value={priority || false}
                   onChange={handleChangePriority}
                 >
                   <MenuItem value={1}>Высокий</MenuItem>
@@ -354,8 +360,8 @@ export default function ModalTasks({opened, closeModal, items}) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={status}
-                    onChange={handleChangeEndTask}
+                    checked={status || false}
+                    onChange={handleChangeStatus}
                     name="checkedB"
                     color="primary"
                   />

@@ -35,6 +35,18 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  cellTheme: {
+    maxWidth: 250,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  cellText: {
+    maxWidth: 250,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
   container: {
     maxHeight: 800,
     width: '100%',
@@ -77,10 +89,9 @@ export default function Tasks() {
   useEffect(() => {
     if (searchText === '') {
       setDataTasks(data.tasks)
-    }
-    else if(searchText === null) {
+    } else if (searchText === null) {
       return dataTasks
-    }else {
+    } else {
       const filteredData = data.tasks.filter((data) => {
         return data.theme.toLowerCase().includes(searchText.toLowerCase().trim())
       })
@@ -136,7 +147,7 @@ export default function Tasks() {
                     key={column.id}
                     align={column.align}
                     style={{minWidth: column.minWidth}}
-                    className={column.id === 'theme' ? classes.cellOne : classes.cell}
+                    className={column.id === 'theme' ? classes.cellTheme : classes.cell}
                   >
                     {column.label}
                   </TableCell>
@@ -154,13 +165,13 @@ export default function Tasks() {
                     onClick={() => openModal(row)}
                   >
                     {columns.map((column) => {
-                      let value = row[column.id]
+                      let value = column.id === 'status' ? row[column.id] ? 'Закрыта' : 'В работе' : row[column.id]
                       if (row[column.id] instanceof Object) {
                         value = row[column.id].title ? row[column.id].title : row[column.id].name
                       }
                       return (
                         <TableCell key={column.id} align={column.align}
-                                   className={column.id === 'theme' ? classes.cellOne : classes.cell}>
+                                   className={column.id === 'theme' ? classes.cellTheme : column.id === 'text'? classes.cellText: classes.cell}>
                           {value}
                           {/*{column.format && typeof value === 'number' ? column.format(value) : value}*/}
                         </TableCell>
