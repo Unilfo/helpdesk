@@ -185,12 +185,21 @@ export default function ModalTasks({opened, closeModal, items}) {
   }
 
   const handleClose = () => {
+    setId('')
+    setTheme('')
+    setResponsible('')
+    setStatus(false)
+    setPriority('')
+    setAuthor('')
+    setDate(new Date())
+    setText('')
     closeModal()
     setOpen(false)
   }
 
   const handleSave = (e) => {
     e.preventDefault()
+    console.log('id', id)
     console.log('theme',theme)
     console.log('responsible',responsible)
     console.log('date',date)
@@ -222,7 +231,7 @@ export default function ModalTasks({opened, closeModal, items}) {
           responsible: +responsible,
           date: date,
           status: status,
-          priority: priority,
+          priority: +priority,
           author: +author,
           text: text,
         },
@@ -270,14 +279,6 @@ export default function ModalTasks({opened, closeModal, items}) {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color='primary'
-        size='small'
-        onClick={handleClickOpen('paper')}
-      >
-        Создать
-      </Button>
       <Dialog
         open={open}
         scroll={scroll}

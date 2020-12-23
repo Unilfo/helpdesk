@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid'
 import ModalTasks from './ModalTasks'
 import {useQuery} from '@apollo/client'
 import {GetAllTasks} from './query'
+import Button from '@material-ui/core/Button'
 
 const columns = [
   {id: 'id', label: '№', minWidth: 50},
@@ -131,6 +132,7 @@ export default function Tasks() {
           <Title>Задачи</Title>
         </Grid>
         <Grid item xs={6} sm={3} md={4} className={classes.button_open}>
+          <Button variant="contained" color='primary' size='small' onClick={openModal}>Добавить</Button>
           <ModalTasks opened={opened} closeModal={closeModal} items={item}/>
         </Grid>
         <Grid item xs={12} sm={3} md={2} className={classes.input_search}>
