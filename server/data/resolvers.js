@@ -119,7 +119,7 @@ const resolvers = {
         name,
       })
     },
-    async createTask(root, {theme, date, text, status, responsible, author, priority}, {models}) {
+    async createTask(root, {theme, date, text, status, responsible, author, priority, answer}, {models}) {
       return models.Task.create({
         theme,
         date,
@@ -128,6 +128,7 @@ const resolvers = {
         priority,
         responsible,
         author,
+        answer
       })
     },
     async createUser(root, {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}, {models, pubsub}) {
@@ -220,7 +221,7 @@ const resolvers = {
         })
       return 'OK'
     },
-    async updateTask(root, {id, theme, date, text, status, responsible, author, priority}, {models}) {
+    async updateTask(root, {id, theme, date, text, status, responsible, author, priority, answer}, {models}) {
       models.Task.update({
           theme: theme,
           date: date,
@@ -229,7 +230,8 @@ const resolvers = {
           priority: priority,
           responsible: responsible,
           author: author,
-        },
+          answer : answer
+    },
         {
           where: {
             id: id,

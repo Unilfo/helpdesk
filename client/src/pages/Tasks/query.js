@@ -20,6 +20,7 @@ const GetAllTasks = gql`
             }
             date
             text
+            answer
         }
     }
 `
@@ -32,6 +33,7 @@ const ADD_TASK = gql`
         $priority: Int!
         $author: Int!
         $text: String!
+        $answer: String!
     ) {
         createTask(
             theme: $theme
@@ -40,7 +42,8 @@ const ADD_TASK = gql`
             status:$status
             priority: $priority
             author: $author
-            text: $text
+            text: $text      
+            answer: $answer
         ){
             id
         }
@@ -58,6 +61,7 @@ const UPDATE_TASK = gql`
         $priority: Int!
         $author: Int!
         $text: String!
+        $answer: String!
     ) {
         updateTask(
             id: $id
@@ -68,6 +72,7 @@ const UPDATE_TASK = gql`
             priority: $priority
             author: $author
             text: $text
+            answer: $answer
         )
     }
 `

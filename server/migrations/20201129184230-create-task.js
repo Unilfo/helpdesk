@@ -41,6 +41,9 @@ module.exports = {
       status:{
         type: Sequelize.BOOLEAN
       },
+      answer:{
+        type: Sequelize.STRING
+      },
       text: {
         type: Sequelize.STRING
       },

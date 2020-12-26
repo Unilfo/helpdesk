@@ -99,7 +99,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [scroll, setScroll] = useState('paper')
-  const [otvet, setOtvet] = useState('')
+  const [answer, setAnswer] = useState('')
   const [files, setFiles] = useState([])
   const [openImg, setOpenImg] = useState(false)
   const [img, setImg] = useState(null)
@@ -149,7 +149,7 @@ export default function ModalTasks({opened, closeModal, items}) {
     })
     setDate(items.date || new Date())
     setText(items.text)
-
+    setAnswer(items.answer)
   }, [open])
 
   function formatDate(date) {
@@ -193,6 +193,7 @@ export default function ModalTasks({opened, closeModal, items}) {
     setAuthor('')
     setDate(new Date())
     setText('')
+    setAnswer('')
     closeModal()
     setOpen(false)
   }
@@ -218,6 +219,7 @@ export default function ModalTasks({opened, closeModal, items}) {
           priority: priority,
           author: +author,
           text: text,
+          answer: answer
         },
         refetchQueries: [{query: GetAllTasks}]
       }).then(() => {
@@ -234,6 +236,7 @@ export default function ModalTasks({opened, closeModal, items}) {
           priority: +priority,
           author: +author,
           text: text,
+          answer: answer
         },
         refetchQueries: [{query: GetAllTasks}]
       }).then(() => {
@@ -414,12 +417,12 @@ export default function ModalTasks({opened, closeModal, items}) {
                     id="outlined-multiline-static"
                     multiline
                     InputProps={{disableUnderline: true}}
-                    value={otvet}
+                    value={answer}
                     contentEditable
                     suppressContentEditableWarning
                     className={classes.contentEditableArea}
                     onChange={(e) => {
-                      setOtvet(e.target.value)
+                      setAnswer(e.target.value)
                     }}
                   />
                 </div>

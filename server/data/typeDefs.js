@@ -49,6 +49,7 @@ const typeDefs = gql`
         status: Boolean!
         author: User!
         text: String!
+        answer : String!
     }
     type AuthPayLoad {
         message: String
@@ -87,6 +88,7 @@ const typeDefs = gql`
             priority: Int!
             author: Int!
             text: String!
+            answer : String!
         ): Tasks!
         createUser(
             name: String!
@@ -126,6 +128,7 @@ const typeDefs = gql`
             priority: Int!
             author: Int!
             text: String!
+            answer : String!
         ): String!
     }
     

@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     theme: DataTypes.STRING,
     date: DataTypes.DATE,
     text: DataTypes.STRING,
-    status: DataTypes.BOOLEAN
+    status: DataTypes.BOOLEAN,
+    answer: DataTypes.STRING,
   }, {});
   Task.associate = function(models) {
     Task.belongsTo(models.Priority, {
