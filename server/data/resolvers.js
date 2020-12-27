@@ -12,6 +12,9 @@ const resolvers = {
     async users(root, args, {models}) {
       return models.User.findAll()
     },
+    async files(root, args, {models}) {
+      return models.File.findAll()
+    },
     async getUserById(root, {id}, {models}) {
       return models.User.findByPk(id)
     },
@@ -45,7 +48,7 @@ const resolvers = {
     async getTask(root, {id}, {models}) {
       return models.Task.findByPk(id)
     },
-    async loginUser(root, args, {models}, info){
+    async loginUser(root, args, {models}, info) {
       const {login, password, token} = args
       if (token) {
         return jwt.verify(token, 'nottake', function (err, decoded) {
@@ -128,7 +131,7 @@ const resolvers = {
         priority,
         responsible,
         author,
-        answer
+        answer,
       })
     },
     async createUser(root, {name, patronymic, surname, statusId, tab_number, roleId, login, password, avatar}, {models, pubsub}) {
@@ -230,8 +233,8 @@ const resolvers = {
           priority: priority,
           responsible: responsible,
           author: author,
-          answer : answer
-    },
+          answer: answer,
+        },
         {
           where: {
             id: id,
@@ -255,8 +258,15 @@ const resolvers = {
     async author(root, args, {models}) {
       return models.User.findByPk(root.author)
     },
-    async priority(root, args ,{models}) {
+    async priority(root, args, {models}) {
       return models.Priority.findByPk(root.priority)
+    },
+    async files(root, args, {models}) {
+      return models.File.findAll({
+        where: {
+          task_id: root.id,
+        },
+      })
     },
   },
 }

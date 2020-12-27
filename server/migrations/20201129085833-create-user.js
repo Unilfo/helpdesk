@@ -1,4 +1,5 @@
 // npx sequelize-cli db:migrate
+//sequelize db:migrate:undo:all &&  sequelize db:migrate
 'use strict'
 module.exports = {
   up: async (queryInterface, Sequelize) => {

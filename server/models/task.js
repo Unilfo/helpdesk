@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     Task.belongsTo(models.User, {
       foreignKey: 'author',
     })
+    Task.hasMany(models.File, {
+      foreignKey: 'task_id',
+    })
   };
   return Task;
 };

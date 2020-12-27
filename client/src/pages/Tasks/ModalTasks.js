@@ -248,6 +248,7 @@ export default function ModalTasks({opened, closeModal, items}) {
 
   const load = (e) => {
     let oldData = files
+    console.log(e.target.files[0])
     setFiles(
       [...oldData, e.target.files[0]],
     )
@@ -268,6 +269,7 @@ export default function ModalTasks({opened, closeModal, items}) {
 
   const openedDialog = (el) => {
     setImg(el)
+    console.log(el)
     setOpenImg(true)
   }
 

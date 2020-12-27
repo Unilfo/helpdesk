@@ -21,6 +21,13 @@ const typeDefs = gql`
         title: String!
     }
 
+    type File {
+        id: ID!
+        name: String!
+        data: String!
+        task_id: Int!
+    }
+    
     type StatusUser {
         id: ID!
         title: String!
@@ -50,6 +57,7 @@ const typeDefs = gql`
         author: User!
         text: String!
         answer : String!
+        files: [File]
     }
     type AuthPayLoad {
         message: String
@@ -61,6 +69,7 @@ const typeDefs = gql`
 
     type Query {
         users: [User!]
+        files: [File]
         getUserById(id:Int!):User
         roles: [Roles!]
         getRole(id:Int!): Roles
