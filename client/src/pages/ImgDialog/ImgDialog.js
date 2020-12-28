@@ -10,14 +10,14 @@ import {makeStyles} from '@material-ui/core/styles'
 
 
 const useStyles = makeStyles((theme) => ({
-  dialog_content:{
+  dialog_content: {
     paddingTop: '5px!important',
     paddingLeft: '5px!important',
     paddingRight: '5px!important',
   },
   img_dialog: {
     [theme.breakpoints.down('xs')]: {
-      width:290,
+      width: 290,
       height: 400,
     },
   },
@@ -36,26 +36,11 @@ export default function ImgDialog(props) {
   const [img, setImg] = useState('')
   const classes = useStyles()
 
-  // const fileUploaded = event.target.files[0]
-  // let reader = new FileReader();
-  // reader.readAsDataURL(event.target.files[0]);
-  //
-  // reader.onload = function () {
-  //   console.log(reader.result);//base64encoded string
-  //   setImg(reader.result)
-  // };
-  // reader.onerror = function (error) {
-  //   console.log('Error: ', error);
-  // };
 
   useEffect(() => {
     if (props.img) {
+      setImg(props.img)
       setOpen(props.opened)
-      let fr = new FileReader()
-      fr.onloadend = function () {
-        setImg(fr.result)
-      }
-      fr.readAsDataURL(props.img)
     }
   }, [props])
 

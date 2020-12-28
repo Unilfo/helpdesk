@@ -21,6 +21,12 @@ const GetAllTasks = gql`
             date
             text
             answer
+            files{
+                id
+                data
+                name
+                task_id
+            }
         }
     }
 `

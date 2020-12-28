@@ -150,6 +150,7 @@ export default function ModalTasks({opened, closeModal, items}) {
     setDate(items.date || new Date())
     setText(items.text)
     setAnswer(items.answer)
+    setFiles(items.files)
   }, [open])
 
   function formatDate(date) {
@@ -200,14 +201,16 @@ export default function ModalTasks({opened, closeModal, items}) {
 
   const handleSave = (e) => {
     e.preventDefault()
-    console.log('id', id)
-    console.log('theme',theme)
-    console.log('responsible',responsible)
-    console.log('date',date)
-    console.log('status',status)
-    console.log('priority',priority)
-    console.log('author',author)
-    console.log('text',text)
+
+
+    // console.log('id', id)
+    // console.log('theme',theme)
+    // console.log('responsible',responsible)
+    // console.log('date',date)
+    // console.log('status',status)
+    // console.log('priority',priority)
+    // console.log('author',author)
+    // console.log('text',text)
 
     if (id === undefined) {
       createTask({
@@ -248,10 +251,19 @@ export default function ModalTasks({opened, closeModal, items}) {
 
   const load = (e) => {
     let oldData = files
-    console.log(e.target.files[0])
-    setFiles(
-      [...oldData, e.target.files[0]],
-    )
+
+    let reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+
+    reader.onload = function () {
+      let file = {task_id:1, data: reader.result, name: e.target.files[0].name}
+      setFiles(
+        [...oldData, file],
+      )
+    }
+    reader.onerror = function (error) {
+      console.log('Error: ', error)
+    }
   }
 
   const Files = () => {
@@ -268,8 +280,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   }
 
   const openedDialog = (el) => {
-    setImg(el)
-    console.log(el)
+    setImg(el.data || el)
     setOpenImg(true)
   }
 

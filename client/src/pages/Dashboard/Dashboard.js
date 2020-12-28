@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Dashboard(props) {
-  console.log(props)
+  // console.log(props)
   let history = useHistory()
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)

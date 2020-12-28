@@ -98,6 +98,13 @@ const resolvers = {
     },
   },
   Mutation: {
+    async createFile(root, {task_id, name, data}, {models}) {
+      return models.File.create({
+        task_id,
+        name,
+        data
+      })
+    },
     async createRole(root, {title}, {models}) {
       return models.Roles.create({
         title,

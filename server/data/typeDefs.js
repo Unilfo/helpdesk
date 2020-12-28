@@ -85,6 +85,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
+        createFile(data: String! name: String! task_id: Int!): File!
         createRole(title: String!): Roles!
         createPriority(title: String!): Priority!
         createStatusUser(title: String!): StatusUser!
