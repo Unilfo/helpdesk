@@ -23,7 +23,7 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import {useMutation} from '@apollo/client'
 import TextField from '@material-ui/core/TextField'
-import {ADD_TASK, UPDATE_TASK, GetAllTasks} from './query'
+import {ADD_TASK, UPDATE_TASK, GetAllTasks, CREATE_FILE} from './query'
 
 const useStyles = makeStyles((theme) => ({
   dialogContent: {
@@ -106,6 +106,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   const descriptionElementRef = React.useRef(null)
   const [createTask] = useMutation(ADD_TASK)
   const [updateTask] = useMutation(UPDATE_TASK)
+  const [createFile] = useMutation(CREATE_FILE)
   const [id, setId] = useState('')
   const [theme, setTheme] = useState('')
   const [responsible, setResponsible] = useState('')
@@ -150,7 +151,7 @@ export default function ModalTasks({opened, closeModal, items}) {
     setDate(items.date || new Date())
     setText(items.text)
     setAnswer(items.answer)
-    setFiles(items.files)
+    setFiles(() => items.files ? items.files : [])
   }, [open])
 
   function formatDate(date) {
@@ -225,8 +226,18 @@ export default function ModalTasks({opened, closeModal, items}) {
           answer: answer
         },
         refetchQueries: [{query: GetAllTasks}]
-      }).then(() => {
-        console.log('ура')
+      }).then(({data}) => {
+        console.log('data.createTask.id' , data.createTask.id)
+        files.map((el)=>{
+          createFile({
+            variables: {
+              task_id: +data.createTask.id,
+              name: el.name,
+              data: el.data,
+            },
+            refetchQueries: [{query: GetAllTasks}]
+          })
+        })
       })
     } else {
       updateTask({
@@ -243,7 +254,8 @@ export default function ModalTasks({opened, closeModal, items}) {
         },
         refetchQueries: [{query: GetAllTasks}]
       }).then(() => {
-        console.log('ура 2')
+        // updateFile
+        console.log('update task')
       })
     }
     handleClose()
@@ -256,7 +268,7 @@ export default function ModalTasks({opened, closeModal, items}) {
     reader.readAsDataURL(e.target.files[0])
 
     reader.onload = function () {
-      let file = {task_id:1, data: reader.result, name: e.target.files[0].name}
+      let file = {data: reader.result, name: e.target.files[0].name}
       setFiles(
         [...oldData, file],
       )
@@ -387,7 +399,7 @@ export default function ModalTasks({opened, closeModal, items}) {
               />
             </Grid>
             <Grid item xs={12} className={classes.panelButtonImgsFiles}>
-              <input accept="image/*" className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
+              <input  className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
               <label htmlFor="icon-button-file">
                 <ImageIcon fontSize='large' className={classes.buttons}/>
               </label>

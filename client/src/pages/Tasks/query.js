@@ -57,6 +57,26 @@ const ADD_TASK = gql`
     }
 `
 
+const CREATE_FILE = gql`
+    mutation CreateFile(
+        $task_id: Int!
+        $name: String!
+        $data: String!
+    ) {
+        createFile(
+         task_id: $task_id
+            name: $name
+            data: $data
+        ){
+            id
+            task_id
+            name
+            data
+        }
+
+    }
+`
+
 const UPDATE_TASK = gql`
     mutation UpdateTask(
         $id: Int!
@@ -83,4 +103,4 @@ const UPDATE_TASK = gql`
     }
 `
 
-export {GetAllTasks, UPDATE_TASK, ADD_TASK}
+export {GetAllTasks, UPDATE_TASK, ADD_TASK, CREATE_FILE}
