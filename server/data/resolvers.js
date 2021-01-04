@@ -170,6 +170,13 @@ const resolvers = {
         },
       })
     },
+    async deleteFiles(root, {task_id}, {models}) {
+      return models.File.destroy({
+        where: {
+          task_id
+        },
+      })
+    },
     async updateInstraction(root, {id, title, path, belongs, group, name}, {models}) {
       models.Instraction.update({
           title: title,

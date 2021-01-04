@@ -23,7 +23,9 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import {useMutation} from '@apollo/client'
 import TextField from '@material-ui/core/TextField'
-import {ADD_TASK, UPDATE_TASK, GetAllTasks, CREATE_FILE} from './query'
+import {ADD_TASK, UPDATE_TASK, GetAllTasks, CREATE_FILE, DELETE_FILES} from './query'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+
 
 const useStyles = makeStyles((theme) => ({
   dialogContent: {
@@ -32,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       borderRight: 'none',
     },
+  },
+  error: {
+    color: 'red'
   },
   input: {
     width: 240,
@@ -83,6 +88,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: 600,
   },
+  textFilesImgs: {
+    width: 300,
+    overflowWrap: 'break-word',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 }))
 
 class RuLocalizedUtils extends DateFnsUtils {
@@ -106,6 +117,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   const descriptionElementRef = React.useRef(null)
   const [createTask] = useMutation(ADD_TASK)
   const [updateTask] = useMutation(UPDATE_TASK)
+  const [deleteFiles] = useMutation(DELETE_FILES)
   const [createFile] = useMutation(CREATE_FILE)
   const [id, setId] = useState('')
   const [theme, setTheme] = useState('')
@@ -115,6 +127,7 @@ export default function ModalTasks({opened, closeModal, items}) {
   const [author, setAuthor] = useState('')
   const [text, setText] = useState('')
   const [priority, setPriority] = useState(false)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if (open) {
@@ -196,6 +209,7 @@ export default function ModalTasks({opened, closeModal, items}) {
     setDate(new Date())
     setText('')
     setAnswer('')
+    setError(false)
     closeModal()
     setOpen(false)
   }
@@ -203,15 +217,17 @@ export default function ModalTasks({opened, closeModal, items}) {
   const handleSave = (e) => {
     e.preventDefault()
 
-
-    // console.log('id', id)
-    // console.log('theme',theme)
-    // console.log('responsible',responsible)
-    // console.log('date',date)
-    // console.log('status',status)
-    // console.log('priority',priority)
-    // console.log('author',author)
-    // console.log('text',text)
+    if ((date === undefined || date === null)
+      || theme === undefined
+      || responsible === ''
+      || status === ''
+      || priority === ''
+      || author === ''
+      || text === undefined
+    ) {
+      setError(true)
+      return
+    }
 
     if (id === undefined) {
       createTask({
@@ -223,19 +239,18 @@ export default function ModalTasks({opened, closeModal, items}) {
           priority: priority,
           author: +author,
           text: text,
-          answer: answer
+          answer: answer,
         },
-        refetchQueries: [{query: GetAllTasks}]
+        refetchQueries: [{query: GetAllTasks}],
       }).then(({data}) => {
-        console.log('data.createTask.id' , data.createTask.id)
-        files.map((el)=>{
+        files.map((el) => {
           createFile({
             variables: {
               task_id: +data.createTask.id,
               name: el.name,
               data: el.data,
             },
-            refetchQueries: [{query: GetAllTasks}]
+            refetchQueries: [{query: GetAllTasks}],
           })
         })
       })
@@ -250,12 +265,27 @@ export default function ModalTasks({opened, closeModal, items}) {
           priority: +priority,
           author: +author,
           text: text,
-          answer: answer
+          answer: answer,
         },
-        refetchQueries: [{query: GetAllTasks}]
-      }).then(() => {
-        // updateFile
-        console.log('update task')
+        refetchQueries: [{query: GetAllTasks}],
+      }).then((data) => {
+        //delete all
+        deleteFiles({
+          variables: {
+            task_id: +id,
+          },
+        })
+        //create
+        files.map((el) => {
+          createFile({
+            variables: {
+              task_id: +id,
+              name: el.name,
+              data: el.data,
+            },
+            refetchQueries: [{query: GetAllTasks}],
+          })
+        })
       })
     }
     handleClose()
@@ -282,8 +312,15 @@ export default function ModalTasks({opened, closeModal, items}) {
     if (files.length !== 0) {
       return (
         <div className={classes.groupFilesImgs}>
-          {files.map((el) => <div className={classes.textFilesImgs} key={el.name}
-                                  onDoubleClick={() => openedDialog(el)}>{el.name}</div>)}
+          {files.map((el) =>
+            <div className={classes.textFilesImgs} key={el.name}
+                 onDoubleClick={() => openedDialog(el)}>
+              {el.name}
+              <label>
+                <DeleteForeverIcon className={classes.buttons} onClick={() =>
+                  setFiles(files.filter((item) => item.name !== el.name))}/>
+              </label>
+            </div>)}
         </div>
       )
     } else {
@@ -323,6 +360,7 @@ export default function ModalTasks({opened, closeModal, items}) {
           >
             <Grid item xs={12} md={12} sm={12} lg={12}>
               <Title>Заявка</Title>
+              {error && <div className={classes.error}>Проверте корректнось данных</div>}
             </Grid>
             <Grid item>
               <ImgDialog opened={openImg} closeDialog={closeDialog} img={img}/>
@@ -399,7 +437,7 @@ export default function ModalTasks({opened, closeModal, items}) {
               />
             </Grid>
             <Grid item xs={12} className={classes.panelButtonImgsFiles}>
-              <input  className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
+              <input className={classes.inputId} id="icon-button-file" type="file" onChange={load}/>
               <label htmlFor="icon-button-file">
                 <ImageIcon fontSize='large' className={classes.buttons}/>
               </label>

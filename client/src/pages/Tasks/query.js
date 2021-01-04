@@ -39,7 +39,7 @@ const ADD_TASK = gql`
         $priority: Int!
         $author: Int!
         $text: String!
-        $answer: String!
+        $answer: String
     ) {
         createTask(
             theme: $theme
@@ -87,7 +87,7 @@ const UPDATE_TASK = gql`
         $priority: Int!
         $author: Int!
         $text: String!
-        $answer: String!
+        $answer: String
     ) {
         updateTask(
             id: $id
@@ -103,4 +103,14 @@ const UPDATE_TASK = gql`
     }
 `
 
-export {GetAllTasks, UPDATE_TASK, ADD_TASK, CREATE_FILE}
+const DELETE_FILES = gql`
+    mutation DeleteFiles(
+        $task_id: Int!
+    ) {
+        deleteFiles(
+        task_id: $task_id
+        )
+    }
+`
+
+export {GetAllTasks, UPDATE_TASK, ADD_TASK, CREATE_FILE, DELETE_FILES}

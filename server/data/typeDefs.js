@@ -56,7 +56,7 @@ const typeDefs = gql`
         status: Boolean!
         author: User!
         text: String!
-        answer : String!
+        answer : String
         files: [File]
     }
     type AuthPayLoad {
@@ -98,7 +98,7 @@ const typeDefs = gql`
             priority: Int!
             author: Int!
             text: String!
-            answer : String!
+            answer : String
         ): Tasks!
         createUser(
             name: String!
@@ -112,6 +112,7 @@ const typeDefs = gql`
             avatar: String!
         ): User!
         deleteUser(id:Int!): String!
+        deleteFiles(task_id:Int!): String!
         deleteTask(id:Int!): String!
         updateInstraction(id:Int! title:String! path:String! belongs: Int! group: Boolean! name: String!): String!
         updateStatusUser(id:Int! title:String!): String!
@@ -138,7 +139,7 @@ const typeDefs = gql`
             priority: Int!
             author: Int!
             text: String!
-            answer : String!
+            answer : String
         ): String!
     }
     

@@ -117,8 +117,8 @@ export default function ModalForm({opened, closeModal, item}) {
       || patronymic === undefined
       || surname === undefined
       || tab_number === undefined
-      || statusId === undefined
-      || roleId === undefined
+      || statusId === ''
+      || roleId === ''
       || login === undefined
       || password === undefined
     ) {
@@ -191,12 +191,10 @@ export default function ModalForm({opened, closeModal, item}) {
       hiddenFileInput.current.click()
     }
     const handleChange = event => {
-      const fileUploaded = event.target.files[0]
       let reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
 
       reader.onload = function () {
-        console.log('RESULT---', reader.result)
         setImg(reader.result)
       }
       reader.onerror = function (error) {
